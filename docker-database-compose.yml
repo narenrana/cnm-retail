@@ -1,0 +1,58 @@
+version: '3.5'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+       DATABASE_HOST: 0.0.0.0
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: root@123
+       POSTGRES_DB: postgres
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-U", "postgres" ]
+      interval: 5s
+      timeout: 1s
+      retries: 2
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: narender.rana.21m@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: root@123
+    volumes:
+      - pgadmin:/root/.pgadmin
+    ports:
+      - "9080:80"
+    networks:
+      - postgres
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  flyway:
+    image: flyway/flyway
+    command: -url=jdbc:postgresql://postgres:5432/postgres  -schemas=root -user=postgres -password=root@123 -connectRetries=60 migrate
+    volumes:
+      - .:/flyway/sql
+    networks:
+      - postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres:
+  pgadmin:
