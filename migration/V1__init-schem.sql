@@ -140,15 +140,18 @@ CREATE TABLE cart_items
 
 
 --DROP TABLE orders CASCADE;
+CREATE TYPE order_status_type AS ENUM ('COMPLETED', 'CANCELED','PENDING', 'DISPATCHED');
 CREATE TABLE orders
 (
     order_id            BIGSERIAL,
     cart_id             BIGINT,
     user_id             BIGINT,
     amount              NUMERIC(10,2),
+    status              order_status_type,
     active              BOOLEAN NOT NULL DEFAULT  true,
     order_data          json NOT NULL,
     date_create         DATE NOT NULL  default  CURRENT_DATE,
+    date_updated        DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT  orders_pkey PRIMARY KEY (order_id)
 );
 
@@ -161,8 +164,9 @@ CREATE TABLE orders_items
     product_name        VARCHAR(250) NOT NULL ,
     product_price       NUMERIC(10,2),
     discount_id         INTEGER,
-    order_data          json NOT NULL,
+    quantity            INTEGER,
     date_create         DATE NOT NULL  default  CURRENT_DATE,
+    date_updated        DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT orders_items_pkey PRIMARY KEY (order_items_id),
     CONSTRAINT orders_items_order_id_fk FOREIGN KEY(order_id) REFERENCES orders(order_id)
 );
@@ -179,10 +183,11 @@ CREATE TABLE payments
     mode_of_payment    VARCHAR(10) NOT NULL,
     payment_status     VARCHAR(10) NOT NULL,
     name_on_card       VARCHAR(10) NOT NULL,
-    card_tye           VARCHAR(10) NOT NULL,
+    card_type           VARCHAR(10) NOT NULL,
     card_last_4_digit  VARCHAR(4) NOT NULL,
     order_data         json NOT NULL,
     date_create        DATE NOT NULL  default  CURRENT_DATE,
+    date_updated       DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT transactions_pkey PRIMARY KEY (payment_id)
     -- TODO add CONSTRAINT
 );

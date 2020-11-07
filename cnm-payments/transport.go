@@ -1,4 +1,4 @@
-package orders
+package payments
 
 import (
 	"context"
@@ -20,32 +20,32 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 		kithttp.ServerErrorEncoder(encodeError),
 	}
 
-	addToCartHandler := kithttp.NewServer(
-		makeOrdersAddEndpoint(bs),
-		decodeAddOrderRequest,
+	addProductHandler := kithttp.NewServer(
+		makePaymentsAddRequestEndpoint(bs),
+		decodeAddPaymentsRequest,
 		encodeResponse,
 		opts...,
 	)
 
-	getCartHandler := kithttp.NewServer(
-		makeGetOrdersEndpoint(bs),
-		decodeGetOrdersRequest,
+	productListHandler := kithttp.NewServer(
+		makePaymentsListEndpoint(bs),
+		decodePaymentsListRequest,
 		encodeResponse,
 		opts...,
 	)
 
 	r := mux.NewRouter()
 
-	r.Handle("/orders/v1/add", addToCartHandler).Methods("POST")
-	r.Handle("/orders/v1/list", getCartHandler).Methods("GET")
+	r.Handle("/payments/v1/add", addProductHandler).Methods("POST")
+	r.Handle("/payments/v1/list", productListHandler).Methods("GET")
 
 	return r
 }
 
 var errBadRoute = errors.New("bad route")
 
-func decodeAddOrderRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request addOrdersRequest
+func decodeAddPaymentsRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request paymentsAddRequest
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
 
@@ -55,7 +55,7 @@ func decodeAddOrderRequest(_ context.Context, r *http.Request) (interface{}, err
 	return request, nil
 }
 
-func decodeGetOrdersRequest(_ context.Context, r *http.Request) (interface{}, error) {
+func decodePaymentsListRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	//var request userRequest
 	//value := r.FormValue("token")
 	return nil, nil

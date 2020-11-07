@@ -17,6 +17,8 @@ import (
 	core "shopping-cart/cnm-core"
 	coupons "shopping-cart/cnm-coupons"
 	offers "shopping-cart/cnm-offers"
+	orders "shopping-cart/cnm-orders"
+	payments "shopping-cart/cnm-payments"
 	products "shopping-cart/cnm-products"
 	users "shopping-cart/cnm-users"
 	"syscall"
@@ -169,9 +171,44 @@ func main() {
 		couponsService,
 	)
 
+	var ordersService orders.Service
+	ordersService = orders.NewService();
+	ordersService = orders.NewLoggingService(log.With(logger, "component", "orders"), ordersService)
+	ordersService = orders.NewInstrumentingService(
+		kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
+			Namespace: "api",
+			Subsystem: "orders_service",
+			Name:      "request_count",
+			Help:      "Number of requests received.",
+		}, fieldKeys),
+		kitprometheus.NewSummaryFrom(stdprometheus.SummaryOpts{
+			Namespace: "api",
+			Subsystem: "orders_service",
+			Name:      "request_latency_microseconds",
+			Help:      "Total duration of requests in microseconds.",
+		}, fieldKeys),
+		ordersService,
+	)
 
+	var paymentsService payments.Service
+	paymentsService = payments.NewService();
+	paymentsService = payments.NewLoggingService(log.With(logger, "component", "payments"), paymentsService)
+	paymentsService = payments.NewInstrumentingService(
+		kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
+			Namespace: "api",
+			Subsystem: "payments_service",
+			Name:      "request_count",
+			Help:      "Number of requests received.",
+		}, fieldKeys),
+		kitprometheus.NewSummaryFrom(stdprometheus.SummaryOpts{
+			Namespace: "api",
+			Subsystem: "payments_service",
+			Name:      "request_latency_microseconds",
+			Help:      "Total duration of requests in microseconds.",
+		}, fieldKeys),
+		paymentsService,
+	)
 
-	//ass = handling.NewService(handlingEvents, handlingEventFactory, handlingEventHandler)
 
 	httpLogger := log.With(logger, "component", "http")
 
@@ -187,6 +224,9 @@ func main() {
 	mux.Handle("/carts/v1/", carts.MakeHandler(cartsService, httpLogger))
 	mux.Handle("/offers/v1/", offers.MakeHandler(offersService, httpLogger))
 	mux.Handle("/coupons/v1/", coupons.MakeHandler(couponsService, httpLogger))
+	mux.Handle("/orders/v1/", orders.MakeHandler(ordersService, httpLogger))
+	mux.Handle("/payments/v1/", payments.MakeHandler(paymentsService, httpLogger))
+
 
 
 

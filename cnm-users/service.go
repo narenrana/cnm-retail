@@ -2,7 +2,6 @@ package users
 
 import (
 	"errors"
-	"fmt"
 	userRepository "shopping-cart/cnm-users/repository"
 )
 
@@ -30,8 +29,8 @@ func (s *service) add(request userRequest) (userResponse, error) {
 		Password: request.Password,
 		PhoneNumber: request.PhoneNumber,
 			})
-	fmt.Print(usr,err);
-	return userResponse{UserId: usr.UserId}, nil
+
+	return userResponse{UserId: usr.UserId}, err
 }
 
 func (s *service) list() (userListResponse, error) {
