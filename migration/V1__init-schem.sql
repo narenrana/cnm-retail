@@ -1,18 +1,20 @@
+--DROP TABLE PRODUCTS CASCADE;
 CREATE TABLE PRODUCTS
 (
-    product_id    SERIAL,
+    product_id    BIGSERIAL,
     product_name  VARCHAR(250) NOT NULL,
     product_price NUMERIC(10,2) NOT NULL DEFAULT 0.00,
     base_currency VARCHAR(3) NOT NULL default 'USD',
     product_title VARCHAR(250) NOT NULL,
     product_desc  TEXT NOT NULL,
-    image_url   VARCHAR(250) NOT NULL
+    image_url     VARCHAR(250) NOT NULL,
     CONSTRAINT products_pkey PRIMARY KEY (product_id)
 );
 
+--DROP TABLE USERS CASCADE;
 CREATE TABLE USERS
 (
-    user_id        SERIAL,
+    user_id        BIGSERIAL,
     first_name     VARCHAR(250) NOT NULL,
     middle_name    VARCHAR(250) NOT NULL,
     last_name      VARCHAR(250) NOT NULL,
@@ -23,10 +25,13 @@ CREATE TABLE USERS
     date_updated   DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT users_pkey PRIMARY KEY (user_id)
 );
+CREATE INDEX users_password_index ON USERS (password);
+CREATE INDEX phone_number_index ON USERS (phone_number);
 
-CREATE TABLE shipping_address
+--DROP TABLE shipping_address CASCADE;
+CREATE TABLE  shipping_address
 (
-    id             SERIAL,
+    shipping_address_id             BIGSERIAL,
     user_id        BIGINT NOT NULL,
     user_name      VARCHAR(250) NOT NULL,
     user_email     VARCHAR(250) NOT NULL,
@@ -38,71 +43,106 @@ CREATE TABLE shipping_address
     landmark       VARCHAR(250) NOT NULL,
     date_create    DATE NOT NULL  default  CURRENT_DATE,
     date_updated   DATE NOT NULL  default  CURRENT_DATE,
-    CONSTRAINT shipping_address_pkey PRIMARY KEY (id)
+    CONSTRAINT  shipping_address_pkey PRIMARY KEY (shipping_address_id),
+    CONSTRAINT  shipping_address_user_id_fk FOREIGN KEY(user_id) REFERENCES USERS(user_id)
 );
 
-CREATE TABLE carts
+--DROP TABLE offers CASCADE;
+CREATE TYPE discount_types AS ENUM ('FLAT', 'PERCENTILE');
+CREATE TABLE offers
 (
-    cart_id        SERIAL,
-    cart_name      VARCHAR(250) NOT NULL,
-    user_id        BIGINT NOT NULL,
-    date_create    DATE NOT NULL  default  CURRENT_DATE,
-    date_updated   DATE NOT NULL  default  CURRENT_DATE,
-    CONSTRAINT carts_pkey PRIMARY KEY (cart_id)
-);
-
-CREATE TABLE cart_items
-(
-    item_id        SERIAL,
-    cart_id        BIGINT ,
-    product_id     BIGINT ,
-    product_name   VARCHAR(250) NOT NULL ,
-    discount_id    INTEGER,
-    date_create    DATE NOT NULL  default  CURRENT_DATE,
-    date_updated   DATE NOT NULL  default  CURRENT_DATE,
-    CONSTRAINT cart_items_pkey PRIMARY KEY (item_id)
-);
-
-CREATE TABLE discount
-(
-    id             SERIAL,
-    description    VARCHAR(250) NOT NULL ,
-    type           VARCHAR(10) NOT NULL,
-    rule_id        INTEGER,
-    date_create    DATE NOT NULL  default  CURRENT_DATE,
-    date_updated   DATE NOT NULL  default  CURRENT_DATE,
-    CONSTRAINT discount_pkey PRIMARY KEY (id)
-);
-
-CREATE TABLE discount_rules
-(
-    rule_id            SERIAL,
-    description        VARCHAR(250) NOT NULL ,
-    type               VARCHAR(10) NOT NULL,
-    key                VARCHAR(250) NOT NULL,
-    value              VARCHAR(250) NOT NULL,
-    date_create        DATE NOT NULL  default  CURRENT_DATE,
-    date_updated       DATE NOT NULL  default  CURRENT_DATE,
-    CONSTRAINT discount_rules_pkey PRIMARY KEY (rule_id)
-);
-
-
-CREATE TABLE discount_coupons
-(
-    coupon_id           SERIAL,
+    offers_id           BIGSERIAL,
     description         VARCHAR(250) NOT NULL ,
-    coupons_value       VARCHAR(10) NOT NULL,
+    discount            NUMERIC NOT NULL,
+    discount_mode       discount_types NOT NULL,
+    date_create         DATE NOT NULL  default  CURRENT_DATE,
+    date_updated        DATE NOT NULL  default  CURRENT_DATE,
+    CONSTRAINT offers_id_pkey PRIMARY KEY (offers_id)
+);
+
+--DROP TABLE offers_rules CASCADE;
+CREATE TABLE offers_rules
+(
+    offers_rules_id      BIGSERIAL,
+    offers_id            BIGINT,
+    key                  VARCHAR(250) NOT NULL,
+    value                VARCHAR(250) NOT NULL,
+    description          VARCHAR(250) NOT NULL ,
+    date_create          DATE NOT NULL  default  CURRENT_DATE,
+    date_updated         DATE NOT NULL  default  CURRENT_DATE,
+    CONSTRAINT offers_rules_pkey PRIMARY KEY (offers_rules_id),
+    CONSTRAINT offers_rules_offers_id_fk FOREIGN KEY(offers_id) REFERENCES offers(offers_id)
+);
+
+--DROP TABLE offers_rules CASCADE;
+CREATE TABLE product_offers
+(
+    product_offers_id    BIGSERIAL,
+    offers_id            BIGINT,
+    product_id           VARCHAR(250) NOT NULL,
+    date_create          DATE NOT NULL  default  CURRENT_DATE,
+    date_updated         DATE NOT NULL  default  CURRENT_DATE,
+    CONSTRAINT           product_offers_pkey            PRIMARY KEY (product_offers_id),
+    CONSTRAINT           product_offers_offers_id_fk    FOREIGN KEY(offers_id) REFERENCES offers(offers_id),
+    CONSTRAINT           product_offers_product_id_fk   FOREIGN KEY(product_id) REFERENCES products(product_id)
+);
+
+
+--DROP TABLE discount_coupons CASCADE;
+CREATE TABLE  discount_coupons
+(
+    discount_coupons_id   BIGSERIAL,
+    description         VARCHAR(250) NOT NULL ,
+    discount_coupon     VARCHAR(20) NOT NULL UNIQUE,
+    discount            NUMERIC NOT NULL,
+    discount_mode       discount_types NOT NULL,
+    product_id          discount_types ,-- Optional IF ID present , coupon will be applicable only on that specific product
     coupons_expiry      DATE NOT NULL  default  CURRENT_DATE,
     date_create         DATE NOT NULL  default  CURRENT_DATE,
     date_updated        DATE NOT NULL  default  CURRENT_DATE,
     active              BOOLEAN NOT NULL DEFAULT  true,
-    CONSTRAINT discount_coupons_pkey PRIMARY KEY (coupon_id)
+    CONSTRAINT discount_coupons_id_pkey PRIMARY KEY (discount_coupons_id)
 );
 
 
+
+--DROP TABLE carts CASCADE;
+CREATE TABLE carts
+(
+    cart_id             BIGSERIAL,
+    cart_name           VARCHAR(250) NOT NULL,
+    user_id             BIGINT NOT NULL,
+    offers_id           BIGINT,
+    discount_coupon     VARCHAR(20),
+    date_create         DATE NOT NULL  default  CURRENT_DATE,
+    date_updated        DATE NOT NULL  default  CURRENT_DATE,
+    CONSTRAINT  carts_pkey PRIMARY KEY (cart_id),
+    CONSTRAINT  carts_user_id_fk FOREIGN KEY(user_id) REFERENCES USERS(user_id),
+    CONSTRAINT  carts_offers_id_fk FOREIGN KEY(offers_id) REFERENCES offers(offers_id),
+    CONSTRAINT  carts_discount_coupon_fk FOREIGN KEY(discount_coupon) REFERENCES discount_coupons(discount_coupon)
+);
+
+--DROP TABLE cart_items CASCADE;
+CREATE TABLE cart_items
+(
+    cart_items_id       BIGSERIAL,
+    cart_id             BIGINT ,
+    product_id          BIGINT ,
+    product_name        VARCHAR(250) NOT NULL ,
+    product_price       NUMERIC(10,2) NOT NULL ,
+    quantity            INTEGER NOT NULL DEFAULT 1,
+    date_create         DATE NOT NULL  default  CURRENT_DATE,
+    date_updated        DATE NOT NULL  default  CURRENT_DATE,
+    CONSTRAINT cart_items_pkey PRIMARY KEY (cart_items_id),
+    CONSTRAINT cart_items_cart_id_fk FOREIGN KEY(cart_id) REFERENCES carts(cart_id),
+    CONSTRAINT cart_items_product_id_fk FOREIGN KEY(product_id) REFERENCES products(product_id)
+);
+
+
+--DROP TABLE orders CASCADE;
 CREATE TABLE orders
 (
-    order_id            SERIAL,
+    order_id            BIGSERIAL,
     cart_id             BIGINT,
     user_id             BIGINT,
     amount              NUMERIC(10,2),
@@ -112,23 +152,25 @@ CREATE TABLE orders
     CONSTRAINT  orders_pkey PRIMARY KEY (order_id)
 );
 
+--DROP TABLE orders_items CASCADE;
 CREATE TABLE orders_items
 (
-    order_items_id      SERIAL,
+    order_items_id      BIGSERIAL,
     order_id            BIGINT,
-    user_id             BIGINT,
-    amount              NUMERIC(10,2),
-    product_id         BIGINT ,
+    product_id          BIGINT ,
     product_name        VARCHAR(250) NOT NULL ,
+    product_price       NUMERIC(10,2),
     discount_id         INTEGER,
     order_data          json NOT NULL,
     date_create         DATE NOT NULL  default  CURRENT_DATE,
-    CONSTRAINT  orders_items_pkey PRIMARY KEY (order_id)
+    CONSTRAINT orders_items_pkey PRIMARY KEY (order_items_id),
+    CONSTRAINT orders_items_order_id_fk FOREIGN KEY(order_id) REFERENCES orders(order_id)
 );
 
+--DROP TABLE payments CASCADE;
 CREATE TABLE payments
 (
-    payment_id         SERIAL,
+    payment_id         BIGSERIAL,
     user_id            BIGINT ,
     payment_mode       VARCHAR(10) NOT NULL,
     order_id           BIGINT,
@@ -142,11 +184,13 @@ CREATE TABLE payments
     order_data         json NOT NULL,
     date_create        DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT transactions_pkey PRIMARY KEY (payment_id)
+    -- TODO add CONSTRAINT
 );
 
+--DROP TABLE invoice CASCADE;
 CREATE TABLE invoice
 (
-    invoice_id           SERIAL,
+    invoice_id           BIGSERIAL,
     user_id              BIGINT ,
     payment_id           BIGINT,
     shipping_address_id  BIGINT,
@@ -160,14 +204,17 @@ CREATE TABLE invoice
     order_data           json NOT NULL,
     date_create          DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT invoice_pkey PRIMARY KEY (invoice_id)
+    -- TODO add CONSTRAINT
 );
 
-
+--DROP TABLE inventory CASCADE;
 CREATE TABLE inventory
 (
-    inventory_id        SERIAL,
+    inventory_id        BIGSERIAL,
     product_id          BIGINT NOT NULL,
     price               NUMERIC(10,2) NOT NULL DEFAULT 0.00,
     quantity            INTEGER ,
-    CONSTRAINT inventory_pkey PRIMARY KEY (inventory_id)
+    CONSTRAINT inventory_pkey PRIMARY KEY (inventory_id),
+    CONSTRAINT inventory_product_id_fk FOREIGN KEY(product_id) REFERENCES products(product_id)
 );
+ 

@@ -28,6 +28,7 @@ require (
 	github.com/hashicorp/go-version v1.2.0 // indirect
 	github.com/hudl/fargo v1.3.0
 	github.com/influxdata/influxdb1-client v0.0.0-20191209144304-8bf82d3c094d
+	github.com/jackc/pgtype v1.5.0
 	github.com/lib/pq v1.8.0 // indirect
 	github.com/lightstep/lightstep-tracer-go v0.18.1
 	github.com/nats-io/nats-server/v2 v2.1.2
@@ -46,6 +47,7 @@ require (
 	github.com/prometheus/client_golang v1.3.0
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/samuel/go-zookeeper v0.0.0-20190923202752-2cc03de413da
+	github.com/shopspring/decimal v1.2.0
 	github.com/sirupsen/logrus v1.4.2
 	github.com/smartystreets/goconvey v1.6.4 // indirect
 	github.com/sony/gobreaker v0.4.1

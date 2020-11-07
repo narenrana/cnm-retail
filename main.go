@@ -4,19 +4,22 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"github.com/go-kit/kit/examples/shipping/routing"
+	"github.com/go-kit/kit/log"
+	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
 	"os"
 	"os/signal"
 	auth "shopping-cart/cnm-auth"
+	carts "shopping-cart/cnm-carts"
 	core "shopping-cart/cnm-core"
+	coupons "shopping-cart/cnm-coupons"
+	offers "shopping-cart/cnm-offers"
 	products "shopping-cart/cnm-products"
 	users "shopping-cart/cnm-users"
 	"syscall"
-	"github.com/go-kit/kit/log"
-	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
-	"github.com/go-kit/kit/examples/shipping/routing"
 )
 
 const (
@@ -108,6 +111,66 @@ func main() {
 		}, fieldKeys),
 		productService,
 	)
+
+	var cartsService carts.Service
+	cartsService = carts.NewService();
+	cartsService = carts.NewLoggingService(log.With(logger, "component", "carts"), cartsService)
+	cartsService = carts.NewInstrumentingService(
+		kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
+			Namespace: "api",
+			Subsystem: "carts_service",
+			Name:      "request_count",
+			Help:      "Number of requests received.",
+		}, fieldKeys),
+		kitprometheus.NewSummaryFrom(stdprometheus.SummaryOpts{
+			Namespace: "api",
+			Subsystem: "carts_service",
+			Name:      "request_latency_microseconds",
+			Help:      "Total duration of requests in microseconds.",
+		}, fieldKeys),
+		cartsService,
+	)
+
+	var offersService offers.Service
+	offersService = offers.NewService();
+	offersService = offers.NewLoggingService(log.With(logger, "component", "offers"), offersService)
+	offersService = offers.NewInstrumentingService(
+		kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
+			Namespace: "api",
+			Subsystem: "offers_service",
+			Name:      "request_count",
+			Help:      "Number of requests received.",
+		}, fieldKeys),
+		kitprometheus.NewSummaryFrom(stdprometheus.SummaryOpts{
+			Namespace: "api",
+			Subsystem: "offers_service",
+			Name:      "request_latency_microseconds",
+			Help:      "Total duration of requests in microseconds.",
+		}, fieldKeys),
+		offersService,
+	)
+
+	var couponsService coupons.Service
+	couponsService = coupons.NewService();
+	couponsService = coupons.NewLoggingService(log.With(logger, "component", "coupons"), couponsService)
+	couponsService = coupons.NewInstrumentingService(
+		kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
+			Namespace: "api",
+			Subsystem: "coupons_service",
+			Name:      "request_count",
+			Help:      "Number of requests received.",
+		}, fieldKeys),
+		kitprometheus.NewSummaryFrom(stdprometheus.SummaryOpts{
+			Namespace: "api",
+			Subsystem: "coupons_service",
+			Name:      "request_latency_microseconds",
+			Help:      "Total duration of requests in microseconds.",
+		}, fieldKeys),
+		couponsService,
+	)
+
+
+
 	//ass = handling.NewService(handlingEvents, handlingEventFactory, handlingEventHandler)
 
 	httpLogger := log.With(logger, "component", "http")
@@ -121,6 +184,11 @@ func main() {
 	mux.Handle("/auth/v1/", auth.MakeHandler(authService, httpLogger))
 	mux.Handle("/users/v1/", users.MakeHandler(userService, httpLogger))
 	mux.Handle("/products/v1/", products.MakeHandler(productService, httpLogger))
+	mux.Handle("/carts/v1/", carts.MakeHandler(cartsService, httpLogger))
+	mux.Handle("/offers/v1/", offers.MakeHandler(offersService, httpLogger))
+	mux.Handle("/coupons/v1/", coupons.MakeHandler(couponsService, httpLogger))
+
+
 
 	http.Handle("/", accessControl(mux))
 	http.Handle("/metrics", promhttp.Handler())

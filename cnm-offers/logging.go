@@ -1,4 +1,4 @@
-package carts
+package offers
 
 import (
 	"time"
@@ -16,7 +16,7 @@ func NewLoggingService(logger log.Logger, s Service) Service {
 	return &loggingService{logger, s}
 }
 
-func (s *loggingService) add(request  productAddRequest) (productAddResponse , error) {
+func (s *loggingService) add(request  addOffersRequest) (addOffersResponse , error) {
 	defer func(begin time.Time) {
 		s.logger.Log("method", "track", "tracking_id", request, "took", time.Since(begin))
 	}(time.Now())
@@ -24,9 +24,9 @@ func (s *loggingService) add(request  productAddRequest) (productAddResponse , e
 }
 
 
-func (s *loggingService) list() ( productListResponse, error) {
+func (s *loggingService) list() ( getOffersResponse, error) {
 	defer func(begin time.Time) {
 		s.logger.Log("method", "track", "tracking_id", "took", time.Since(begin))
 	}(time.Now())
-	return s.Service.list()
+	return s.Service.get()
 }

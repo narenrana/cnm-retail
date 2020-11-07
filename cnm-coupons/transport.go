@@ -1,4 +1,4 @@
-package carts
+package coupons
 
 import (
 	"context"
@@ -21,31 +21,31 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 	}
 
 	addProductHandler := kithttp.NewServer(
-		makeProductAddRequestEndpoint(bs),
-		decodeAddProductRequest,
+		makeDiscountCouponsAddRequestEndpoint(bs),
+		decodeAddDiscountCouponRequest,
 		encodeResponse,
 		opts...,
 	)
 
 	productListHandler := kithttp.NewServer(
-		makeUserListEndpoint(bs),
-		decodeProductListRequest,
+		makeDiscountCouponsListEndpoint(bs),
+		decodeDiscountCouponListRequest,
 		encodeResponse,
 		opts...,
 	)
 
 	r := mux.NewRouter()
 
-	r.Handle("/products/v1/add", addProductHandler).Methods("POST")
-	r.Handle("/products/v1/list", productListHandler).Methods("GET")
+	r.Handle("/coupons/v1/add", addProductHandler).Methods("POST")
+	r.Handle("/coupons/v1/list", productListHandler).Methods("GET")
 
 	return r
 }
 
 var errBadRoute = errors.New("bad route")
 
-func decodeAddProductRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request productAddRequest
+func decodeAddDiscountCouponRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request discountCouponsAddRequest
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
 
@@ -55,7 +55,7 @@ func decodeAddProductRequest(_ context.Context, r *http.Request) (interface{}, e
 	return request, nil
 }
 
-func decodeProductListRequest(_ context.Context, r *http.Request) (interface{}, error) {
+func decodeDiscountCouponListRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	//var request userRequest
 	//value := r.FormValue("token")
 	return nil, nil

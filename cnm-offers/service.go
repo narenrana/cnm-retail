@@ -1,8 +1,8 @@
-package products
+package offers
 
 import (
 	"errors"
-	repository "shopping-cart/cnm-carts/repository"
+	repository "shopping-cart/cnm-offers/repository"
 
 )
 
@@ -11,28 +11,29 @@ var ErrInvalidArgument = errors.New("invalid argument")
 
 // Service is the interface that provides booking methods.
 type  Service interface {
-	add(request addToCartRequest) (addToCartResponse , error)
-	get() (getCartResponse, error)
+	add(request addOffersRequest) (addOffersResponse , error)
+	get() (getOffersResponse, error)
 }
 
 type service struct {
 }
 
-func (s *service) add(request addToCartRequest) (addToCartResponse, error) {
+func (s *service) add(request addOffersRequest) (addOffersResponse, error) {
 	repository:= repository.CartsRepositoryInstance()
-	cart, err:=repository.Add(request.Cart)
-	return  addToCartResponse{Cart: cart}, err
+	cart, err:=repository.Add(request.Offers)
+	return  addOffersResponse{Offers: cart}, err
 }
 
-func (s *service) get() (getCartResponse, error) {
+func (s *service) get() (getOffersResponse, error) {
 	repository:= repository.CartsRepositoryInstance()
-	cart, err:=repository.List();
+	offer, err:=repository.List();
 	//TODO- cart empty check missing
-	return getCartResponse{Cart: cart}, err
+	return getOffersResponse{Offers: offer}, err
 }
 
 // NewService creates a  service with necessary dependencies.
 func NewService() Service {
 	return &service{}
+
 }
 

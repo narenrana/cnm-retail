@@ -1,4 +1,4 @@
-package carts
+package coupons
 
 import (
 	"time"
@@ -21,7 +21,7 @@ func NewInstrumentingService(counter metrics.Counter, latency metrics.Histogram,
 	}
 }
 
-func (s *instrumentingService) add(request productAddRequest) (productAddResponse, error){
+func (s *instrumentingService) add(request discountCouponsAddRequest) (discountCouponsResponse, error){
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
@@ -30,7 +30,7 @@ func (s *instrumentingService) add(request productAddRequest) (productAddRespons
 	return s.Service.add(request)
 }
 
-func (s *instrumentingService) list() (productListResponse, error) {
+func (s *instrumentingService) list() (discountCouponsListResponse, error) {
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())

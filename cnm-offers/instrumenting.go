@@ -1,4 +1,4 @@
-package carts
+package offers
 
 import (
 	"time"
@@ -21,7 +21,7 @@ func NewInstrumentingService(counter metrics.Counter, latency metrics.Histogram,
 	}
 }
 
-func (s *instrumentingService) add(request productAddRequest) (productAddResponse, error){
+func (s *instrumentingService) add(request addOffersRequest) (addOffersResponse, error){
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
@@ -30,11 +30,11 @@ func (s *instrumentingService) add(request productAddRequest) (productAddRespons
 	return s.Service.add(request)
 }
 
-func (s *instrumentingService) list() (productListResponse, error) {
+func (s *instrumentingService) list() (getOffersResponse, error) {
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	return s.Service.list()
+	return s.Service.get()
 }

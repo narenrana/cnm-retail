@@ -17,7 +17,7 @@ type addToCartResponse struct {
 }
 
 type getCartResponse struct {
-	Cart           repository.Cart `json:"cart,omitempty"`
+	Cart           [] *repository.Cart `json:"cart,omitempty"`
 	Err            error  `json:"error,omitempty"`
 }
 
