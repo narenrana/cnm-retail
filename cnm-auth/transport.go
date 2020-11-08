@@ -34,10 +34,34 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 		opts...,
 	)
 
+	authSignUpHandler := kithttp.NewServer(
+		makeSignUpEndpoint(bs),
+		decodeAuthSignUpRequest,
+		encodeResponse,
+		opts...,
+	)
+
+	authRecoverPasswordHandler := kithttp.NewServer(
+		makeRecoverPasswordEndpoint(bs),
+		decodeAuthRecoverPasswordRequest,
+		encodeResponse,
+		opts...,
+	)
+
+	authRefreshTokenHandler := kithttp.NewServer(
+		makeRefreshTokenEndpoint(bs),
+		decodeAuthRefreshTokenRequest,
+		encodeResponse,
+		opts...,
+	)
+
 	r := mux.NewRouter()
 
 	r.Handle("/auth/v1/login", authLoginHandler).Methods("POST")
 	r.Handle("/auth/v1/logout", authLogoutHandler).Methods("GET")
+	r.Handle("/auth/v1/signup", authSignUpHandler).Methods("POST")
+	r.Handle("/auth/v1/recoverPassword", authRecoverPasswordHandler).Methods("POST")
+	r.Handle("/auth/v1/refreshToken", authRefreshTokenHandler).Methods("POST")
 
 	return r
 }
@@ -45,34 +69,54 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 var errBadRoute = errors.New("bad route")
 
 func decodeAuthLoginRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var body struct {
-		Name       string `json:"name"`
-		Password   string `json:"password"`
-		RememberMe string `json:"rememberMe"`
-	}
-
+	var request authLoginRequest
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
-
-	if err := dec.Decode(&body); err != nil {
+	if err := dec.Decode(&request); err != nil {
 		return nil, err
 	}
-
-	return authLoginRequest{
-		name:       body.Name,
-		password:   body.Password,
-		rememberMe: body.RememberMe,
-	}, nil
+	return request, nil
 }
 
 func decodeAuthLogoutRequest(_ context.Context, r *http.Request) (interface{}, error) {
 
 	value := r.FormValue("token")
 	return authLogoutRequest{
-		token:       value,
+		Token:       value,
 	}, nil
 }
 
+func decodeAuthSignUpRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request authSignUpRequest
+	dec := json.NewDecoder(r.Body)
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&request); err != nil {
+		return nil, err
+	}
+	return request, nil
+}
+
+func decodeAuthRecoverPasswordRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request authRecoverPasswordRequest
+	dec := json.NewDecoder(r.Body)
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&request); err != nil {
+		return nil, err
+	}
+	return request, nil
+}
+
+
+
+func decodeAuthRefreshTokenRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request authRecoverPasswordRequest
+	dec := json.NewDecoder(r.Body)
+	dec.DisallowUnknownFields()
+	if err := dec.Decode(&request); err != nil {
+		return nil, err
+	}
+	return request, nil
+}
 
 func encodeResponse(ctx context.Context, w http.ResponseWriter, response interface{}) error {
 	if e, ok := response.(errorer); ok && e.error() != nil {

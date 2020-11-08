@@ -19,13 +19,13 @@ type service struct {
 }
 
 func (s *service) add(request discountCouponsAddRequest) (discountCouponsResponse, error) {
-	repository:= repository.CouponsRepositoryInstance()
+	repository:= repository.DiscountCouponsRepositoryInstance()
 	product, err:=repository.Add(request.DiscountCoupons)
 	return  discountCouponsResponse{DiscountCoupons: product}, err
 }
 
 func (s *service) list() (discountCouponsListResponse, error) {
-	repository:= repository.CouponsRepositoryInstance()
+	repository:= repository.DiscountCouponsRepositoryInstance()
 	product, err:=repository.List();
 	return discountCouponsListResponse{Product: product , Err: err}, err
 }

@@ -31,7 +31,7 @@ func makeOffersEndpoint(s Service) endpoint.Endpoint {
 
 func makeGetOffersEndpoint(s Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		response, err := s.get()
+		response, err := s.list()
 		return response, err
 	}
 }

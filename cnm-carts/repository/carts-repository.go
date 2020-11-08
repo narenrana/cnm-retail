@@ -1,13 +1,13 @@
 package repository
 
 import (
-	"github.com/shopspring/decimal"
 	core "shopping-cart/cnm-core"
+	"shopping-cart/cnm-core/wrappers"
 )
 
 type Service interface {
 	List() ([] *Cart,error)
-	FindBy(u Cart) (  Cart,error)
+	FirstOrCreate(userId int) (  Cart,error)
 	Add(u Cart) ( Cart,error)
 	Delete(u Cart) ( Cart,error)
 
@@ -19,8 +19,8 @@ type Cart struct {
 	CartName      string    `json:"cartName,omitempty"`
 	UserId        int       `json:"userId,omitempty"`
 	CartItems     []*CartItems `gorm:"foreignKey:CartId;references:CartId" json:"cartItems,omitempty"`
-	OffersId      int      `json:"offersId,omitempty"`
-	DiscountCoupon string   `json:"discountCoupon,omitempty"`
+	//OffersId      int      `json:"offersId,omitempty"`
+	DiscountCoupon *string   `json:"discountCoupon,omitempty"`
 }
 
 type CartItems struct {
@@ -29,7 +29,7 @@ type CartItems struct {
 	CartId        *int `json:"cartId,omitempty"`
 	Quantity      *int  `json:"quantity,omitempty"`
 	ProductId     int `json:"productId,omitempty"`
-	ProductPrice  decimal.Decimal `json:"productPrice,omitempty"`
+	ProductPrice  float64 `json:"productPrice,omitempty"`
 	ProductName  string `json:"productName,omitempty"`
 }
 
@@ -48,18 +48,28 @@ func (*Cart) List() ([] *Cart, error){
 	return  found, err;
 }
 
-func (*Cart) FindBy(user Cart) (Cart, error){
+func (*Cart) FirstOrCreate(userId int) (Cart, error){
 	db,err :=core.GetDB()
 	 var found Cart;
+	found.UserId= userId
 	if err != nil {
-		return user, err;
+		return Cart{}, err;
 	}
-	db.Find(&found);
+	db.Model(&found).Where("user_id= ?",userId).FirstOrCreate(&found);
+	var cartItem [] *CartItems;
+	db.Model(&cartItem).Where("cart_id = ?", found.CartId).Find(&cartItem)
+	found.CartItems=cartItem;
 	return  found, err;
 }
 
 func (*Cart) Add(cart Cart) (Cart, error){
 	db,err :=core.GetDB()
+
+	for _,v := range cart.CartItems {
+		if v.Quantity == nil {
+			v.Quantity = wrappers.IntWrapper(1);
+		}
+	}
 
 	if db.Model(&cart).Where("cart_id = ?", cart.CartId).Updates(&cart).RowsAffected == 0 {
 		db.Create(&cart)
@@ -89,4 +99,5 @@ func (*Cart) Delete(user Cart) (Cart, error){
 func CartsRepositoryInstance() Service {
 	return &Cart{}
 }
+
 

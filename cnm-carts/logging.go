@@ -1,32 +1,33 @@
-package products
+package carts
 
 import (
-	"time"
-
 	"github.com/go-kit/kit/log"
+	"shopping-cart/cnm-carts/models"
+	"shopping-cart/cnm-carts/services"
+	"time"
 )
 
 type loggingService struct {
 	logger log.Logger
-	Service
+	services.Service
 }
 
 // NewLoggingService returns a new instance of a logging Service.
-func NewLoggingService(logger log.Logger, s Service) Service {
+func NewLoggingService(logger log.Logger, s services.Service) services.Service {
 	return &loggingService{logger, s}
 }
 
-func (s *loggingService) add(request  addToCartRequest) (addToCartResponse , error) {
+func (s *loggingService) add(request models.AddToCartRequest) (models.AddToCartResponse, error) {
 	defer func(begin time.Time) {
 		s.logger.Log("method", "track", "tracking_id", request, "took", time.Since(begin))
 	}(time.Now())
-	return s.Service.add(request)
+	return s.Service.Add(request)
 }
 
 
-func (s *loggingService) list() ( getCartResponse, error) {
+func (s *loggingService) list(request models.GetCartRequest) (models.GetCartResponse, error) {
 	defer func(begin time.Time) {
 		s.logger.Log("method", "track", "tracking_id", "took", time.Since(begin))
 	}(time.Now())
-	return s.Service.get()
+	return s.Service.Get(request)
 }

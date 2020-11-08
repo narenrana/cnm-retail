@@ -5,13 +5,13 @@ import (
 )
 
 type UsersRepository interface {
-	List() ([]Users,error)
-	FindBy(u Users)  (Users, error)
-	Add(u Users) (Users, error)
-	Delete(u Users) (Users, error)
+	List() ([]UserDetails,error)
+	FindBy(u UserDetails)  (UserDetails, error)
+	Add(u UserDetails) (UserDetails, error)
+	Delete(u UserDetails) (UserDetails, error)
 }
 
-type Users struct {
+type UserDetails struct {
 	UserId         uint
 	FirstName      string
 	MiddleName     string
@@ -24,9 +24,9 @@ type Users struct {
 
 }
 
-func (*Users) List() ([] Users, error){
+func (*UserDetails) List() ([] UserDetails, error){
 	db,err :=core.GetDB()
-	var found [] Users;
+	var found [] UserDetails;
 	if err != nil {
 		return nil, err;
 	}
@@ -34,9 +34,9 @@ func (*Users) List() ([] Users, error){
 	return  found, err;
 }
 
-func (*Users) FindBy(user Users) (Users, error){
+func (*UserDetails) FindBy(user UserDetails) (UserDetails, error){
 	db,err :=core.GetDB()
-	 var found Users;
+	 var found UserDetails;
 	if err != nil {
 		return user, err;
 	}
@@ -44,7 +44,7 @@ func (*Users) FindBy(user Users) (Users, error){
 	return  found, err;
 }
 
-func (*Users) Add(user Users) (Users, error){
+func (*UserDetails) Add(user UserDetails) (UserDetails, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return user, err;
@@ -53,7 +53,7 @@ func (*Users) Add(user Users) (Users, error){
 	return  user, err;
 }
 
-func (*Users) Delete(user Users) (Users, error){
+func (*UserDetails) Delete(user UserDetails) (UserDetails, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return user, err;
@@ -63,6 +63,6 @@ func (*Users) Delete(user Users) (Users, error){
 }
 
 func UsersRepositoryInstance() UsersRepository {
-	return &Users{};
+	return &UserDetails{};
 }
 

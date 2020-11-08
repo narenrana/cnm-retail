@@ -36,5 +36,5 @@ func (s *instrumentingService) list() (getOffersResponse, error) {
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	return s.Service.get()
+	return s.Service.list()
 }

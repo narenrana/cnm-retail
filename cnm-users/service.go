@@ -21,7 +21,7 @@ type service struct {
 
 func (s *service) add(request userRequest) (userResponse, error) {
 	repository:= userRepository.UsersRepositoryInstance()
-	usr, err:=repository.Add(userRepository.Users{
+	usr, err:=repository.Add(userRepository.UserDetails{
 		FirstName: request.FirstName,
 		MiddleName: request.MiddleName,
 		LastName: request.LastName,
@@ -36,7 +36,7 @@ func (s *service) add(request userRequest) (userResponse, error) {
 func (s *service) list() (userListResponse, error) {
 	repository:= userRepository.UsersRepositoryInstance()
 	users, err:=repository.List();
-	return userListResponse{Users:users , Err: err}, err
+	return userListResponse{UserDetails:users , Err: err}, err
 }
 
 // NewService creates a auth service with necessary dependencies.

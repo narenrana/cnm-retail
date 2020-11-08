@@ -1,9 +1,8 @@
 package repository
 
 import (
-	"github.com/jackc/pgtype"
-	"github.com/shopspring/decimal"
 	core "shopping-cart/cnm-core"
+	"time"
 )
 
 type Service interface {
@@ -20,11 +19,14 @@ type Offers struct {
 	//json:"offer_id,omitempty",
 	OffersId           int             `gorm:"primaryKey" json:"offersId,omitempty"`
 	Description        string          `json:"description,description"`
-	Discount           decimal.Decimal `json:"discount,omitempty"`
+	Discount           float64          `json:"discount,omitempty"`
 	DiscountMode       string          `json:"discountMode,omitempty"`
-	DateCreate         pgtype.Date     `json:"dateCreate,omitempty"`
-	DateUpdated        pgtype.Date     `json:"dateUpdated,omitempty"`
-	OffersRules        [] *OffersRules  `gorm:"foreignKey:OffersId;references:OffersId" json:"offersRules,omitempty"`
+	OffersType         string          `json:"offersType,omitempty"`
+	active             string          `json:"active,omitempty"`
+	expireDate         time.Time       `json:"expireDate,omitempty"`
+	DateCreated        time.Time     `json:"dateCreated,omitempty"`
+	DateUpdated        time.Time    `json:"dateUpdated,omitempty"`
+	OffersRules        [] *OffersRules `gorm:"foreignKey:OffersId;references:OffersId" json:"offersRules,omitempty"`
 }
 
 type OffersRules struct {
@@ -33,9 +35,10 @@ type OffersRules struct {
 	OffersId             int        `json:"offersId,omitempty"`
 	Key                  string     `json:"key,omitempty"`
 	Value                string     `json:"value,omitempty"`
+	Operator             string     `json:"operator,omitempty"`
 	Description          string     `json:"description,omitempty"`
-	DateCreate          pgtype.Date `json:"dateCreate,omitempty"`
-	DateUpdated         pgtype.Date `json:"dateUpdated,omitempty"`
+	DateCreated          time.Time  `json:"dateCreated,omitempty"`
+	DateUpdated         time.Time   `json:"dateUpdated,omitempty"`
 }
 
 func (*Offers) List() ([] *Offers, error){
@@ -93,7 +96,7 @@ func (*Offers) Delete(offer Offers) (Offers, error){
 	return  offer, err;
 }
 
-func CartsRepositoryInstance() Service {
+func OffersRepositoryInstance() Service {
 	return &Offers{};
 }
 

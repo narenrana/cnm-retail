@@ -12,20 +12,22 @@ var ErrInvalidArgument = errors.New("invalid argument")
 // Service is the interface that provides booking methods.
 type  Service interface {
 	add(request addOffersRequest) (addOffersResponse , error)
-	get() (getOffersResponse, error)
+	list() (getOffersResponse, error)
 }
 
 type service struct {
 }
 
+
+
 func (s *service) add(request addOffersRequest) (addOffersResponse, error) {
-	repository:= repository.CartsRepositoryInstance()
+	repository:= repository.OffersRepositoryInstance()
 	cart, err:=repository.Add(request.Offers)
 	return  addOffersResponse{Offers: cart}, err
 }
 
-func (s *service) get() (getOffersResponse, error) {
-	repository:= repository.CartsRepositoryInstance()
+func (s *service) list() (getOffersResponse, error) {
+	repository:= repository.OffersRepositoryInstance()
 	offer, err:=repository.List();
 	//TODO- cart empty check missing
 	return getOffersResponse{Offers: offer}, err

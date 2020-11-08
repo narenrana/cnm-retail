@@ -30,16 +30,32 @@ INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, pr
 INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1116, 'Ooty Beans', '12.30', 'USD','Ooty Beans' ,'','/static/images/products/product-15.png' );
 
 --Add discount coupons
-INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, coupons_expiry, active) VALUES (1, 'Discount Coupons', 'DIS237890WR',10.00,'PERCENTILE','2020-01-01', true);
-INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, coupons_expiry, active) VALUES (2, 'Discount Coupons', 'DIS237891WR',5.00,'PERCENTILE','2021-01-01', true);
-INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, coupons_expiry, active) VALUES (3, 'Discount Coupons', 'DIS237892WR',4.00,'PERCENTILE','2021-11-11', true);
-INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, coupons_expiry, active) VALUES (4, 'Discount Coupons', 'DIS237893WR',3.00,'PERCENTILE','2021-12-30', true);
-INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, coupons_expiry, active) VALUES (5, 'Discount Coupons', 'DIS237894WR',2.00,'PERCENTILE','2022-01-01', true);
+INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (1, 'Discount Coupons', 'DIS237890WR',10.00,'PERCENTILE','2020-01-01', true);
+INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (2, 'Discount Coupons', 'DIS237891WR',5.00,'PERCENTILE','2021-01-01', true);
+INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (3, 'Discount Coupons', 'DIS237892WR',4.00,'PERCENTILE','2021-11-11', true);
+INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (4, 'Discount Coupons', 'DIS237893WR',3.00,'PERCENTILE','2021-12-30', true);
+INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (5, 'Discount Coupons', 'DIS237894WR',2.00,'PERCENTILE','2022-01-01', true);
+
+INSERT INTO  discount_coupons_rules(discount_coupons_rules_id, discount_coupons_id, key, value, operator,description) VALUES (1, 1, 'Oranges','>=', 0, '30% Discount on Oranges');
+
 
 --Add offers
-INSERT INTO  offers( offers_id, description, discount, discount_mode) VALUES (1, 'Basket offer', 30, 'PERCENTILE');
-INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, description) VALUES (1, 1, 'Pears', 4, 'Basket offer on pears');
-INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, description) VALUES (1, 1, 'Bananas', 2, 'Basket offer on bananas');
+INSERT INTO  offers( offers_id, description, discount, discount_mode,offer_type) VALUES (1, 'Basket offer', 30, 'PERCENTILE','COMBO_OFFER');
+INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, description) VALUES (1, 1, 'Pears', 4, '4 Pears and 2 Banana Combo Offer');
+INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, description) VALUES (1, 1, 'Bananas', 2, '4 Pears and 2 Banana Combo Offer');
 
-INSERT INTO  offers( offers_id, description, discount, discount_mode) VALUES (2, 'Products offers', 30, 'PERCENTILE');
+INSERT INTO  offers( offers_id, description, discount, discount_mode) VALUES (2, 'Products offers', 30, 'PERCENTILE','INDIVIDUAL_ITEM_OFFER');
+INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, operator,description) VALUES (1, 2, 'Apples','>=', 7, '7 or more Apples');
+
+
+
+
 INSERT INTO  product_offers(product_offers_id, offers_id, product_id) VALUES (1, 2, 1002);
+
+
+--increase sequence
+alter sequence users_user_id_seq restart with 1300;
+alter sequence offers_rules_offers_rules_id_seq restart with 1300;
+alter sequence products_product_id_seq restart with 1300;
+alter sequence discount_coupons_discount_coupons_id_seq restart with 1300;
+alter sequence offers_offers_id_seq restart with 1300;

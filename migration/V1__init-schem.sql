@@ -49,13 +49,17 @@ CREATE TABLE  shipping_address
 
 --DROP TABLE offers CASCADE;
 CREATE TYPE discount_types AS ENUM ('FLAT', 'PERCENTILE');
+CREATE TYPE offers_type AS ENUM ('COMBO_OFFER', 'INDIVIDUAL_ITEM_OFFER','CHRISTMAS_OFFER', 'NEW_YEAR_OFFER','BLACK_FRIDAY'); --All type of discount
 CREATE TABLE offers
 (
     offers_id           BIGSERIAL,
     description         VARCHAR(250) NOT NULL ,
     discount            NUMERIC NOT NULL,
     discount_mode       discount_types NOT NULL,
-    date_create         DATE NOT NULL  default  CURRENT_DATE,
+    offers_type         offers_type NOT NULL  ,
+    active              boolean NOT NULL,
+    expire_date          DATE NOT NULL,
+    date_created         DATE NOT NULL  default  CURRENT_DATE,
     date_updated        DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT offers_id_pkey PRIMARY KEY (offers_id)
 );
@@ -67,8 +71,9 @@ CREATE TABLE offers_rules
     offers_id            BIGINT,
     key                  VARCHAR(250) NOT NULL,
     value                VARCHAR(250) NOT NULL,
+    operator             VARCHAR(10)  NOT NULL  default  '==',
     description          VARCHAR(250) NOT NULL ,
-    date_create          DATE NOT NULL  default  CURRENT_DATE,
+    date_created          DATE NOT NULL  default  CURRENT_DATE,
     date_updated         DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT offers_rules_pkey PRIMARY KEY (offers_rules_id),
     CONSTRAINT offers_rules_offers_id_fk FOREIGN KEY(offers_id) REFERENCES offers(offers_id)
@@ -89,6 +94,8 @@ CREATE TABLE product_offers
 
 
 --DROP TABLE discount_coupons CASCADE;
+
+CREATE TYPE discount_coupons_type AS ENUM ('ONE_TIME',  'MULTI_USE', 'NEW_YEAR_2020'); --All type of discount coupons
 CREATE TABLE  discount_coupons
 (
     discount_coupons_id   BIGSERIAL,
@@ -96,12 +103,40 @@ CREATE TABLE  discount_coupons
     discount_coupon     VARCHAR(20) NOT NULL UNIQUE,
     discount            NUMERIC NOT NULL,
     discount_mode       discount_types NOT NULL,
-    product_id          discount_types ,-- Optional IF ID present , coupon will be applicable only on that specific product
-    coupons_expiry      DATE NOT NULL  default  CURRENT_DATE,
-    date_create         DATE NOT NULL  default  CURRENT_DATE,
+    coupons_type        discount_coupons_type NOT NULL default  'ONE_TIME' ,
+    expiry_date         DATE NOT NULL,
+    date_created        DATE NOT NULL  default  CURRENT_DATE,
     date_updated        DATE NOT NULL  default  CURRENT_DATE,
     active              BOOLEAN NOT NULL DEFAULT  true,
     CONSTRAINT discount_coupons_id_pkey PRIMARY KEY (discount_coupons_id)
+);
+
+CREATE TABLE discount_coupons_rules
+(
+    discount_coupons_rules_id      BIGSERIAL,
+    discount_coupons_id            BIGINT,
+    key                  VARCHAR(250) NOT NULL,
+    value                VARCHAR(250) NOT NULL,
+    operator             VARCHAR(10)  NOT NULL  default  '==',
+    description          VARCHAR(250) NOT NULL ,
+    date_created          DATE NOT NULL  default  CURRENT_DATE,
+    date_updated         DATE NOT NULL  default  CURRENT_DATE,
+    CONSTRAINT discount_coupons_rules_id_pkey PRIMARY KEY (discount_coupons_rules_id),
+    CONSTRAINT discount_coupons_id_fk FOREIGN KEY(discount_coupons_id) REFERENCES discount_coupons(discount_coupons_id)
+);
+
+--DROP TABLE discount_coupons CASCADE;
+CREATE TABLE  products_coupons_mapping
+(
+    products_coupons_mapping_id   BIGSERIAL,
+    description                   VARCHAR(250) NOT NULL ,
+    product_id                    BIGINT,
+    date_create         DATE NOT NULL  default  CURRENT_DATE,
+    date_updated        DATE NOT NULL  default  CURRENT_DATE,
+    active              BOOLEAN NOT NULL DEFAULT  true,
+    CONSTRAINT            products_coupons_mapping_id_pkey PRIMARY KEY (products_coupons_mapping_id),
+    CONSTRAINT           products_coupons_mapping_discount_coupons_fk    FOREIGN KEY(product_id) REFERENCES discount_coupons(discount_coupons_id),
+    CONSTRAINT           products_coupons_mapping_product_id_fk   FOREIGN KEY(product_id) REFERENCES products(product_id)
 );
 
 
@@ -110,15 +145,15 @@ CREATE TABLE  discount_coupons
 CREATE TABLE carts
 (
     cart_id             BIGSERIAL,
-    cart_name           VARCHAR(250) NOT NULL,
+    cart_name           VARCHAR(250),
     user_id             BIGINT NOT NULL,
-    offers_id           BIGINT,
+    --offers_id           BIGINT,
     discount_coupon     VARCHAR(20),
     date_create         DATE NOT NULL  default  CURRENT_DATE,
     date_updated        DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT  carts_pkey PRIMARY KEY (cart_id),
     CONSTRAINT  carts_user_id_fk FOREIGN KEY(user_id) REFERENCES USERS(user_id),
-    CONSTRAINT  carts_offers_id_fk FOREIGN KEY(offers_id) REFERENCES offers(offers_id),
+    --CONSTRAINT  carts_offers_id_fk FOREIGN KEY(offers_id) REFERENCES offers(offers_id),
     CONSTRAINT  carts_discount_coupon_fk FOREIGN KEY(discount_coupon) REFERENCES discount_coupons(discount_coupon)
 );
 

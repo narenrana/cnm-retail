@@ -1,38 +1,28 @@
-package products
+package carts
 
 import (
 	"context"
-	"shopping-cart/cnm-carts/repository"
-
 	"github.com/go-kit/kit/endpoint"
+	"shopping-cart/cnm-carts/models"
+
+	"shopping-cart/cnm-carts/services"
+
 )
 
-type  addToCartRequest struct {
-	Cart repository.Cart;
-}
-
-type addToCartResponse struct {
-	Cart          repository.Cart   `json:"product,omitempty"`
-	Err               error  `json:"error,omitempty"`
-}
-
-type getCartResponse struct {
-	Cart           [] *repository.Cart `json:"cart,omitempty"`
-	Err            error  `json:"error,omitempty"`
-}
 
 
-func makeAddToCartEndpoint(s Service) endpoint.Endpoint {
+func makeAddToCartEndpoint(s services.Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		req := request.(addToCartRequest)
-		response, err := s.add(req)
+		req := request.(models.AddToCartRequest)
+		response, err := s.Add(req)
 		return response, err
 	}
 }
 
-func makeGetCartEndpoint(s Service) endpoint.Endpoint {
+func makeGetCartEndpoint(s services.Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		response, err := s.get()
+		req := request.(models.GetCartRequest)
+		response, err := s.Get(req)
 		return response, err
 	}
 }

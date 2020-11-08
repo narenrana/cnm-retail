@@ -27,7 +27,7 @@ type userResponse struct {
 }
 
 type userListResponse struct {
-	Users            [] repository.Users `json:"users,omitempty"`
+	UserDetails            [] repository.UserDetails `json:"users,omitempty"`
 	Err              error  `json:"error,omitempty"`
 }
 
