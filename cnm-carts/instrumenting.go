@@ -23,7 +23,7 @@ func NewInstrumentingService(counter metrics.Counter, latency metrics.Histogram,
 	}
 }
 
-func (s *instrumentingService) add(request models.AddToCartRequest) (models.AddToCartResponse, error){
+func (s *instrumentingService) add(request models.AddToCartRequest) (models.CartResponse, error){
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
@@ -32,7 +32,7 @@ func (s *instrumentingService) add(request models.AddToCartRequest) (models.AddT
 	return s.Service.Add(request)
 }
 
-func (s *instrumentingService) list(request models.GetCartRequest) (models.GetCartResponse, error) {
+func (s *instrumentingService) list(request models.GetCartRequest) (models.CartResponse, error) {
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())

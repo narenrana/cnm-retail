@@ -14,6 +14,7 @@ import (
 	"os/signal"
 	auth "shopping-cart/cnm-auth"
 	carts "shopping-cart/cnm-carts"
+	"shopping-cart/cnm-carts/services"
 	core "shopping-cart/cnm-core"
 	coupons "shopping-cart/cnm-coupons"
 	offers "shopping-cart/cnm-offers"
@@ -53,12 +54,8 @@ func main() {
 	var rs routing.Service
 	rs = routing.NewProxyingMiddleware(ctx, *routingServiceURL)(rs)
 
-
-
-
-
 	var authService auth.Service
-	authService=auth.NewService();
+	authService=auth.NewService()
 	authService = auth.NewLoggingService(log.With(logger, "component", "auth"), authService)
 	authService = auth.NewInstrumentingService(
 		kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
@@ -114,8 +111,8 @@ func main() {
 		productService,
 	)
 
-	var cartsService carts.Service
-	cartsService = carts.NewService();
+	var cartsService services.Service
+	cartsService = services.NewService();
 	cartsService = carts.NewLoggingService(log.With(logger, "component", "carts"), cartsService)
 	cartsService = carts.NewInstrumentingService(
 		kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{

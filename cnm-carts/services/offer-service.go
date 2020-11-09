@@ -25,6 +25,7 @@ type offersService struct {
 }
 
 func (s *offersService) getOffers(items [] *repository.CartItems) ([] *offersRepository.Offers,float64, error){
+
 	offersRepositoryInstance:=offersRepository.OffersRepositoryInstance()
 	offers, error :=offersRepositoryInstance.List();
 

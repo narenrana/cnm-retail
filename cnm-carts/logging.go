@@ -17,7 +17,7 @@ func NewLoggingService(logger log.Logger, s services.Service) services.Service {
 	return &loggingService{logger, s}
 }
 
-func (s *loggingService) add(request models.AddToCartRequest) (models.AddToCartResponse, error) {
+func (s *loggingService) add(request models.AddToCartRequest) (models.CartResponse, error) {
 	defer func(begin time.Time) {
 		s.logger.Log("method", "track", "tracking_id", request, "took", time.Since(begin))
 	}(time.Now())
@@ -25,7 +25,7 @@ func (s *loggingService) add(request models.AddToCartRequest) (models.AddToCartR
 }
 
 
-func (s *loggingService) list(request models.GetCartRequest) (models.GetCartResponse, error) {
+func (s *loggingService) list(request models.GetCartRequest) (models.CartResponse, error) {
 	defer func(begin time.Time) {
 		s.logger.Log("method", "track", "tracking_id", "took", time.Since(begin))
 	}(time.Now())

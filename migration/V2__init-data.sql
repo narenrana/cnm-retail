@@ -6,9 +6,11 @@ INSERT INTO users(user_id, first_name,middle_name,last_name, user_email, passwor
 
 --Add Sample Products
 
-INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1001, 'Banana', '4.80', 'USD','Tomato' ,'','/static/images/products/product-0.png' );
-INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1002, 'Orange', '2.10', 'USD','Broccoli' ,'','/static/images/products/product-1.png' );
-INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1003, 'Pears', '3.20', 'USD','Mushroom' ,'','/static/images/products/product-2.png' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1001, 'Banana', '4.80', 'USD','Banana' ,'','/static/images/products/fruit_25.jpg' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1002, 'Orange', '2.10', 'USD','Oranges' ,'','/static/images/products/fruit_21.jpg' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1003, 'Pears', '3.20', 'USD','Pears' ,'','/static/images/products/fruit_37.jpeg' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1004, 'Grapes', '3.20', 'USD','Grapes' ,'','/static/images/products/fruit_36.jpg' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1005, 'Apples', '3.20', 'USD','Apples' ,'','/static/images/products/fruit_38.jpeg' );
 
 
 INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1101, 'Tomato', '2.80', 'USD','Tomato' ,'','/static/images/products/product-0.png' );
@@ -28,6 +30,9 @@ INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, pr
 INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1114, 'Purple Salad lettuce', '10.30', 'USD','Purple lettuce' ,'','/static/images/products/product-13.png' );
 INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1115, 'Cauliflower Ind', '13.30', 'USD','Cauliflower Ind' ,'','/static/images/products/product-14.png' );
 INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1116, 'Ooty Beans', '12.30', 'USD','Ooty Beans' ,'','/static/images/products/product-15.png' );
+
+
+
 
 --Add discount coupons
 INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (1, 'Discount Coupons', 'DIS237890WR',10.00,'PERCENTILE','2020-01-01', true);
