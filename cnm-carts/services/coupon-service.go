@@ -26,6 +26,12 @@ type couponService struct {
 
 func (s *couponService) couponDiscount(cart repository.Cart ) (*coupons.DiscountCoupons,float64, error) {
 	couponsRepositoryInstance:= coupons.DiscountCouponsRepositoryInstance();
+
+	if cart.DiscountCoupon==nil {
+		return nil,0.0, nil
+
+	}
+
 	discountCoupon, error :=couponsRepositoryInstance.FindByDiscountCoupon(*cart.DiscountCoupon);
 	if error!=nil {
 		return nil,0.0, nil
@@ -87,8 +93,8 @@ func (s *couponService)  findDiscount(items []*repository.CartItems, discountCou
 
 func (s *couponService) productsAndQuantityMap(items []*repository.CartItems, productAndQuantityMap map[string]int, productPriceMapping map[string]float64) {
 	for _, item := range items {
-		productAndQuantityMap[item.ProductName] = productAndQuantityMap[item.ProductName] + *item.Quantity
-		productPriceMapping[item.ProductName] = item.ProductPrice
+		productAndQuantityMap[item.Product.ProductName] = productAndQuantityMap[item.Product.ProductName] + *item.Quantity
+		productPriceMapping[item.Product.ProductName] = item.Product.ProductPrice
 
 	}
 }

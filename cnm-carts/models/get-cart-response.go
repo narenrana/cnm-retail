@@ -13,7 +13,8 @@ type CartResponse struct {
 	CartItems     		 []*repository.CartItems `json:"cartItems,omitempty"`
 	Err           		 error  	`json:"error,omitempty"`
 	AppliedOffers   	[]*offersRepository.Offers `json:"appliedOffers,omitempty"`
-	IsCouponApplied 	bool  		`json:"isCouponApplied,omitempty"`
+	OffersDiscount     float64  		`json:"offersDiscount,omitempty"`
+	CouponDiscount 	     float64  		`json:"couponDiscount,omitempty"`
 	DiscountCoupon      *string       `json:"discountCoupon,omitempty"`
 	DiscountCouponDetails 		*coupoenRepository.DiscountCoupons `json:"discountCouponDetails,omitempty"`
 	TotalDiscount   	float64 	`json:"totalDiscount,omitempty"`

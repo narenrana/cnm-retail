@@ -35,11 +35,13 @@ const getProducts = createAsyncThunk(
 const updateCart = createAsyncThunk(
   "cart/updateCart",
   async (request, thunkAPI) => {
+    console.log({ request });
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ cart: request }),
     };
     let response = (await httpClient("/carts/v1/add", options)) || [];
     response = _.isEmpty(response) ? initialOtpState.defaultTabList : response;
@@ -68,10 +70,11 @@ const Reducer = createSlice({
   initialState: initialOtpState,
   reducers: {
     addCartItem: (state, { payload }) => {
-      state.cart.cartItems.push({ ...payload });
+      const cartItems = state.cart.cartItems || [];
+      cartItems.push({ ...payload });
+      state.cart.cartItems = cartItems;
     },
     updateCartItem: (state, { payload }) => {
-      console.log({ payload });
       const cartItems = state.cart.cartItems.map((product) => {
         if (payload.productId == product.productId) {
           product.quantity = payload.quantity;
@@ -84,29 +87,29 @@ const Reducer = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getProducts.fulfilled, (state, { payload }) => {
       state.products = payload.products;
-      state.isLoading = true;
+      state.isLoading = false;
     });
 
     builder.addCase(getProducts.rejected, (state, action) => {
-      state.isLoading = true;
+      state.isLoading = false;
     });
 
     builder.addCase(updateCart.fulfilled, (state, { payload }) => {
-      state.cart = payload.cart;
-      state.isLoading = true;
+      state.cart = { ...payload };
+      state.isLoading = false;
     });
 
     builder.addCase(updateCart.rejected, (state, action) => {
-      state.isLoading = true;
+      state.isLoading = false;
     });
 
     builder.addCase(getCart.fulfilled, (state, { payload }) => {
       state.cart = { ...payload };
-      state.isLoading = true;
+      state.isLoading = false;
     });
 
     builder.addCase(getCart.rejected, (state, action) => {
-      state.isLoading = true;
+      state.isLoading = false;
     });
   },
 });

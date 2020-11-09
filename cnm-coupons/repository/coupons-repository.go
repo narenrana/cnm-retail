@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+
 type Service interface {
 	List() ([] DiscountCoupons,error)
 	FindByDiscountCoupon(u string) (  DiscountCoupons,error)
@@ -14,7 +15,7 @@ type Service interface {
 
 type DiscountCoupons struct {
 
-	DiscountCouponsId     int          `gorm:"primaryKey" json:"description,omitempty"`
+	DiscountCouponsId     int          `gorm:"primaryKey" json:"discountCouponsId,omitempty"`
 	Description           string       `json:"description,omitempty"`
 	DiscountCoupon        string       `json:"discountCoupon,omitempty"`
 	Discount              float64       `json:"discount,omitempty"`
@@ -73,6 +74,10 @@ func (*DiscountCoupons) FindByDiscountCoupon(coupon string) (DiscountCoupons, er
 		return DiscountCoupons{}, err;
 	}
 	db.Model(found).Where("discount_coupon=?",coupon).Find(&found);
+
+	if &found==nil {
+		return found,nil
+	}
 	var item [] *DiscountCouponsRules;
 	db.Model(&item).Where("discount_coupons_id = ?", found.DiscountCouponsId).Find(&item)
 	found.DiscountCouponsRules=item;

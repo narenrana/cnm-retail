@@ -22,7 +22,7 @@ type service struct {
 func (s *service) calculateTotalAmount(items []*cartRepo.CartItems) float64{
 	total:=0.00;
 	for _, item := range items {
-		total=total+ item.ProductPrice * float64(*item.Quantity)
+		total=total+ item.Product.ProductPrice * float64(*item.Quantity)
 	}
 	return total;
 }
@@ -44,15 +44,18 @@ func (s *service) Get(request models.GetCartRequest) (models.CartResponse, error
 
 func (s *service) parePareCartResponse(cart cartRepo.Cart, err error) (models.CartResponse, error) {
 	offersService := NewOffersServiceService()
+	productService := NewProductPriceService()
 	var offers []*offersRepo.Offers
 	var coupon *coupons.DiscountCoupons
-	totalDiscount := 0.0
+	offersDiscount := 0.0
 	couponDiscount := 0.0
 	//totalDiscount:=0.0
+	cartItems, _ :=productService.findCartItemProduct(cart.CartItems);
+	cart.CartItems=cartItems;
 	if len(cart.CartItems) > 0 {
 		couponService := NewCouponServiceService()
 		coupon, couponDiscount, _ = couponService.couponDiscount(cart)
-		offers, totalDiscount, _ = offersService.getOffers(cart.CartItems)
+		offers, offersDiscount, _ = offersService.getOffers(cartItems)
 	}
 	return models.CartResponse{
 		CartId:                cart.CartId,
@@ -60,11 +63,13 @@ func (s *service) parePareCartResponse(cart cartRepo.Cart, err error) (models.Ca
 		CartItems:             cart.CartItems,
 		UserId:                cart.UserId,
 		AppliedOffers:         offers,
-		TotalDiscount:         totalDiscount + couponDiscount,
-		IsCouponApplied:       couponDiscount > 0,
+		TotalDiscount:         offersDiscount + couponDiscount,
+		//IsCouponApplied:       couponDiscount > 0,
+		OffersDiscount:         offersDiscount,
+		CouponDiscount:        couponDiscount,
 		DiscountCoupon:        cart.DiscountCoupon,
 		DiscountCouponDetails: coupon,
-		TotalAmount:           s.calculateTotalAmount(cart.CartItems),
+		TotalAmount:           s.calculateTotalAmount(cartItems),
 	}, err
 }
 

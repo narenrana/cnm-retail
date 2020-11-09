@@ -4,9 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"net/http"
-
 	"github.com/gorilla/mux"
+	"net/http"
 
 	kitlog "github.com/go-kit/kit/log"
 	"github.com/go-kit/kit/transport"
@@ -20,29 +19,50 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 		kithttp.ServerErrorEncoder(encodeError),
 	}
 
-	addProductHandler := kithttp.NewServer(
+	addCouponHandler := kithttp.NewServer(
 		makeDiscountCouponsAddRequestEndpoint(bs),
 		decodeAddDiscountCouponRequest,
 		encodeResponse,
 		opts...,
 	)
 
-	productListHandler := kithttp.NewServer(
+	couponListHandler := kithttp.NewServer(
 		makeDiscountCouponsListEndpoint(bs),
 		decodeDiscountCouponListRequest,
 		encodeResponse,
 		opts...,
 	)
 
+
+	couponFindHandler := kithttp.NewServer(
+		makeCouponFindEndpoint(bs),
+		decodeCouponFindRequest,
+		encodeResponse,
+		opts...,
+	)
+
+
 	r := mux.NewRouter()
 
-	r.Handle("/coupons/v1/add", addProductHandler).Methods("POST")
-	r.Handle("/coupons/v1/list", productListHandler).Methods("GET")
+	r.Handle("/coupons/v1/add", addCouponHandler).Methods("POST")// Must be  for admin role Only
+	r.Handle("/coupons/v1/list", couponListHandler).Methods("GET")// Must be  for admin role Only
+	r.Handle("/coupons/v1/find", couponFindHandler).Methods("GET")
+
 
 	return r
 }
 
 var errBadRoute = errors.New("bad route")
+
+
+
+
+func decodeCouponFindRequest(_ context.Context, r *http.Request) (interface{}, error) {
+	var request  findCouponRequest;
+	coupon := r.FormValue("coupon")
+	request.Coupon=coupon
+	return request, nil
+}
 
 func decodeAddDiscountCouponRequest(_ context.Context, r *http.Request) (interface{}, error) {
 	var request discountCouponsAddRequest

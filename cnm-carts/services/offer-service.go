@@ -7,6 +7,7 @@ import (
 	"shopping-cart/cnm-carts/repository"
 	"shopping-cart/cnm-core/constants"
 	offersRepository "shopping-cart/cnm-offers/repository"
+	"sort"
 	"strconv"
 )
 
@@ -115,18 +116,22 @@ func (s *offersService) comboOfferDiscount(items [] *repository.CartItems, offer
 }
 
 func (s *offersService) maxPossibleCombo(individualCombination map[string]int) int {
-	minPossibleComboCount := 0
-	for key, value := range individualCombination {
-		log.Println("Key:", key, "Value:", value)
-		if minPossibleComboCount == 0 {
-			minPossibleComboCount = value
-			continue
-		}
 
-		if minPossibleComboCount > value {
-			minPossibleComboCount = value
-		}
+	if len(individualCombination) <=0 {
+		return 0
 	}
+
+	var valueArray []int
+	for key, value:= range individualCombination {
+		log.Println("Key:", key, "Value:", value)
+		valueArray = append(valueArray,  value)
+	}
+	sort.Slice(valueArray, func(i, j int) bool {
+		return valueArray[i]< valueArray[j]
+	})
+
+	minPossibleComboCount := valueArray[0]
+
 	return minPossibleComboCount
 }
 
@@ -138,8 +143,8 @@ func (s *offersService) individualPossiblePairs(productComboMap map[string]int, 
 
 func (s *offersService) productAndQuantityMap(items []*repository.CartItems, productAndQuantityMap map[string]int, productPriceMapping map[string]float64) {
 	for _, item := range items {
-		productAndQuantityMap[item.ProductName] = productAndQuantityMap[item.ProductName] + *item.Quantity
-		productPriceMapping[item.ProductName] = item.ProductPrice
+		productAndQuantityMap[item.Product.ProductName] = productAndQuantityMap[item.Product.ProductName] + *item.Quantity
+		productPriceMapping[item.Product.ProductName] = item.Product.ProductPrice
 
 	}
 }

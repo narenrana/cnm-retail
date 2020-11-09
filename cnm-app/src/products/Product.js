@@ -63,7 +63,7 @@ export default function ProductCart(props) {
       </CardContent>
       <CardContent className={classes.cardPriceContainer}>
         <Typography variant="body1" className={classes.price}>
-          {product.productPrice}
+          {`${product.productPrice} ${product.baseCurrency}`}
         </Typography>
       </CardContent>
       {!expanded && (

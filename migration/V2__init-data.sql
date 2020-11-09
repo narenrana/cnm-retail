@@ -6,11 +6,11 @@ INSERT INTO users(user_id, first_name,middle_name,last_name, user_email, passwor
 
 --Add Sample Products
 
-INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1001, 'Banana', '4.80', 'USD','Banana' ,'','/static/images/products/fruit_25.jpg' );
-INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1002, 'Orange', '2.10', 'USD','Oranges' ,'','/static/images/products/fruit_21.jpg' );
-INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1003, 'Pears', '3.20', 'USD','Pears' ,'','/static/images/products/fruit_37.jpeg' );
-INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1004, 'Grapes', '3.20', 'USD','Grapes' ,'','/static/images/products/fruit_36.jpg' );
-INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1005, 'Apples', '3.20', 'USD','Apples' ,'','/static/images/products/fruit_38.jpeg' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1001, 'Bananas', '10', 'USD','Banana' ,'','/static/images/products/fruit_25.jpg' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1002, 'Oranges', '5', 'USD','Oranges' ,'','/static/images/products/fruit_21.jpg' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1003, 'Pears', '10', 'USD','Pears' ,'','/static/images/products/fruit_37.jpeg' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1004, 'Grapes', '5', 'USD','Grapes' ,'','/static/images/products/fruit_36.jpg' );
+INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1005, 'Apples', '10', 'USD','Apples' ,'','/static/images/products/fruit_38.jpeg' );
 
 
 INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, product_title, product_desc,image_url) VALUES (1101, 'Tomato', '2.80', 'USD','Tomato' ,'','/static/images/products/product-0.png' );
@@ -35,24 +35,21 @@ INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, pr
 
 
 --Add discount coupons
-INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (1, 'Discount Coupons', 'DIS237890WR',10.00,'PERCENTILE','2020-01-01', true);
+INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (1, '30% Discount on Oranges', 'DIS237890WR',10.00,'PERCENTILE','2020-01-01', true);
 INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (2, 'Discount Coupons', 'DIS237891WR',5.00,'PERCENTILE','2021-01-01', true);
 INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (3, 'Discount Coupons', 'DIS237892WR',4.00,'PERCENTILE','2021-11-11', true);
 INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (4, 'Discount Coupons', 'DIS237893WR',3.00,'PERCENTILE','2021-12-30', true);
 INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (5, 'Discount Coupons', 'DIS237894WR',2.00,'PERCENTILE','2022-01-01', true);
-
-INSERT INTO  discount_coupons_rules(discount_coupons_rules_id, discount_coupons_id, key, value, operator,description) VALUES (1, 1, 'Oranges','>=', 0, '30% Discount on Oranges');
+INSERT INTO  discount_coupons_rules(discount_coupons_rules_id, discount_coupons_id, key, value, operator,description) VALUES (1, 1, 'Oranges', 0,'>=', '30% Discount on Oranges');
 
 
 --Add offers
-INSERT INTO  offers( offers_id, description, discount, discount_mode,offer_type) VALUES (1, 'Basket offer', 30, 'PERCENTILE','COMBO_OFFER');
+INSERT INTO  offers( offers_id, description, discount, discount_mode,offers_type,expire_date) VALUES (1, '4 Pears and 2 Banana Combo Offer- 30%', 30, 'PERCENTILE','COMBO_OFFER','2021-10-10');
 INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, description) VALUES (1, 1, 'Pears', 4, '4 Pears and 2 Banana Combo Offer');
-INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, description) VALUES (1, 1, 'Bananas', 2, '4 Pears and 2 Banana Combo Offer');
+INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, description) VALUES (2, 1, 'Bananas', 2, '4 Pears and 2 Banana Combo Offer');
 
-INSERT INTO  offers( offers_id, description, discount, discount_mode) VALUES (2, 'Products offers', 30, 'PERCENTILE','INDIVIDUAL_ITEM_OFFER');
-INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, operator,description) VALUES (1, 2, 'Apples','>=', 7, '7 or more Apples');
-
-
+INSERT INTO  offers( offers_id, description, discount, discount_mode,offers_type,expire_date) VALUES (2, '7 or more apples - 10%', 10, 'PERCENTILE','INDIVIDUAL_ITEM_OFFER','2021-10-10');
+INSERT INTO  offers_rules(offers_rules_id, offers_id, key, value, operator,description) VALUES (3, 2, 'Apples', 7,'>=', '7 or more Apples');
 
 
 INSERT INTO  product_offers(product_offers_id, offers_id, product_id) VALUES (1, 2, 1002);

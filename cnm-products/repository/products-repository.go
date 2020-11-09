@@ -6,6 +6,7 @@ import (
 
 type Service interface {
 	List() ([] Product,error)
+	FindByIds(ids [] int) ([] Product,error)
 	FindBy(u Product) (  Product,error)
 	Add(u Product) ( Product,error)
 	Delete(u Product) ( Product,error)
@@ -19,6 +20,16 @@ type Product struct {
 	ProductTitle  string    `json:"productTitle,omitempty"`
 	ProductDesc   string    `json:"productDesc,omitempty"`
 	ImageUrl      string    `json:"imageUrl,omitempty"`
+}
+
+func (p *Product) FindByIds(ids []int) ([]Product, error) {
+	db,err :=core.GetDB()
+	var found [] Product;
+	if err != nil {
+		return nil, err;
+	}
+	db.Model(&found).Where("product_id in (?)",ids).Find(&found);
+	return  found, err;
 }
 
 func (*Product) List() ([] Product, error){

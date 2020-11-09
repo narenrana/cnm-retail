@@ -3,6 +3,7 @@ package repository
 import (
 	core "shopping-cart/cnm-core"
 	"shopping-cart/cnm-core/wrappers"
+	"shopping-cart/cnm-products/repository"
 )
 
 type Service interface {
@@ -29,8 +30,8 @@ type CartItems struct {
 	CartId        *int `json:"cartId,omitempty"`
 	Quantity      *int  `json:"quantity,omitempty"`
 	ProductId     int `json:"productId,omitempty"`
-	ProductPrice  float64 `json:"productPrice,omitempty"`
-	ProductName  string `json:"productName,omitempty"`
+	Currency    string `json:currency,omitempty"`
+	Product     repository.Product `gorm:"foreignKey:ProductId;references:ProductId" json:"products,omitempty"`
 }
 
 func (*Cart) List() ([] *Cart, error){
@@ -61,6 +62,7 @@ func (*Cart) FirstOrCreate(userId int) (Cart, error){
 	found.CartItems=cartItem;
 	return  found, err;
 }
+
 
 func (*Cart) Add(cart Cart) (Cart, error){
 	db,err :=core.GetDB()

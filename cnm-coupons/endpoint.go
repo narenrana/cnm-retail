@@ -20,6 +20,18 @@ type discountCouponsListResponse struct {
 	Err              error  `json:"error,omitempty"`
 }
 
+type findCouponRequest struct {
+	Coupon   string ;
+}
+
+type findCouponResponse struct {
+	DiscountCoupons           repository.DiscountCoupons   `json:"discountCoupons,omitempty"`
+	Valid                   bool  `json:"valid"`
+	Message                   string  `json:"message"`
+	Err                       error  `json:"error,omitempty"`
+}
+
+
 func (r discountCouponsListResponse) error() error { return r.Err }
 
 func makeDiscountCouponsAddRequestEndpoint(s Service) endpoint.Endpoint {
@@ -33,6 +45,14 @@ func makeDiscountCouponsAddRequestEndpoint(s Service) endpoint.Endpoint {
 func makeDiscountCouponsListEndpoint(s Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		response, err := s.list()
+		return response, err
+	}
+}
+
+func makeCouponFindEndpoint(s Service) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(findCouponRequest)
+		response, err := s.find(req)
 		return response, err
 	}
 }

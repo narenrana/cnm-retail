@@ -1,3 +1,4 @@
 import httpClient from "./services/HttpClient";
+import { updateCartPrice } from "./services/CartService";
 
-export { httpClient };
+export { httpClient, updateCartPrice };

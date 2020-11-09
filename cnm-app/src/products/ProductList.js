@@ -5,9 +5,10 @@ import Pagination from "../core/Pagination";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "./style";
 import _ from "lodash";
+import { updateCartPrice } from "../core";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, addCartItem, getCart, updateCartItem } from "./redux";
+import { getProducts, addCartItem, getCart, updateCart } from "./redux";
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -15,7 +16,6 @@ export default function ProductList() {
     (state) => state.productsStore
   );
 
-  //const { cart } = useSelector((state) => state.productsStore);
   const { cartItems = [] } = cart;
   const cartItemsMap = {};
 
@@ -24,8 +24,11 @@ export default function ProductList() {
   });
 
   const onAddToCart = (product) => {
-    const { productId, productName, productPrice, quantity = 1 } = product;
-    dispatch(addCartItem({ productId, productName, productPrice, quantity }));
+    const { productId, quantity = 0 } = product;
+    dispatch(addCartItem({ productId, quantity, cartId: cart.cartId }));
+
+    //const updatedCart = updateCartPrice(cart, { productId, quantity });
+    //dispatch(updateCart(updatedCart));
   };
 
   const isExpanded = (product) => {
@@ -37,15 +40,16 @@ export default function ProductList() {
   };
 
   const onIncreaseQuantity = (product) => {
-    dispatch(updateCartItem(product));
+    const updatedCart = updateCartPrice(cart, product);
+    dispatch(updateCart(updatedCart));
   };
 
   const onReduceQuantity = (product) => {
-    dispatch(updateCartItem(product));
+    const updatedCart = updateCartPrice(cart, product);
+    dispatch(updateCart(updatedCart));
   };
 
   const classes = useStyles();
-  const handleSortBy = () => {};
 
   useEffect(() => {
     if (!isLoading) {

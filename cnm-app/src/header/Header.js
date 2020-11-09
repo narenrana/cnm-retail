@@ -5,19 +5,18 @@ import IconButton from "@material-ui/core/IconButton";
 import Link from "@material-ui/core/Link";
 import AddShoppingCart from "@material-ui/icons/AddShoppingCart";
 import UserIcon from "@material-ui/icons/PermIdentity";
-import StoreIcon from "@material-ui/icons/Store";
-import Fab from "@material-ui/core/Fab";
+
 import Badge from "@material-ui/core/Badge";
 import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import useStyles from "./style";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import * as _ from "lodash";
 
 export default function Header(props) {
   const classes = useStyles();
   const { sections } = props;
-  const dispatch = useDispatch();
+
   const { cart } = useSelector((state) => state.productsStore);
   const { cartItems = [] } = cart;
   const itemsCount = _.reduce(
@@ -32,14 +31,16 @@ export default function Header(props) {
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
         <div className={classes.rightMenuPanel}>
-          <IconButton>
-            <Badge badgeContent={itemsCount} color="primary">
-              <AddShoppingCart />
-            </Badge>
-          </IconButton>
-          <IconButton>
-            <UserIcon />
-          </IconButton>
+          <a href="/checkout">
+            <IconButton>
+              <Badge badgeContent={itemsCount} color="primary">
+                <AddShoppingCart />
+              </Badge>
+            </IconButton>
+            <IconButton>
+              <UserIcon />
+            </IconButton>
+          </a>
         </div>
       </Toolbar>
       <Toolbar

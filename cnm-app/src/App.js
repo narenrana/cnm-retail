@@ -7,6 +7,7 @@ import Footer from "./footer/Footer";
 import { ThemeProvider } from "@material-ui/core/styles";
 import SideNavBar from "./sidebar/SideNavBar";
 import ProductList from "./products/ProductList";
+import { Checkout } from "./checkout";
 import theme from "./theme";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -14,8 +15,9 @@ import configureStore from "./configure-store";
 const store = configureStore();
 
 const sections = [
-  { title: "Category", url: "#" },
-  { title: "Pickup Time", url: "#" },
+  { title: "Home", url: "/home" },
+  { title: "Orders", url: "/orders" },
+  { title: "Paymemnts", url: "/paymemnts" },
 ];
 
 export default function Cart() {
@@ -31,11 +33,13 @@ export default function Cart() {
                 <div>Payment</div>
               </Route>
               <Route path="/checkout">
-                <div>checkout</div>
+                <main>
+                  <Checkout />
+                </main>
               </Route>
               <Route path="/">
                 <main>
-                  <Grid container spacing={4}>
+                  <Grid container>
                     <Grid item xs={12} md={3} xl={3}>
                       <SideNavBar />
                     </Grid>
