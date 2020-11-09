@@ -17,9 +17,9 @@ import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 
 import { get } from "lodash";
-import useStyles from "./style";
+import useStyles from "../style";
 
-import { loadCoupon } from "../redux";
+import { loadCoupon } from "../../redux";
 
 export default function CartDetails(props) {
   const { cart, addCouponToCart } = props;

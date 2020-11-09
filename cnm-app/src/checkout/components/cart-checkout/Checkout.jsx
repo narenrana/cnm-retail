@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Product from "../../products/Product";
+import { Product } from "../../../products";
 import _ from "lodash";
-import { updateCartPrice } from "../../core";
-import CartDetails from "./CartDetails";
+import { updateCartPrice } from "../../../core";
+import CartDetails from "../cart-details/CartDetails";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addCartItem,
   updateCart,
   getCart,
   getProducts,
-} from "../../products/redux";
+} from "../../../products/redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {

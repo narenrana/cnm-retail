@@ -9,7 +9,7 @@ import Fab from "@material-ui/core/Fab";
 import IconButton from "@material-ui/core/IconButton";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
-import useStyles from "./style";
+import useStyles from "../../style";
 
 export default function ProductCart(props) {
   const {

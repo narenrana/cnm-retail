@@ -1,5 +1,3 @@
-import Checkout from './components/Checkout';
+import Checkout from "./components/cart-checkout/Checkout";
 
-export {
-    Checkout
-}
+export { Checkout };

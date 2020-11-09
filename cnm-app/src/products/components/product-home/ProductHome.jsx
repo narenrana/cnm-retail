@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import Product from "./Product";
-import Pagination from "../core/Pagination";
+import { Product } from "../../";
+import Pagination from "../../../core/Pagination";
 import Typography from "@material-ui/core/Typography";
-import useStyles from "./style";
+import useStyles from "../../style";
 import _ from "lodash";
-import { updateCartPrice } from "../core";
+import { updateCartPrice } from "../../../core";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, addCartItem, getCart, updateCart } from "./redux";
+import { getProducts, addCartItem, getCart, updateCart } from "../../redux";
 
 export default function ProductList() {
   const dispatch = useDispatch();

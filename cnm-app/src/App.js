@@ -6,7 +6,7 @@ import Header from "./header/Header";
 import Footer from "./footer/Footer";
 import { ThemeProvider } from "@material-ui/core/styles";
 import SideNavBar from "./sidebar/SideNavBar";
-import ProductList from "./products/ProductList";
+import ProductList from "./products/components/product-home/ProductHome";
 import { Checkout } from "./checkout";
 import theme from "./theme";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
