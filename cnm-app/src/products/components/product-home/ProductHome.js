@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
-import { Product } from "../../";
+import { Product } from "../..";
 import Pagination from "../../../core/Pagination";
 import Typography from "@material-ui/core/Typography";
 import useStyles from "../../style";

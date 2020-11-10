@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select test Select should match snapshot 1`] = `
+<div
+  className="makeStyles-root-3"
+>
+  <span
+    className="MuiTypography-root makeStyles-name-4 MuiTypography-caption"
+  />
+  <div
+    className="MuiInputBase-root MuiInput-root MuiInput-underline makeStyles-selectEmpty-2"
+    onClick={[Function]}
+  >
+    <select
+      className="MuiNativeSelect-root MuiNativeSelect-select MuiInputBase-input MuiInput-input"
+      name="select"
+      onAnimationStart={[Function]}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+    >
+      <option
+        disabled={true}
+        value=""
+      />
+    </select>
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiNativeSelect-icon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M7 10l5 5 5-5z"
+      />
+    </svg>
+  </div>
+</div>
+`;
