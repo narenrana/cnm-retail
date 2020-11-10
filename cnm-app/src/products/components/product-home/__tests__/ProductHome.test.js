@@ -2,11 +2,11 @@
 /* eslint-disable no-undef */
 import React from "react";
 import renderer from "react-test-renderer";
-import SideNavBar from "../SideNavBar";
+import ProductHome from "../ProductHome";
 
-describe("SideNavBar test", () => {
-  it("SideNavBar should match snapshot", () => {
-    const component = renderer.create(<SideNavBar />);
+describe("ProductHome test", () => {
+  it("ProductHome should match snapshot", () => {
+    const component = renderer.create(<ProductHome />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

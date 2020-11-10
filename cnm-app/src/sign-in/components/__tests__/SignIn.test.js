@@ -2,11 +2,11 @@
 /* eslint-disable no-undef */
 import React from "react";
 import renderer from "react-test-renderer";
-import SideNavBar from "../SideNavBar";
+import SignIn from "../SignIn";
 
-describe("SideNavBar test", () => {
-  it("SideNavBar should match snapshot", () => {
-    const component = renderer.create(<SideNavBar />);
+describe("SignIn test", () => {
+  it("SignIn should match snapshot", () => {
+    const component = renderer.create(<SignIn />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

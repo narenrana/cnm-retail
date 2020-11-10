@@ -2,11 +2,11 @@
 /* eslint-disable no-undef */
 import React from "react";
 import renderer from "react-test-renderer";
-import SideNavBar from "../SideNavBar";
+import Subscribe from "../Subscribe";
 
-describe("SideNavBar test", () => {
-  it("SideNavBar should match snapshot", () => {
-    const component = renderer.create(<SideNavBar />);
+describe("Subscribe test", () => {
+  it("Subscribe should match snapshot", () => {
+    const component = renderer.create(<Subscribe />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

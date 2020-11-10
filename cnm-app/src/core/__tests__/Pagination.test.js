@@ -2,11 +2,11 @@
 /* eslint-disable no-undef */
 import React from "react";
 import renderer from "react-test-renderer";
-import SideNavBar from "../SideNavBar";
+import Pagination from "../Pagination";
 
-describe("SideNavBar test", () => {
-  it("SideNavBar should match snapshot", () => {
-    const component = renderer.create(<SideNavBar />);
+describe("Pagination test", () => {
+  it("Pagination should match snapshot", () => {
+    const component = renderer.create(<Pagination />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

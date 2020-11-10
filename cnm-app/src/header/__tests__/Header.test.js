@@ -2,11 +2,13 @@
 /* eslint-disable no-undef */
 import React from "react";
 import renderer from "react-test-renderer";
-import SideNavBar from "../SideNavBar";
+import Header from "../Header";
 
-describe("SideNavBar test", () => {
-  it("SideNavBar should match snapshot", () => {
-    const component = renderer.create(<SideNavBar />);
+describe("Header test", () => {
+  it("Header should match snapshot", () => {
+    const component = renderer.create(
+      <Header sections={undefined} title={undefined} />
+    );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

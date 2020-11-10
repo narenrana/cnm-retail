@@ -2,11 +2,11 @@
 /* eslint-disable no-undef */
 import React from "react";
 import renderer from "react-test-renderer";
-import SideNavBar from "../SideNavBar";
+import Copyright from "../Copyright";
 
-describe("SideNavBar test", () => {
-  it("SideNavBar should match snapshot", () => {
-    const component = renderer.create(<SideNavBar />);
+describe("Copyright test", () => {
+  it("Copyright should match snapshot", () => {
+    const component = renderer.create(<Copyright />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

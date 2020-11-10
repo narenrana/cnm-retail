@@ -2,11 +2,13 @@
 /* eslint-disable no-undef */
 import React from "react";
 import renderer from "react-test-renderer";
-import SideNavBar from "../SideNavBar";
+import Footer from "../Footer";
 
-describe("SideNavBar test", () => {
-  it("SideNavBar should match snapshot", () => {
-    const component = renderer.create(<SideNavBar />);
+describe("Footer test", () => {
+  it("Footer should match snapshot", () => {
+    const component = renderer.create(
+      <Footer description={undefined} title={undefined} />
+    );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
