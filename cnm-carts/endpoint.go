@@ -27,3 +27,13 @@ func makeGetCartEndpoint(s services.Service) endpoint.Endpoint {
 	}
 }
 
+func makeDeleteCartItemsEndpoint(s services.Service) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		req := request.(models.DeleteCartItemRequest)
+		response, err := s.DeleteCartItems(req)
+		return response, err
+	}
+}
+
+
+

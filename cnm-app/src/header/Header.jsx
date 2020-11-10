@@ -12,11 +12,12 @@ import SearchIcon from "@material-ui/icons/Search";
 import useStyles from "./style";
 import { useSelector } from "react-redux";
 import * as _ from "lodash";
+import { useHistory, withRouter } from "react-router-dom";
 
-export default function Header(props) {
+function Header(props) {
   const classes = useStyles();
   const { sections } = props;
-
+  let history = useHistory();
   const { cart } = useSelector((state) => state.productsStore);
   const { cartItems = [] } = cart;
   const itemsCount = _.reduce(
@@ -26,21 +27,24 @@ export default function Header(props) {
     },
     0
   );
+  console.log({ history });
+
+  const onLinkClick = (url) => {
+    history.push(url);
+  };
 
   return (
     <React.Fragment>
       <Toolbar className={classes.toolbar}>
         <div className={classes.rightMenuPanel}>
-          <a href="/checkout">
-            <IconButton>
-              <Badge badgeContent={itemsCount} color="primary">
-                <AddShoppingCart />
-              </Badge>
-            </IconButton>
-            <IconButton>
-              <UserIcon />
-            </IconButton>
-          </a>
+          <IconButton onClick={() => onLinkClick("/checkout")}>
+            <Badge badgeContent={itemsCount} color="primary">
+              <AddShoppingCart />
+            </Badge>
+          </IconButton>
+          <IconButton>
+            <UserIcon />
+          </IconButton>
         </div>
       </Toolbar>
       <Toolbar
@@ -52,9 +56,10 @@ export default function Header(props) {
           <Link
             key={section.title}
             variant="body2"
-            href={section.url}
+            href={"#"}
             className={classes.toolbarLink}
             color="primary"
+            onClick={() => onLinkClick(section.url)}
           >
             {section.title}
           </Link>
@@ -81,3 +86,5 @@ Header.propTypes = {
   sections: PropTypes.array,
   title: PropTypes.string,
 };
+
+export default withRouter(Header);

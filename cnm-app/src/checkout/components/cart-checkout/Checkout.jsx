@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Product } from "../../../products";
 import _ from "lodash";
-import { updateCartPrice } from "../../../core";
+import { updateCartPrice, filterCartItem } from "../../../core";
 import CartDetails from "../cart-details/CartDetails";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -11,6 +11,7 @@ import {
   updateCart,
   getCart,
   getProducts,
+  deleteCartItem,
 } from "../../../products/redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -53,6 +54,11 @@ export default function Checkout(props) {
   };
 
   const onReduceQuantity = (product) => {
+    if (product.quantity === 0) {
+      const updatedCart = filterCartItem(cart, product);
+      dispatch(deleteCartItem(updatedCart));
+      return;
+    }
     const updatedCart = updateCartPrice(cart, product);
     dispatch(updateCart(updatedCart));
   };
@@ -82,7 +88,7 @@ export default function Checkout(props) {
 
   return (
     <div className={classes.root}>
-      <Grid container>
+      <Grid container spacing={4}>
         <Grid item xs={6} md={6} xl={6}>
           <Grid container spacing={4}>
             {cartItems.map((cartItem, index) => (

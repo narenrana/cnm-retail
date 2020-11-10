@@ -2,7 +2,6 @@ package utils
 
 import (
 	"github.com/dgrijalva/jwt-go"
-	"golang.org/x/crypto/bcrypt"
 	"shopping-cart/cnm-core/models"
 	"time"
 )
@@ -10,15 +9,6 @@ import (
 var jwtKey = []byte("HGHHJHJHJHJH&&&&7921829182981!=")
 
 
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-	return string(bytes), err
-}
-
-func CheckPasswordHash(password, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
-	return err == nil
-}
 
 func CreateToken( username string, userId *int) (string , error) {
 	// Declare the expiration time of the token
@@ -78,3 +68,16 @@ func RefreshToken( token string) (bool, string , error) {
 
 	return true, tokenString, err
 }
+
+func  TokenClaim( token string) (*models.Claims,bool, error) {
+	tknStr :=token
+	claims := &models.Claims{}
+	tkn, err := jwt.ParseWithClaims(tknStr, claims, func(token *jwt.Token) (interface{}, error) {
+		return jwtKey, nil
+	})
+	// Now, create a new token for the current use, with a renewed expiration time
+	expirationTime := time.Now().Add(5 * time.Minute)
+	claims.ExpiresAt = expirationTime.Unix()
+	return claims,tkn.Valid, err
+}
+

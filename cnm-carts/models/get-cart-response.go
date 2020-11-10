@@ -9,7 +9,7 @@ import (
 type CartResponse struct {
 	CartId        		*int      	`gorm:"primaryKey" json:"cartId,omitempty"`
 	CartName      		string    	`json:"cartName,omitempty"`
-	UserId        		int       	`json:"userId,omitempty"`
+	UserId        		*int       	`json:"userId,omitempty"`
 	CartItems     		 []*repository.CartItems `json:"cartItems,omitempty"`
 	Err           		 error  	`json:"error,omitempty"`
 	AppliedOffers   	[]*offersRepository.Offers `json:"appliedOffers,omitempty"`

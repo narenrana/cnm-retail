@@ -8,9 +8,9 @@ import (
 
 type Service interface {
 	List() ([] *Cart,error)
-	FirstOrCreate(userId int) (  Cart,error)
+	FirstOrCreate(userId *int) (  Cart,error)
 	Add(u Cart) ( Cart,error)
-	Delete(u Cart) ( Cart,error)
+	DeleteCartItem(cartItemIds []int) ([]*CartItems, error)
 
 }
 
@@ -18,7 +18,7 @@ type Cart struct {
 	//TODO adopt some id generator - Time being i am using only timestamp while creating record
 	CartId        *int      `gorm:"primaryKey" json:"cartId,omitempty"`
 	CartName      string    `json:"cartName,omitempty"`
-	UserId        int       `json:"userId,omitempty"`
+	UserId        *int       `json:"userId,omitempty"`
 	CartItems     []*CartItems `gorm:"foreignKey:CartId;references:CartId" json:"cartItems,omitempty"`
 	//OffersId      int      `json:"offersId,omitempty"`
 	DiscountCoupon *string   `json:"discountCoupon,omitempty"`
@@ -49,10 +49,10 @@ func (*Cart) List() ([] *Cart, error){
 	return  found, err;
 }
 
-func (*Cart) FirstOrCreate(userId int) (Cart, error){
+func (*Cart) FirstOrCreate(userId *int) (Cart, error){
 	db,err :=core.GetDB()
 	 var found Cart;
-	found.UserId= userId
+	found.UserId= userId;
 	if err != nil {
 		return Cart{}, err;
 	}
@@ -84,10 +84,6 @@ func (*Cart) Add(cart Cart) (Cart, error){
 			}
 		}
 	}
-    //clean extra records
-    var deletedItems CartItems
-	db.Model(&deletedItems).Where("cart_items_id not in (?)", cartItemIds).Delete(&deletedItems)
-	//db.Delete("cart_items_id not in (?)",cartItemIds, "cart_id=?",cart.CartId)
 
 	if err != nil {
 		return cart, err;
@@ -96,22 +92,18 @@ func (*Cart) Add(cart Cart) (Cart, error){
 	return  cart, err;
 }
 
-func (*Cart) Delete(user Cart) (Cart, error){
-	db,err :=core.GetDB()
-	if err != nil {
-		return user, err;
-	}
-	db.Delete(&user);
-	return  user, err;
-}
 
-func (*Cart) DeleteByIds(user Cart) (Cart, error){
+
+func (*Cart) DeleteCartItem(cartItemIds []int) ([]*CartItems, error){
 	db,err :=core.GetDB()
 	if err != nil {
-		return user, err;
+		return nil, err;
 	}
-	db.Where("cart_items_id=?")
-	return  user, err;
+	var cartItem   [] *CartItems
+
+
+	db.Model(cartItem).Where("cart_items_id in (?)",cartItemIds).Delete(cartItem)
+	return  cartItem, err;
 }
 
 

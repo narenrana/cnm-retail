@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import * as _ from "lodash";
 import { httpClient } from "../../core";
 
@@ -56,11 +56,28 @@ const getCart = createAsyncThunk("cart/get", async (request, thunkAPI) => {
       "Content-Type": "application/json",
     },
   };
-  let response =
-    (await httpClient("/carts/v1/list?userId=1201", options)) || [];
+  let response = (await httpClient("/carts/v1/list", options)) || [];
   response = _.isEmpty(response) ? initialOtpState.defaultTabList : response;
   return response;
 });
+
+const deleteCartItem = createAsyncThunk(
+  "cart/deleteCartItem",
+  async (request, thunkAPI) => {
+    console.log({ request });
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...request }),
+    };
+
+    let response = (await httpClient("/carts/v1/items", options)) || [];
+    response = _.isEmpty(response) ? initialOtpState.defaultTabList : response;
+    return response;
+  }
+);
 
 /**
  * Reducers
@@ -111,6 +128,14 @@ const Reducer = createSlice({
     builder.addCase(getCart.rejected, (state) => {
       state.isLoading = false;
     });
+    builder.addCase(deleteCartItem.fulfilled, (state, { payload }) => {
+      state.cart = { ...payload };
+      state.isLoading = false;
+    });
+
+    builder.addCase(deleteCartItem.rejected, (state) => {
+      state.isLoading = false;
+    });
   },
 });
 
@@ -123,6 +148,7 @@ export {
   updateCartItem,
   removeCartItem,
   getCart,
+  deleteCartItem,
 };
 /*Reducer export*/
 export default Reducer.reducer;

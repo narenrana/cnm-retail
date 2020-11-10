@@ -13,7 +13,7 @@ import clsx from "clsx";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Button from "@material-ui/core/Button";
-
+import { withRouter } from "react-router-dom";
 import { login } from "../../common/redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login(props) {
+export default withRouter(function Login(props) {
   const classes = useStyles();
   let history = useHistory();
   const dispatch = useDispatch();
@@ -132,4 +132,4 @@ export default function Login(props) {
       </div>
     </div>
   );
-}
+});

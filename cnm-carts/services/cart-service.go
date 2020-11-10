@@ -3,6 +3,7 @@ package services
 import (
 	models "shopping-cart/cnm-carts/models"
 	cartRepo "shopping-cart/cnm-carts/repository"
+
 	coupons "shopping-cart/cnm-coupons/repository"
 	offersRepo "shopping-cart/cnm-offers/repository"
 )
@@ -12,12 +13,12 @@ import (
 type  Service interface {
 	Add(request   models.AddToCartRequest) (models.CartResponse, error)
 	Get(request models.GetCartRequest) (models.CartResponse, error)
+	DeleteCartItems(request models.DeleteCartItemRequest) (models.CartResponse, error)
 
 }
 
 type service struct {
 }
-
 
 func (s *service) calculateTotalAmount(items []*cartRepo.CartItems) float64{
 	total:=0.00;
@@ -38,8 +39,16 @@ func (s *service) Add(request models.AddToCartRequest) (models.CartResponse, err
 
 func (s *service) Get(request models.GetCartRequest) (models.CartResponse, error) {
 	repository:= cartRepo.CartsRepositoryInstance()
-	cart, err:=repository.FirstOrCreate(request.UseId);
+	cart, err:=repository.FirstOrCreate(request.UserId);
 	return s.parePareCartResponse(cart, err)
+}
+
+func (s *service) DeleteCartItems(request models.DeleteCartItemRequest) (models.CartResponse, error) {
+	repository:= cartRepo.CartsRepositoryInstance()
+	_, _ = repository.DeleteCartItem(request.CartItemIds)
+	var getRequest models.GetCartRequest
+	getRequest.UserId=request.UserId
+	return s.Get(getRequest)
 }
 
 func (s *service) parePareCartResponse(cart cartRepo.Cart, err error) (models.CartResponse, error) {

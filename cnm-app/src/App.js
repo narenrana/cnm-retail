@@ -10,7 +10,13 @@ import ProductList from "./products/components/product-home/ProductHome";
 import { Checkout } from "./checkout";
 import { SignIn } from "./sign-in";
 import theme from "./theme";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  useHistory,
+} from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
@@ -22,26 +28,29 @@ const sections = [
 ];
 
 export default function App() {
-  const { auth = {}, isLoading } = useSelector((state) => state.commonStore);
+  let historyq = useHistory();
+  console.log({ historyq });
+  const { auth = {} } = useSelector((state) => state.commonStore);
   return (
     <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        {auth.isLogin && <Header title="Cart" sections={sections} />}
-        <Router>
+      <CssBaseline />{" "}
+      <Router>
+        <Container maxWidth="lg">
+          {auth.isLogin && <Header title="Cart" sections={sections} />}
+
           <Switch>
             <Route path="/login">
               <SignIn />
             </Route>
-            <Route path="/payment">
+            <PrivateRoute path="/payment">
               <div>Payment</div>
-            </Route>
-            <Route path="/checkout">
+            </PrivateRoute>
+            <PrivateRoute path="/checkout">
               <main>
                 <Checkout />
               </main>
-            </Route>
-            <Route path="/">
+            </PrivateRoute>
+            <PrivateRoute path="/">
               <main>
                 <Grid container>
                   <Grid item xs={12} md={3} xl={3}>
@@ -52,16 +61,38 @@ export default function App() {
                   </Grid>
                 </Grid>
               </main>
-            </Route>
+            </PrivateRoute>
           </Switch>
-        </Router>
-      </Container>
-      {auth.isLogin && (
-        <Footer
-          title="Footer"
-          description="Something here to give the footer a purpose!"
-        />
-      )}
+        </Container>
+        {auth.isLogin && (
+          <Footer
+            title="Footer"
+            description="Something here to give the footer a purpose!"
+          />
+        )}
+      </Router>
     </ThemeProvider>
+  );
+}
+
+function PrivateRoute({ children, ...rest }) {
+  const { auth = {} } = useSelector((state) => state.commonStore);
+
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        auth.isLogin ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
   );
 }
