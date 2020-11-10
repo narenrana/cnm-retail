@@ -1,8 +1,8 @@
 package models
 
-import "shopping-cart/cnm-carts/repository"
+import "shopping-cart/cnm-carts/entities"
 
 type  AddToCartRequest struct {
-	Cart repository.Cart;
+	Cart entities.Cart;
 }
 

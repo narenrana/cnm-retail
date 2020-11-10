@@ -3,7 +3,7 @@ package services
 
 import (
 	"log"
-	repository "shopping-cart/cnm-carts/repository"
+	ce "shopping-cart/cnm-carts/entities"
 	"shopping-cart/cnm-core/constants"
 	e "shopping-cart/cnm-coupons/entities"
 	ec "shopping-cart/cnm-coupons/repository"
@@ -13,9 +13,9 @@ import (
 
 // Service is the interface that provides booking methods.
 type  CouponService interface {
-    couponDiscount(cart repository.Cart ) (*e.DiscountCoupons,float64, error)
-    findDiscount(items []*repository.CartItems, discountCoupon e.DiscountCoupons) (*e.DiscountCoupons, float64, error)
-	productsAndQuantityMap(items []*repository.CartItems, productAndQuantityMap map[string]int, productPriceMapping map[string]float64)
+    couponDiscount(cart ce.Cart ) (*e.DiscountCoupons,float64, error)
+    findDiscount(items []*ce.CartItems, discountCoupon e.DiscountCoupons) (*e.DiscountCoupons, float64, error)
+	productsAndQuantityMap(items []*ce.CartItems, productAndQuantityMap map[string]int, productPriceMapping map[string]float64)
     productDiscountRuleMap( coupon e.DiscountCoupons, itemMap map[string]int)
 }
 
@@ -25,7 +25,7 @@ type couponService struct {
 
 
 
-func (s *couponService) couponDiscount(cart repository.Cart ) (*e.DiscountCoupons,float64, error) {
+func (s *couponService) couponDiscount(cart ce.Cart ) (*e.DiscountCoupons,float64, error) {
 	couponsRepositoryInstance:= ec.RepositoryInstance();
 
 	if cart.DiscountCoupon==nil {
@@ -53,7 +53,7 @@ func (s *couponService) couponDiscount(cart repository.Cart ) (*e.DiscountCoupon
 }
 
 
-func (s *couponService)  findDiscount(items []*repository.CartItems, discountCoupon e.DiscountCoupons) (*e.DiscountCoupons, float64, error){
+func (s *couponService)  findDiscount(items []* ce.CartItems, discountCoupon e.DiscountCoupons) (*e.DiscountCoupons, float64, error){
 
 	log.Println("-------------------Product Coupon Discount Service--------------------------")
 	//Prepare Key Value of Product and quantity from rules
@@ -92,7 +92,7 @@ func (s *couponService)  findDiscount(items []*repository.CartItems, discountCou
 
 
 
-func (s *couponService) productsAndQuantityMap(items []*repository.CartItems, productAndQuantityMap map[string]int, productPriceMapping map[string]float64) {
+func (s *couponService) productsAndQuantityMap(items []*ce.CartItems, productAndQuantityMap map[string]int, productPriceMapping map[string]float64) {
 	for _, item := range items {
 		productAndQuantityMap[item.Product.ProductName] = productAndQuantityMap[item.Product.ProductName] + *item.Quantity
 		productPriceMapping[item.Product.ProductName] = item.Product.ProductPrice

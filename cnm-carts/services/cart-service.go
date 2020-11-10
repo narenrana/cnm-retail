@@ -3,6 +3,7 @@ package services
 import (
 	models "shopping-cart/cnm-carts/models"
 	cartRepo "shopping-cart/cnm-carts/repository"
+	re "shopping-cart/cnm-carts/entities"
 	ce "shopping-cart/cnm-coupons/entities"
 	oe "shopping-cart/cnm-offers/entities"
 )
@@ -19,7 +20,7 @@ type  Service interface {
 type service struct {
 }
 
-func (s *service) calculateTotalAmount(items []*cartRepo.CartItems) float64{
+func (s *service) calculateTotalAmount(items []*re.CartItems) float64{
 	total:=0.00;
 	for _, item := range items {
 		total=total+ item.Product.ProductPrice * float64(*item.Quantity)
@@ -50,7 +51,7 @@ func (s *service) DeleteCartItems(request models.DeleteCartItemRequest) (models.
 	return s.Get(getRequest)
 }
 
-func (s *service) parePareCartResponse(cart cartRepo.Cart, err error) (models.CartResponse, error) {
+func (s *service) parePareCartResponse(cart re.Cart, err error) (models.CartResponse, error) {
 	offersService := NewOffersServiceService()
 	productService := NewProductPriceService()
 	var offers []*oe.Offers

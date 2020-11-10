@@ -1,70 +1,56 @@
 package repository
 
 import (
+	ce "shopping-cart/cnm-carts/entities"
 	core "shopping-cart/cnm-core"
 	"shopping-cart/cnm-core/wrappers"
-	e "shopping-cart/cnm-products/entities"
 )
 
-type Service interface {
-	List() ([] *Cart,error)
-	FirstOrCreate(userId *int) (  Cart,error)
-	Add(u Cart) ( Cart,error)
-	DeleteCartItem(cartItemIds []int) ([]*CartItems, error)
+type Repository interface {
+	List() ([] *ce.Cart,error)
+	FirstOrCreate(userId *int) (  ce.Cart,error)
+	Add(u ce.Cart) ( ce.Cart,error)
+	DeleteCartItem(cartItemIds []int) ([]*ce.CartItems, error)
 
 }
 
-type Cart struct {
-	//TODO adopt some id generator - Time being i am using only timestamp while creating record
-	CartId        *int      `gorm:"primaryKey" json:"cartId,omitempty"`
-	CartName      string    `json:"cartName,omitempty"`
-	UserId        *int       `json:"userId,omitempty"`
-	CartItems     []*CartItems `gorm:"foreignKey:CartId;references:CartId" json:"cartItems,omitempty"`
-	//OffersId      int      `json:"offersId,omitempty"`
-	DiscountCoupon *string   `json:"discountCoupon,omitempty"`
+type repository struct {
+
 }
 
-type CartItems struct {
-	//TODO adopt some id generator - Time being i am using only timestamp while creating record
-	CartItemsId   *int `gorm:"primaryKey" json:"cartItemsId,omitempty"`
-	CartId        *int `json:"cartId,omitempty"`
-	Quantity      *int  `json:"quantity,omitempty"`
-	ProductId     int `json:"productId,omitempty"`
-	Currency    string `json:currency,omitempty"`
-	Product     e.Product `gorm:"foreignKey:ProductId;references:ProductId" json:"products,omitempty"`
-}
 
-func (*Cart) List() ([] *Cart, error){
+
+func (*repository) List() ([] *ce.Cart, error){
 	db,err :=core.GetDB()
-	var found [] *Cart;
+	var found [] *ce.Cart;
 	if err != nil {
 		return nil, err;
 	}
 	db.Find(&found);
 	for _,v := range found {
-		var cartItem [] *CartItems;
+		var cartItem [] *ce.CartItems;
 		db.Model(&cartItem).Where("cart_id = ?", v.CartId).Find(&cartItem)
 		v.CartItems=  cartItem
 	}
 	return  found, err;
 }
 
-func (*Cart) FirstOrCreate(userId *int) (Cart, error){
+func (*repository) FirstOrCreate(userId *int) (ce.Cart, error){
 	db,err :=core.GetDB()
-	 var found Cart;
+	 var found ce.Cart;
 	found.UserId= userId;
 	if err != nil {
-		return Cart{}, err;
+		return ce.Cart{}, err;
 	}
 	db.Model(&found).Where("user_id= ?",userId).FirstOrCreate(&found);
-	var cartItem [] *CartItems;
+	var cartItem [] *ce.CartItems;
 	db.Model(&cartItem).Where("cart_id = ?", found.CartId).Find(&cartItem)
 	found.CartItems=cartItem;
 	return  found, err;
 }
 
 
-func (*Cart) Add(cart Cart) (Cart, error){
+func (*repository) Add(cart ce.Cart) (ce.Cart, error){
 	db,err :=core.GetDB()
 	var cartItemIds[] int ;
 	for _,v := range cart.CartItems {
@@ -94,12 +80,12 @@ func (*Cart) Add(cart Cart) (Cart, error){
 
 
 
-func (*Cart) DeleteCartItem(cartItemIds []int) ([]*CartItems, error){
+func (*repository) DeleteCartItem(cartItemIds []int) ([]*ce.CartItems, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return nil, err;
 	}
-	var cartItem   [] *CartItems
+	var cartItem   [] *ce.CartItems
 
 
 	db.Model(cartItem).Where("cart_items_id in (?)",cartItemIds).Delete(cartItem)
@@ -107,8 +93,8 @@ func (*Cart) DeleteCartItem(cartItemIds []int) ([]*CartItems, error){
 }
 
 
-func CartsRepositoryInstance() Service {
-	return &Cart{}
+func CartsRepositoryInstance() Repository {
+	return &repository{}
 }
 
 

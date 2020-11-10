@@ -1,8 +1,8 @@
 package models
 
-import "shopping-cart/cnm-carts/repository"
+import "shopping-cart/cnm-carts/entities"
 
 type AddToCartResponse struct {
-	Cart          repository.Cart   `json:"product,omitempty"`
+	Cart          entities.Cart   `json:"product,omitempty"`
 	Err            error  `json:"error,omitempty"`
 }

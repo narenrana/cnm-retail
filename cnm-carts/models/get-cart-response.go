@@ -1,7 +1,7 @@
 package models
 
 import (
-	"shopping-cart/cnm-carts/repository"
+	"shopping-cart/cnm-carts/entities"
 	e "shopping-cart/cnm-coupons/entities"
 	ce "shopping-cart/cnm-offers/entities"
 )
@@ -10,7 +10,7 @@ type CartResponse struct {
 	CartId        		*int      	`gorm:"primaryKey" json:"cartId,omitempty"`
 	CartName      		string    	`json:"cartName,omitempty"`
 	UserId        		*int       	`json:"userId,omitempty"`
-	CartItems     		 []*repository.CartItems `json:"cartItems,omitempty"`
+	CartItems     		 []*entities.CartItems `json:"cartItems,omitempty"`
 	Err           		 error  	`json:"error,omitempty"`
 	AppliedOffers   	[]*ce.Offers `json:"appliedOffers,omitempty"`
 	OffersDiscount     float64  		`json:"offersDiscount,omitempty"`
