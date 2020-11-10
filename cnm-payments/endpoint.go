@@ -2,21 +2,21 @@ package  payments
 
 import (
 	"context"
-	repository "shopping-cart/cnm-payments/repository"
+	e "shopping-cart/cnm-payments/entities"
 	"github.com/go-kit/kit/endpoint"
 )
 
 type paymentsAddRequest struct {
-	Payments   repository.Payments ;
+	Payments   e.Payments ;
 }
 
 type paymentsAddResponse struct {
-	Payments          repository.Payments   `json:"payments,omitempty"`
+	Payments          e.Payments   `json:"payments,omitempty"`
 	Err               error  `json:"error,omitempty"`
 }
 
 type paymentsListResponse struct {
-	Payments           []repository.Payments `json:"products,omitempty"`
+	Payments           []e.Payments `json:"products,omitempty"`
 	Err              error  `json:"error,omitempty"`
 }
 

@@ -2,7 +2,7 @@ package coupons
 
 import (
 	"errors"
-	repository "shopping-cart/cnm-coupons/repository"
+	cr "shopping-cart/cnm-coupons/repository"
 	"time"
 )
 
@@ -21,19 +21,19 @@ type service struct {
 
 
 func (s *service) add(request discountCouponsAddRequest) (discountCouponsResponse, error) {
-	instance:= repository.DiscountCouponsRepositoryInstance()
+	instance:= cr.RepositoryInstance()
 	product, err:=instance.Add(request.DiscountCoupons)
 	return  discountCouponsResponse{DiscountCoupons: product}, err
 }
 
 func (s *service) list() (discountCouponsListResponse, error) {
-	instance:= repository.DiscountCouponsRepositoryInstance()
+	instance:= cr.RepositoryInstance()
 	product, err:=instance.List();
 	return discountCouponsListResponse{Product: product , Err: err}, err
 }
 
 func (s *service) find(request findCouponRequest) (findCouponResponse,error){
-	instance:= repository.DiscountCouponsRepositoryInstance()
+	instance:= cr.RepositoryInstance()
 	coupon, err:=instance.FindByDiscountCoupon(request.Coupon);
 	isValid:= coupon.Active &&  coupon.ExpiryDate.After(time.Now())
 	return findCouponResponse{ DiscountCoupons: coupon, Valid:isValid  },err

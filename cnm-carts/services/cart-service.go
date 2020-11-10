@@ -3,9 +3,8 @@ package services
 import (
 	models "shopping-cart/cnm-carts/models"
 	cartRepo "shopping-cart/cnm-carts/repository"
-
-	coupons "shopping-cart/cnm-coupons/repository"
-	offersRepo "shopping-cart/cnm-offers/repository"
+	ce "shopping-cart/cnm-coupons/entities"
+	oe "shopping-cart/cnm-offers/entities"
 )
 
 
@@ -54,8 +53,8 @@ func (s *service) DeleteCartItems(request models.DeleteCartItemRequest) (models.
 func (s *service) parePareCartResponse(cart cartRepo.Cart, err error) (models.CartResponse, error) {
 	offersService := NewOffersServiceService()
 	productService := NewProductPriceService()
-	var offers []*offersRepo.Offers
-	var coupon *coupons.DiscountCoupons
+	var offers []*oe.Offers
+	var coupon *ce.DiscountCoupons
 	offersDiscount := 0.0
 	couponDiscount := 0.0
 	//totalDiscount:=0.0

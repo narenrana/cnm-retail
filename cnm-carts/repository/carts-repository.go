@@ -3,7 +3,7 @@ package repository
 import (
 	core "shopping-cart/cnm-core"
 	"shopping-cart/cnm-core/wrappers"
-	"shopping-cart/cnm-products/repository"
+	e "shopping-cart/cnm-products/entities"
 )
 
 type Service interface {
@@ -31,7 +31,7 @@ type CartItems struct {
 	Quantity      *int  `json:"quantity,omitempty"`
 	ProductId     int `json:"productId,omitempty"`
 	Currency    string `json:currency,omitempty"`
-	Product     repository.Product `gorm:"foreignKey:ProductId;references:ProductId" json:"products,omitempty"`
+	Product     e.Product `gorm:"foreignKey:ProductId;references:ProductId" json:"products,omitempty"`
 }
 
 func (*Cart) List() ([] *Cart, error){

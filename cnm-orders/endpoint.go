@@ -3,20 +3,20 @@ package orders
 import (
 	"context"
 	"github.com/go-kit/kit/endpoint"
-	repository "shopping-cart/cnm-orders/repository"
+	e "shopping-cart/cnm-orders/entities"
 )
 
 type  addOrdersRequest struct {
-	Orders repository.Orders;
+	Orders e.Orders;
 }
 
 type addOrdersResponse struct {
-	Orders            repository.Orders   `json:"product,omitempty"`
+	Orders            e.Orders   `json:"product,omitempty"`
 	Err               error  `json:"error,omitempty"`
 }
 
 type getOrderListResponse struct {
-	Orders           [] *repository.Orders `json:"cart,omitempty"`
+	Orders           [] *e.Orders `json:"cart,omitempty"`
 	Err            error  `json:"error,omitempty"`
 }
 

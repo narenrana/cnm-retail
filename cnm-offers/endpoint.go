@@ -2,22 +2,22 @@ package offers
 
 import (
 	"context"
-	"shopping-cart/cnm-offers/repository"
+	e "shopping-cart/cnm-offers/entities"
 
 	"github.com/go-kit/kit/endpoint"
 )
 
 type  addOffersRequest struct {
-	Offers repository.Offers;
+	Offers e.Offers;
 }
 
 type addOffersResponse struct {
-	Offers          repository.Offers   `json:"offers,omitempty"`
+	Offers          e.Offers   `json:"offers,omitempty"`
 	Err               error  `json:"error,omitempty"`
 }
 
 type getOffersResponse struct {
-	Offers         [] *repository.Offers `json:"offers,omitempty"`
+	Offers         [] *e.Offers `json:"offers,omitempty"`
 	Err            error  `json:"error,omitempty"`
 }
 

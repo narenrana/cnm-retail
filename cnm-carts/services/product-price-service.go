@@ -3,6 +3,7 @@ package services
 import (
 	"shopping-cart/cnm-carts/repository"
 	repositoryDao "shopping-cart/cnm-products/repository"
+	"shopping-cart/cnm-products/entities"
 
 )
 
@@ -21,7 +22,7 @@ func (p productPriceService) findCartItemProduct(items []*repository.CartItems) 
     for _,item:= range  items {
 		productIds = append(productIds,item.ProductId )
 	}
-	productPriceMap := make(map[int] repositoryDao.Product)
+	productPriceMap := make(map[int] entities.Product)
 	products, err := instance.FindByIds(productIds);
 	for _,product:= range  products {
 		productPriceMap[ product.ProductId]=product;

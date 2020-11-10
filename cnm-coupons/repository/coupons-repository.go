@@ -1,54 +1,34 @@
 package coupons
 
 import (
+	 
 	core "shopping-cart/cnm-core"
-	"time"
+	e "shopping-cart/cnm-coupons/entities"
 )
 
 
-type Service interface {
-	List() ([] DiscountCoupons,error)
-	FindByDiscountCoupon(u string) (  DiscountCoupons,error)
-	Add(u DiscountCoupons) ( DiscountCoupons,error)
-	Delete(u DiscountCoupons) ( DiscountCoupons,error)
+type Repository interface {
+	List() ([]  e.DiscountCoupons,error)
+	FindByDiscountCoupon(u string) (  e.DiscountCoupons,error)
+	Add(u e.DiscountCoupons) ( e.DiscountCoupons,error)
+	Delete(u e.DiscountCoupons) ( e.DiscountCoupons,error)
 }
 
-type DiscountCoupons struct {
 
-	DiscountCouponsId     int          `gorm:"primaryKey" json:"discountCouponsId,omitempty"`
-	Description           string       `json:"description,omitempty"`
-	DiscountCoupon        string       `json:"discountCoupon,omitempty"`
-	Discount              float64       `json:"discount,omitempty"`
-	DiscountMode          string       `json:"discountMode,omitempty"`
-	CouponsType          string        `json:"couponsType,omitempty"`
-	ExpiryDate            time.Time    `json:"expiryDate,omitempty"`
-	DateCreated           time.Time   `json:"dateCreated,omitempty"`
-	DateUpdated           time.Time    `json:"dateUpdated,omitempty"`
-	Active                bool         `json:"active,omitempty"`
-	DiscountCouponsRules  [] *DiscountCouponsRules   `gorm:"foreignKey:DiscountCouponsId;references:DiscountCouponsId" json:"discountCouponsRules,omitempty"`
+type repository struct {
+
 }
 
-type DiscountCouponsRules struct {
-	//TODO adopt some id generator - Time being, i am using only timestamp while creating record
-	DiscountCouponsRulesId        int        `gorm:"primaryKey" json:"discountCouponsRulesId,omitempty"`
-	DiscountCouponsId             int        `json:"discountCouponsId,omitempty"`
-	Key                           string     `json:"key,omitempty"`
-	Value                         string     `json:"value,omitempty"`
-	Operator                      string     `json:"operator,omitempty"`
-	Description                   string     `json:"description,omitempty"`
-	DateCreated                   time.Time  `json:"dateCreated,omitempty"`
-	DateUpdated                   time.Time   `json:"dateUpdated,omitempty"`
-}
 
-func (*DiscountCoupons) List() ([] DiscountCoupons, error){
+func (*repository) List() ([] e.DiscountCoupons, error){
 	db,err :=core.GetDB()
-	var found [] DiscountCoupons;
+	var found [] e.DiscountCoupons;
 	if err != nil {
 		return nil, err;
 	}
 	db.Find(&found);
 	for _,v := range found {
-		var item [] *DiscountCouponsRules;
+		var item [] *e.DiscountCouponsRules;
 		db.Model(&item).Where("DiscountCoupons_id = ?", v.DiscountCouponsId).Find(&item)
 		v.DiscountCouponsRules=  item
 	}
@@ -56,9 +36,9 @@ func (*DiscountCoupons) List() ([] DiscountCoupons, error){
 	return  found, err;
 }
 
-func (*DiscountCoupons) FindBy(user DiscountCoupons) (DiscountCoupons, error){
+func (*repository) FindBy(user e.DiscountCoupons) (e.DiscountCoupons, error){
 	db,err :=core.GetDB()
-	var found  DiscountCoupons;
+	var found  e.DiscountCoupons;
 	if err != nil {
 		return user, err;
 	}
@@ -67,25 +47,25 @@ func (*DiscountCoupons) FindBy(user DiscountCoupons) (DiscountCoupons, error){
 	return  found, err;
 }
 
-func (*DiscountCoupons) FindByDiscountCoupon(coupon string) (DiscountCoupons, error){
+func (*repository) FindByDiscountCoupon(coupon string) (e.DiscountCoupons, error){
 	db,err :=core.GetDB()
-	var found  DiscountCoupons;
+	var found  e.DiscountCoupons;
 	if err != nil {
-		return DiscountCoupons{}, err;
+		return e.DiscountCoupons{}, err;
 	}
 	db.Model(found).Where("discount_coupon=?",coupon).Find(&found);
 
 	if &found==nil {
 		return found,nil
 	}
-	var item [] *DiscountCouponsRules;
+	var item [] *e.DiscountCouponsRules;
 	db.Model(&item).Where("discount_coupons_id = ?", found.DiscountCouponsId).Find(&item)
 	found.DiscountCouponsRules=item;
 
 	return  found, err;
 }
 
-func (*DiscountCoupons) Add(d DiscountCoupons) (DiscountCoupons, error){
+func (*repository) Add(d e.DiscountCoupons) (e.DiscountCoupons, error){
 	db,err :=core.GetDB()
 
 	if db.Model(&d).Where("cart_id = ?", d.DiscountCouponsId).Updates(&d).RowsAffected == 0 {
@@ -104,7 +84,7 @@ func (*DiscountCoupons) Add(d DiscountCoupons) (DiscountCoupons, error){
 	return  d, err;
 }
 
-func (*DiscountCoupons) Delete(offer DiscountCoupons) (DiscountCoupons, error){
+func (*repository) Delete(offer e.DiscountCoupons) (e.DiscountCoupons, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return offer, err;
@@ -114,7 +94,7 @@ func (*DiscountCoupons) Delete(offer DiscountCoupons) (DiscountCoupons, error){
 }
 
 
-func DiscountCouponsRepositoryInstance() Service {
-	return &DiscountCoupons{};
+func  RepositoryInstance() Repository {
+	return &repository{};
 }
 

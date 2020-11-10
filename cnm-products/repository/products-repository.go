@@ -2,29 +2,25 @@ package repository
 
 import (
 	core "shopping-cart/cnm-core"
+	 e "shopping-cart/cnm-products/entities"
 )
 
-type Service interface {
-	List() ([] Product,error)
-	FindByIds(ids [] int) ([] Product,error)
-	FindBy(u Product) (  Product,error)
-	Add(u Product) ( Product,error)
-	Delete(u Product) ( Product,error)
+type Repository interface {
+	List() ([] e.Product,error)
+	FindByIds(ids [] int) ([] e.Product,error)
+	FindBy(u e.Product) (  e.Product,error)
+	Add(u e.Product) ( e.Product,error)
+	Delete(u e.Product) ( e.Product,error)
 }
 
-type Product struct {
-	ProductId     int       `gorm:"primaryKey" json:"productId,omitempty"`
-	ProductName   string    `json:"productName,omitempty"`
-	ProductPrice  float64   `json:"productPrice,omitempty"`
-	BaseCurrency  string    `json:"baseCurrency,omitempty"`
-	ProductTitle  string    `json:"productTitle,omitempty"`
-	ProductDesc   string    `json:"productDesc,omitempty"`
-	ImageUrl      string    `json:"imageUrl,omitempty"`
+type repository struct {
+
 }
 
-func (p *Product) FindByIds(ids []int) ([]Product, error) {
+
+func (p *repository) FindByIds(ids []int) ([]e.Product, error) {
 	db,err :=core.GetDB()
-	var found [] Product;
+	var found [] e.Product;
 	if err != nil {
 		return nil, err;
 	}
@@ -32,9 +28,9 @@ func (p *Product) FindByIds(ids []int) ([]Product, error) {
 	return  found, err;
 }
 
-func (*Product) List() ([] Product, error){
+func (p *repository) List() ([] e.Product, error){
 	db,err :=core.GetDB()
-	var found [] Product;
+	var found [] e.Product;
 	if err != nil {
 		return nil, err;
 	}
@@ -42,9 +38,9 @@ func (*Product) List() ([] Product, error){
 	return  found, err;
 }
 
-func (*Product) FindBy(user Product) (Product, error){
+func (p *repository) FindBy(user e.Product) (e.Product, error){
 	db,err :=core.GetDB()
-	 var found Product;
+	 var found e.Product;
 	if err != nil {
 		return user, err;
 	}
@@ -52,7 +48,7 @@ func (*Product) FindBy(user Product) (Product, error){
 	return  found, err;
 }
 
-func (*Product) Add(user Product) (Product, error){
+func (p *repository) Add(user e.Product) (e.Product, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return user, err;
@@ -61,7 +57,7 @@ func (*Product) Add(user Product) (Product, error){
 	return  user, err;
 }
 
-func (*Product) Delete(user Product) (Product, error){
+func (p *repository) Delete(user e.Product) (e.Product, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return user, err;
@@ -70,7 +66,7 @@ func (*Product) Delete(user Product) (Product, error){
 	return  user, err;
 }
 
-func ProductRepositoryInstance() Service {
-	return &Product{};
+func ProductRepositoryInstance() Repository {
+	return &repository{};
 }
 

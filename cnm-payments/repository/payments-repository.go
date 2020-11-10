@@ -1,37 +1,24 @@
 package payments
 
 import (
-	"github.com/jackc/pgtype"
 	core "shopping-cart/cnm-core"
+	e "shopping-cart/cnm-payments/entities"
 )
 
-type Service interface {
-	List() ([] Payments,error)
-	FindBy(u Payments) (  Payments,error)
-	Add(u Payments) ( Payments,error)
-	Delete(u Payments) ( Payments,error)
+type Repository interface {
+	List() ([] e.Payments,error)
+	FindBy(u e.Payments) (  e.Payments,error)
+	Add(u e.Payments) ( e.Payments,error)
+	Delete(u e.Payments) ( e.Payments,error)
 }
 
-type Payments struct {
-
-	PaymentId         int          `gorm:"primaryKey" json:"description,omitempty"`
-	UserId            string       `json:"userId,omitempty"`
-	PaymentMode       string       `json:"paymentMode,omitempty"`
-	OrderId           string       `json:"orderId,omitempty"`
-	OrderDate         string       `json:"orderDate,omitempty"`
-	OrderAmount       string       `json:"orderAmount,omitempty"`
-	PaymentStatus     string       `json:"PaymentStatus,omitempty"`
-	NameOnCard        pgtype.Date  `json:"nameOnCard,omitempty"`
-	CardType          pgtype.Date  `json:"cardType,omitempty"`
-	CardLastDigit     string       `json:"cardLastDigit,omitempty"`
-	active            bool         `json:"active,omitempty"`
-	DateCreated   pgtype.Date    `json:"dateCreated,omitempty"`
-	DateUpdated   pgtype.Date    `json:"dateUpdated,omitempty"`
+type repository struct {
 }
 
-func (*Payments) List() ([] Payments, error){
+
+func (repository) List() ([] e.Payments, error){
 	db,err :=core.GetDB()
-	var found [] Payments;
+	var found [] e.Payments;
 	if err != nil {
 		return nil, err;
 	}
@@ -39,9 +26,9 @@ func (*Payments) List() ([] Payments, error){
 	return  found, err;
 }
 
-func (*Payments) FindBy(item Payments) (Payments, error){
+func (repository) FindBy(item e.Payments) (e.Payments, error){
 	db,err :=core.GetDB()
-	 var found Payments;
+	 var found e.Payments;
 	if err != nil {
 		return item, err;
 	}
@@ -49,7 +36,7 @@ func (*Payments) FindBy(item Payments) (Payments, error){
 	return  found, err;
 }
 
-func (*Payments) Add(item Payments) (Payments, error){
+func (repository) Add(item e.Payments) (e.Payments, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return item, err;
@@ -58,7 +45,7 @@ func (*Payments) Add(item Payments) (Payments, error){
 	return  item, err;
 }
 
-func (*Payments) Delete(item Payments) (Payments, error){
+func (repository) Delete(item e.Payments) (e.Payments, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return item, err;
@@ -67,7 +54,7 @@ func (*Payments) Delete(item Payments) (Payments, error){
 	return  item, err;
 }
 
-func PaymentsRepositoryInstance() Service {
-	return &Payments{};
+func PaymentsRepositoryInstance() Repository {
+	return &repository{};
 }
 

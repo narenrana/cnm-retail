@@ -1,37 +1,30 @@
 package repository
 
 import (
+	e "shopping-cart/cnm-auth/entities"
 	core "shopping-cart/cnm-core"
 )
 
 type UsersAuthRepository interface {
-
-	FindById(u string) (Users, error)
-	AddOrUpdate(u Users)  (Users, error)
-	Delete(u Users)  (Users, error)
+	FindById(u string) (e.Users, error)
+	AddOrUpdate(u e.Users)  (e.Users, error)
+	Delete(u e.Users)  (e.Users, error)
 }
 
-type Users struct {
-	UserId         *int        `gorm:"primaryKey" json:"userId,omitempty"`
-	FirstName      string      `json:"firstName,omitempty"`
-	MiddleName     string      `json:"middleName,omitempty"`
-	LastName       string      `json:"lastName,omitempty"`
-	UserEmail      string      `json:"userEmail,omitempty"`
-	Password       string      `json:"password,omitempty"`
-	PhoneNumber    string      `json:"phoneNumber,omitempty"`
-
+type usersAuthRepository struct {
+	
 }
 
 
-func (u *Users) FindById(email string) (Users, error) {
+func (*usersAuthRepository) FindById(email string) (e.Users, error) {
 	db,err :=core.GetDB()
-	var found Users
+	var found e.Users
 
 	db.Model(&found).Where("user_email=?",email).First(&found);
 	return  found, err;
 }
 
-func (u *Users) AddOrUpdate(user Users) (Users, error) {
+func (*usersAuthRepository) AddOrUpdate(user e.Users) (e.Users, error) {
 	db,err :=core.GetDB()
 	if db.Model(&user).Where("user_id = ?", user.UserId).Updates(&user).RowsAffected == 0 {
 		db.Create(&user)
@@ -39,13 +32,13 @@ func (u *Users) AddOrUpdate(user Users) (Users, error) {
 	return user, err
 }
 
-func (u *Users) Delete(user Users) (Users, error) {
+func (*usersAuthRepository) Delete(user e.Users) (e.Users, error) {
 	db,err :=core.GetDB()
     db.Delete(&user)
 	return user , err
 }
 
 func NewUsersRepository() UsersAuthRepository {
-	return &Users{}
+	return &usersAuthRepository{}
 }
 

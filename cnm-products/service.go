@@ -19,8 +19,8 @@ type service struct {
 }
 
 func (s *service) add(request productAddRequest) (productAddResponse, error) {
-	repository:= repository.ProductRepositoryInstance()
-	product, err:=repository.Add(request.Product)
+	instance:= repository.ProductRepositoryInstance()
+	product, err:=instance.Add(request.Product)
 	return  productAddResponse{Product: product}, err
 }
 

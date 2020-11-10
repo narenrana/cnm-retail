@@ -2,31 +2,25 @@ package repository
 
 import (
 	core "shopping-cart/cnm-core"
+	e "shopping-cart/cnm-users/entities"
+	
 )
 
 type UsersRepository interface {
-	List() ([]UserDetails,error)
-	FindBy(u UserDetails)  (UserDetails, error)
-	Add(u UserDetails) (UserDetails, error)
-	Delete(u UserDetails) (UserDetails, error)
+	List() ([]e.UserDetails,error)
+	FindBy(u e.UserDetails)  (e.UserDetails, error)
+	Add(u e.UserDetails) (e.UserDetails, error)
+	Delete(u e.UserDetails) (e.UserDetails, error)
 }
 
-type UserDetails struct {
-	UserId         uint
-	FirstName      string
-	MiddleName     string
-	LastName       string
-	UserEmail      string
-	Password       string
-	PhoneNumber    string
-	DateCreate     string
-	DateUpdated    string
-
+type usersRepository struct {
+	
 }
 
-func (*UserDetails) List() ([] UserDetails, error){
+
+func (*usersRepository) List() ([] e.UserDetails, error){
 	db,err :=core.GetDB()
-	var found [] UserDetails;
+	var found [] e.UserDetails;
 	if err != nil {
 		return nil, err;
 	}
@@ -34,9 +28,9 @@ func (*UserDetails) List() ([] UserDetails, error){
 	return  found, err;
 }
 
-func (*UserDetails) FindBy(user UserDetails) (UserDetails, error){
+func (*usersRepository) FindBy(user e.UserDetails) (e.UserDetails, error){
 	db,err :=core.GetDB()
-	 var found UserDetails;
+	 var found e.UserDetails;
 	if err != nil {
 		return user, err;
 	}
@@ -44,7 +38,7 @@ func (*UserDetails) FindBy(user UserDetails) (UserDetails, error){
 	return  found, err;
 }
 
-func (*UserDetails) Add(user UserDetails) (UserDetails, error){
+func (*usersRepository) Add(user e.UserDetails) (e.UserDetails, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return user, err;
@@ -53,7 +47,7 @@ func (*UserDetails) Add(user UserDetails) (UserDetails, error){
 	return  user, err;
 }
 
-func (*UserDetails) Delete(user UserDetails) (UserDetails, error){
+func (*usersRepository) Delete(user e.UserDetails) (e.UserDetails, error){
 	db,err :=core.GetDB()
 	if err != nil {
 		return user, err;
@@ -63,6 +57,6 @@ func (*UserDetails) Delete(user UserDetails) (UserDetails, error){
 }
 
 func UsersRepositoryInstance() UsersRepository {
-	return &UserDetails{};
+	return &usersRepository{};
 }
 

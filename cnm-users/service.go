@@ -2,7 +2,8 @@ package users
 
 import (
 	"errors"
-	userRepository "shopping-cart/cnm-users/repository"
+	e "shopping-cart/cnm-users/entities"
+	 "shopping-cart/cnm-users/repository"
 )
 
 // ErrInvalidArgument is returned when one or more arguments are invalid.
@@ -18,10 +19,9 @@ type service struct {
 }
 
 
-
 func (s *service) add(request userRequest) (userResponse, error) {
-	repository:= userRepository.UsersRepositoryInstance()
-	usr, err:=repository.Add(userRepository.UserDetails{
+	instance:= repository.UsersRepositoryInstance()
+	usr, err:=instance.Add(e.UserDetails{
 		FirstName: request.FirstName,
 		MiddleName: request.MiddleName,
 		LastName: request.LastName,
@@ -34,8 +34,8 @@ func (s *service) add(request userRequest) (userResponse, error) {
 }
 
 func (s *service) list() (userListResponse, error) {
-	repository:= userRepository.UsersRepositoryInstance()
-	users, err:=repository.List();
+	instance:= repository.UsersRepositoryInstance()
+	users, err:=instance.List();
 	return userListResponse{UserDetails:users , Err: err}, err
 }
 

@@ -2,22 +2,23 @@ package carts
 
 import (
 	"context"
-	"shopping-cart/cnm-products/repository"
+	//"shopping-cart/cnm-core/repository"
+	"shopping-cart/cnm-products/entities"
 
 	"github.com/go-kit/kit/endpoint"
 )
 
 type productAddRequest struct {
-	Product repository.Product;
+	Product entities.Product;
 }
 
 type productAddResponse struct {
-	Product          repository.Product   `json:"product,omitempty"`
+	Product          entities.Product   `json:"product,omitempty"`
 	Err               error  `json:"error,omitempty"`
 }
 
 type productListResponse struct {
-	Product           []repository.Product `json:"products,omitempty"`
+	Product           []entities.Product `json:"products,omitempty"`
 	Err              error  `json:"error,omitempty"`
 }
 

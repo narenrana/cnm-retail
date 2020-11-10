@@ -6,6 +6,7 @@ import (
 	"log"
 	"shopping-cart/cnm-carts/repository"
 	"shopping-cart/cnm-core/constants"
+	oe "shopping-cart/cnm-offers/entities"
 	offersRepository "shopping-cart/cnm-offers/repository"
 	"sort"
 	"strconv"
@@ -16,16 +17,16 @@ var ErrInvalidArgument = errors.New("invalid argument")
 
 // Service is the interface that provides booking methods.
 type  OffersService interface {
-	getOffers(items [] *repository.CartItems) ([] *offersRepository.Offers,float64, error)
-	comboOfferDiscount(items [] *repository.CartItems,offer *offersRepository.Offers)  ( *offersRepository.Offers ,float64, error)
-	individualOfferDiscount(items [] *repository.CartItems,offer *offersRepository.Offers )  ( *offersRepository.Offers, float64, error)
+	getOffers(items [] *repository.CartItems) ([] *oe.Offers,float64, error)
+	comboOfferDiscount(items [] *repository.CartItems,offer *oe.Offers)  ( *oe.Offers ,float64, error)
+	individualOfferDiscount(items [] *repository.CartItems,offer *oe.Offers )  ( *oe.Offers, float64, error)
 
 }
 
 type offersService struct {
 }
 
-func (s *offersService) getOffers(items [] *repository.CartItems) ([] *offersRepository.Offers,float64, error){
+func (s *offersService) getOffers(items [] *repository.CartItems) ([] *oe.Offers,float64, error){
 
 	offersRepositoryInstance:=offersRepository.OffersRepositoryInstance()
 	offers, error :=offersRepositoryInstance.List();
@@ -34,7 +35,7 @@ func (s *offersService) getOffers(items [] *repository.CartItems) ([] *offersRep
 		return offers, 0, error
 
 	}
-	var offersFound [] *offersRepository.Offers;
+	var offersFound [] *oe.Offers;
 	var totalDiscount float64;
 
 	for _, offer := range offers {
@@ -59,7 +60,7 @@ func (s *offersService) getOffers(items [] *repository.CartItems) ([] *offersRep
 }
 
 
-func (s *offersService) comboOfferDiscount(items [] *repository.CartItems, offer *offersRepository.Offers )  ( *offersRepository.Offers,float64, error) {
+func (s *offersService) comboOfferDiscount(items [] *repository.CartItems, offer *oe.Offers )  ( *oe.Offers,float64, error) {
 	log.Println("-------------------Product combo Offer Discount Service--------------------------")
 	//Prepare Key Value of Product and quantity from rules
 	productComboMap := make(map[string]int)
@@ -149,7 +150,7 @@ func (s *offersService) productAndQuantityMap(items []*repository.CartItems, pro
 	}
 }
 
-func (s *offersService) productRuleMap(offer *offersRepository.Offers, itemMap map[string]int) {
+func (s *offersService) productRuleMap(offer *oe.Offers, itemMap map[string]int) {
 	for _, rule := range offer.OffersRules {
 		ruleValue, _ := strconv.ParseInt(rule.Value, 10, 64)
 		itemMap[rule.Key] = int(ruleValue)
@@ -157,7 +158,7 @@ func (s *offersService) productRuleMap(offer *offersRepository.Offers, itemMap m
 	}
 }
 
-func (s *offersService)  individualOfferDiscount(items []*repository.CartItems, offer *offersRepository.Offers) (*offersRepository.Offers, float64, error){
+func (s *offersService)  individualOfferDiscount(items []*repository.CartItems, offer *oe.Offers) (*oe.Offers, float64, error){
 
 	log.Println("-------------------Product Individual Offer Discount Service--------------------------")
 	//Prepare Key Value of Product and quantity from rules

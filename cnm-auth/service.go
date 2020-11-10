@@ -2,7 +2,8 @@ package auth
 
 import (
 	"errors"
-	repositoryDao "shopping-cart/cnm-auth/repository"
+	"shopping-cart/cnm-auth/entities"
+	"shopping-cart/cnm-auth/repository"
 	"shopping-cart/cnm-core/utils"
 )
 
@@ -29,8 +30,8 @@ type service struct {
 
 func (s *service) login(request authLoginRequest) (authLoginResponse, error){
 
-	repository:= repositoryDao.NewUsersRepository()
-	usr, err:=repository.FindById(request.Email);
+	instance:= repository.NewUsersRepository()
+	usr, err:=instance.FindById(request.Email);
 	if err != nil {
 		return authLoginResponse{Err: err}, err
 	}
@@ -82,8 +83,8 @@ func (s *service) refreshToken(request authRefreshTokenRequest)(authRefreshToken
 }
 
 func (s *service)  signUp(request authSignUpRequest ) (authSignUpResponse, error){
-	repository:=repositoryDao.NewUsersRepository()
-	var users repositoryDao.Users
+	instance:=repository.NewUsersRepository()
+	var users entities.Users
 
 	users.FirstName=request.FirstName
 	users.LastName=request.LastName
@@ -96,7 +97,7 @@ func (s *service)  signUp(request authSignUpRequest ) (authSignUpResponse, error
 	if err != nil {
 		return authSignUpResponse{},err
 	}
-	 usr, err:=repository.AddOrUpdate(users);
+	 usr, err:=instance.AddOrUpdate(users);
 
 	if err!=nil   {
 		return authSignUpResponse{}, err

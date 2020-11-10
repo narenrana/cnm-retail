@@ -2,22 +2,22 @@ package  coupons
 
 import (
 	"context"
-	repository "shopping-cart/cnm-coupons/repository"
 	"github.com/go-kit/kit/endpoint"
+	e "shopping-cart/cnm-coupons/entities"
 )
 
 type discountCouponsAddRequest struct {
-	DiscountCoupons   repository.DiscountCoupons ;
+	DiscountCoupons e.DiscountCoupons ;
 }
 
 type discountCouponsResponse struct {
-	DiscountCoupons          repository.DiscountCoupons   `json:"discountCoupons,omitempty"`
-	Err               error  `json:"error,omitempty"`
+	DiscountCoupons e.DiscountCoupons `json:"discountCoupons,omitempty"`
+	Err             error             `json:"error,omitempty"`
 }
 
 type discountCouponsListResponse struct {
-	Product           []repository.DiscountCoupons `json:"products,omitempty"`
-	Err              error  `json:"error,omitempty"`
+	Product           []e.DiscountCoupons `json:"products,omitempty"`
+	Err              error                `json:"error,omitempty"`
 }
 
 type findCouponRequest struct {
@@ -25,10 +25,10 @@ type findCouponRequest struct {
 }
 
 type findCouponResponse struct {
-	DiscountCoupons           repository.DiscountCoupons   `json:"discountCoupons,omitempty"`
-	Valid                   bool  `json:"valid"`
-	Message                   string  `json:"message"`
-	Err                       error  `json:"error,omitempty"`
+	DiscountCoupons e.DiscountCoupons `json:"discountCoupons,omitempty"`
+	Valid           bool              `json:"valid"`
+	Message         string            `json:"message"`
+	Err             error             `json:"error,omitempty"`
 }
 
 

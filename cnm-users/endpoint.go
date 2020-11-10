@@ -2,7 +2,7 @@ package users
 
 import (
 	"context"
-	"shopping-cart/cnm-users/repository"
+	"shopping-cart/cnm-users/entities"
 
 	"github.com/go-kit/kit/endpoint"
 )
@@ -27,7 +27,7 @@ type userResponse struct {
 }
 
 type userListResponse struct {
-	UserDetails            [] repository.UserDetails `json:"users,omitempty"`
+	UserDetails            [] entities.UserDetails `json:"users,omitempty"`
 	Err              error  `json:"error,omitempty"`
 }
 
