@@ -8,55 +8,60 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import SideNavBar from "./sidebar/SideNavBar";
 import ProductList from "./products/components/product-home/ProductHome";
 import { Checkout } from "./checkout";
+import { SignIn } from "./sign-in";
 import theme from "./theme";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Provider } from "react-redux";
-import configureStore from "./configure-store";
-const store = configureStore();
+
+import { useSelector } from "react-redux";
 
 const sections = [
+  { title: "SignIn", url: "/login" },
   { title: "Home", url: "/home" },
   { title: "Orders", url: "/orders" },
   { title: "Paymemnts", url: "/paymemnts" },
 ];
 
-export default function Cart() {
+export default function App() {
+  const { auth = {}, isLoading } = useSelector((state) => state.commonStore);
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Container maxWidth="lg">
-          <Header title="Cart" sections={sections} />
-          <Router>
-            <Switch>
-              <Route path="/payment">
-                <div>Payment</div>
-              </Route>
-              <Route path="/checkout">
-                <main>
-                  <Checkout />
-                </main>
-              </Route>
-              <Route path="/">
-                <main>
-                  <Grid container>
-                    <Grid item xs={12} md={3} xl={3}>
-                      <SideNavBar />
-                    </Grid>
-                    <Grid item xs={12} md={9} xl={9}>
-                      <ProductList />
-                    </Grid>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container maxWidth="lg">
+        {auth.isLogin && <Header title="Cart" sections={sections} />}
+        <Router>
+          <Switch>
+            <Route path="/login">
+              <SignIn />
+            </Route>
+            <Route path="/payment">
+              <div>Payment</div>
+            </Route>
+            <Route path="/checkout">
+              <main>
+                <Checkout />
+              </main>
+            </Route>
+            <Route path="/">
+              <main>
+                <Grid container>
+                  <Grid item xs={12} md={3} xl={3}>
+                    <SideNavBar />
                   </Grid>
-                </main>
-              </Route>
-            </Switch>
-          </Router>
-        </Container>
+                  <Grid item xs={12} md={9} xl={9}>
+                    <ProductList />
+                  </Grid>
+                </Grid>
+              </main>
+            </Route>
+          </Switch>
+        </Router>
+      </Container>
+      {auth.isLogin && (
         <Footer
           title="Footer"
           description="Something here to give the footer a purpose!"
         />
-      </ThemeProvider>
-    </Provider>
+      )}
+    </ThemeProvider>
   );
 }

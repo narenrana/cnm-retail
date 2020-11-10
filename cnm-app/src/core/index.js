@@ -1,4 +1,19 @@
 import httpClient from "./services/HttpClient";
 import { updateCartPrice } from "./services/CartService";
+import {
+  storeAuth,
+  getToken,
+  refreshToken,
+  getAuthState,
+  clearToken,
+} from "./services/AuthService";
 
-export { httpClient, updateCartPrice };
+export {
+  httpClient,
+  updateCartPrice,
+  storeAuth,
+  getToken,
+  refreshToken,
+  getAuthState,
+  clearToken,
+};

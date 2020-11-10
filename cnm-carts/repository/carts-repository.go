@@ -66,11 +66,13 @@ func (*Cart) FirstOrCreate(userId int) (Cart, error){
 
 func (*Cart) Add(cart Cart) (Cart, error){
 	db,err :=core.GetDB()
-
+	var cartItemIds[] int ;
 	for _,v := range cart.CartItems {
 		if v.Quantity == nil {
 			v.Quantity = wrappers.IntWrapper(1);
 		}
+
+		cartItemIds = append(cartItemIds,v.ProductId )
 	}
 
 	if db.Model(&cart).Where("cart_id = ?", cart.CartId).Updates(&cart).RowsAffected == 0 {
@@ -82,6 +84,11 @@ func (*Cart) Add(cart Cart) (Cart, error){
 			}
 		}
 	}
+    //clean extra records
+    var deletedItems CartItems
+	db.Model(&deletedItems).Where("cart_items_id not in (?)", cartItemIds).Delete(&deletedItems)
+	//db.Delete("cart_items_id not in (?)",cartItemIds, "cart_id=?",cart.CartId)
+
 	if err != nil {
 		return cart, err;
 	}
@@ -97,6 +104,16 @@ func (*Cart) Delete(user Cart) (Cart, error){
 	db.Delete(&user);
 	return  user, err;
 }
+
+func (*Cart) DeleteByIds(user Cart) (Cart, error){
+	db,err :=core.GetDB()
+	if err != nil {
+		return user, err;
+	}
+	db.Where("cart_items_id=?")
+	return  user, err;
+}
+
 
 func CartsRepositoryInstance() Service {
 	return &Cart{}

@@ -1,23 +1,31 @@
-import * as _ from 'lodash';
-import store from '../../common/redux';
-//import { useDispatch, useSelector } from 'react-redux';
+import * as _ from "lodash";
+import { getToken, clearToken } from "../../core";
 
-async function   httpClient(URL,options)   {
-    //const dispatch = useDispatch();
-    //const { products = [], isLoading } = useSelector(state => state.commonStore);
+async function httpClient(URL, options) {
+  const token = getToken();
+  if (token) {
+    const commonOptions = {
+      headers: { Authorization: token },
+      mode: "cors",
+      withCredentials: true,
+    };
+    options.headers = { ...commonOptions.headers, ...options.headers };
+  }
+  return await fetch("http://localhost:8080" + URL, options)
+    .then(async (res) => {
+      console.log(res.status);
+      if (res.status === 401) {
+        clearToken();
+        window.location.href = "/login";
+      }
+      return await res.json();
+    })
+    .then(async (res) => {
+      return await res;
+    })
+    .catch((e) => {
+      return e;
+    });
+}
 
-    //store.commonStore.setLoading(true);
-    return await fetch( 'http://localhost:8080'+URL,options)
-      .then(async (res) => await res.json())
-      .then(async res => {
-        //store.commonStore.setLoading(false);
-        return await res;
-      })
-      .catch( e => {
-        //store.commonStore.setLoading(false);
-        return e;
-      });
-  };
-
-  export default httpClient;
- 
+export default httpClient;

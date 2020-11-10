@@ -37,6 +37,7 @@ export default makeStyles((theme) => ({
   },
   checkout: {
     width: "100%",
+    color: "#fff",
   },
   discount: {
     margin: "5px 0",

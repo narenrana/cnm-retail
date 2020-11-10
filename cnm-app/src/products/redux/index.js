@@ -76,7 +76,7 @@ const Reducer = createSlice({
     },
     updateCartItem: (state, { payload }) => {
       const cartItems = state.cart.cartItems.map((product) => {
-        if (payload.productId == product.productId) {
+        if (payload.productId === product.productId) {
           product.quantity = payload.quantity;
         }
         return product;
@@ -85,12 +85,12 @@ const Reducer = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getProducts.fulfilled, (state, { payload }) => {
+    builder.addCase(getProducts.fulfilled, (state, { payload = {} }) => {
       state.products = payload.products;
       state.isLoading = false;
     });
 
-    builder.addCase(getProducts.rejected, (state, action) => {
+    builder.addCase(getProducts.rejected, (state) => {
       state.isLoading = false;
     });
 
@@ -99,7 +99,7 @@ const Reducer = createSlice({
       state.isLoading = false;
     });
 
-    builder.addCase(updateCart.rejected, (state, action) => {
+    builder.addCase(updateCart.rejected, (state) => {
       state.isLoading = false;
     });
 
@@ -108,7 +108,7 @@ const Reducer = createSlice({
       state.isLoading = false;
     });
 
-    builder.addCase(getCart.rejected, (state, action) => {
+    builder.addCase(getCart.rejected, (state) => {
       state.isLoading = false;
     });
   },

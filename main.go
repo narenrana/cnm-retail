@@ -16,6 +16,7 @@ import (
 	carts "shopping-cart/cnm-carts"
 	"shopping-cart/cnm-carts/services"
 	core "shopping-cart/cnm-core"
+	"shopping-cart/cnm-core/utils"
 	coupons "shopping-cart/cnm-coupons"
 	offers "shopping-cart/cnm-offers"
 	orders "shopping-cart/cnm-orders"
@@ -247,16 +248,42 @@ func main() {
 func accessControl(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-		w.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST,PUT, HEAD,OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization")
 
 		if r.Method == "OPTIONS" {
 			return
 		}
 
+		if r.URL.RequestURI()=="/auth/v1/login" {
+			h.ServeHTTP(w, r)
+			return
+		}
+
+		header :=   r.Header
+		token:=header.Get("Authorization")
+
+		if token== "" {
+			w.WriteHeader(401)
+			w.Write([]byte("Empty Token"))
+			return
+
+		}
+		token, err:=utils.VerifyToken(token)
+
+		if err!=nil {
+			w.WriteHeader(401)
+			w.Write([]byte("Empty or Invalid token"));
+			return
+		}
+
+		//validateAuthHeaders(h);
 		h.ServeHTTP(w, r)
 	})
 }
+
+
 
 func envString(env, fallback string) string {
 	e := os.Getenv(env)

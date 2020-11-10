@@ -20,13 +20,14 @@ func CheckPasswordHash(password, hash string) bool {
 	return err == nil
 }
 
-func CreateToken( username string) (string , error) {
+func CreateToken( username string, userId *int) (string , error) {
 	// Declare the expiration time of the token
 	// here, we have kept it as 5 minutes
 	expirationTime := time.Now().Add(5 * time.Minute)
 	// Create the JWT claims, which includes the username and expiry time
 	claims := &models.Claims{
 		Username: username,
+		UserId: userId,
 		StandardClaims: jwt.StandardClaims{
 			// In JWT, the expiry time is expressed as unix milliseconds
 			ExpiresAt: expirationTime.Unix(),

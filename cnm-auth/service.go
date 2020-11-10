@@ -41,7 +41,7 @@ func (s *service) login(request authLoginRequest) (authLoginResponse, error){
 		return authLoginResponse{}, ErrInvalidPassword
 	}
 
-	token, error:=utils.CreateToken(usr.UserEmail);
+	token, error:=utils.CreateToken(usr.UserEmail, usr.UserId);
 
 	if error != nil {
 		return authLoginResponse{Err: err}, err
@@ -102,7 +102,7 @@ func (s *service)  signUp(request authSignUpRequest ) (authSignUpResponse, error
 		return authSignUpResponse{}, err
 	}
 
-	token, error:=utils.CreateToken(usr.UserEmail);
+	token, error:=utils.CreateToken(usr.UserEmail,usr.UserId);
 
 	if err!=nil   {
 		return authSignUpResponse{}, error

@@ -62,7 +62,7 @@ export default function CartDetails(props) {
           </IconButton>
         }
         title={`$${cart.totalAmount || 0}`}
-        subheader={`Total Discount - $${cart.totalDiscount || 0}`}
+        subheader={`Total Savings - $${cart.totalDiscount || 0}`}
       />
 
       <CardContent>
@@ -138,13 +138,17 @@ export default function CartDetails(props) {
           component="h2"
           className={classes.heading}
         ></Typography>
+        <Typography variant="h6" component="h2" className={classes.heading}>
+          Total Paybel - ${cart.totalAmount - cart.totalDiscount}
+        </Typography>
       </CardContent>
+
       <CardActions disableSpacing>
         <Button
           variant="contained"
           color="primary"
           className={classes.checkout}
-          startIcon={<ShoppingBasket />}
+          startIcon={<ShoppingBasket color="secondary" />}
         >
           checkout
         </Button>

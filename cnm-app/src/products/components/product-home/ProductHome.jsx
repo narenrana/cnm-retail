@@ -64,7 +64,7 @@ export default function ProductList() {
         Fruits
       </Typography>
       <Grid container spacing={4}>
-        {products.map((product, index) => (
+        {_.sortBy(products, ["productId"]).map((product, index) => (
           <Grid item xs={12} md={3} xl={3} key={"suggestion-key-" + index}>
             <Product
               product={product}

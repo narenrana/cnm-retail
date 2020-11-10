@@ -3,6 +3,9 @@ package core
 import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
+	"log"
+	"os"
 	"time"
 )
 
@@ -20,10 +23,19 @@ type Connection struct {
 var Conn= Connection{};
 
 func (s *Connection ) openConnection()  ( *gorm.DB, error ) {
+	newLogger := logger.New(
+		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
+		logger.Config{
+			SlowThreshold: time.Second,   // Slow SQL threshold
+			LogLevel:      logger.Info, // Log level
+			Colorful:      true,         // Disable color
+		},
+	)
 	db, err := gorm.Open(postgres.New(postgres.Config{
 		DSN: "host=0.0.0.0 user=postgres password=root@123 dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai",
 		PreferSimpleProtocol: true, // disables implicit prepared statement usage
-	}), &gorm.Config{})
+
+	}), &gorm.Config{Logger: newLogger,})
 
 	if err!=nil {
 		Conn.error=err;
