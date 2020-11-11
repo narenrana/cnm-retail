@@ -3,9 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Product } from "../../../products";
 import _ from "lodash";
-import { updateCartPrice, filterCartItem } from "../../../core";
+import {
+  updateCartPrice,
+  filterCartItem,
+  deleteCartItemPayload,
+} from "../../../core";
 import CartDetails from "../cart-details/CartDetails";
 import { useDispatch, useSelector } from "react-redux";
+import PlaceOrderModal from "../place-order/PlaceOrder";
 import {
   addCartItem,
   updateCart,
@@ -13,6 +18,7 @@ import {
   getProducts,
   deleteCartItem,
 } from "../../../products/redux";
+import { placeOrder } from "../../../orders/redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,6 +34,7 @@ export default function Checkout(props) {
     (state) => state.productsStore
   );
   const classes = useStyles();
+  const [displayModal, setDisplayModal] = React.useState(false);
 
   const { cartItems = [] } = cart;
   const cartItemsMap = {};
@@ -65,6 +72,22 @@ export default function Checkout(props) {
 
   const getCartProduct = (cartItem) => {
     return products.find((product) => product.productId === cartItem.productId);
+  };
+
+  const onPlaceOrder = async () => {
+    const data = await dispatch(placeOrder({ cartId: cart.cartId }));
+
+    console.log(
+      `${data.payload.paymentHost}${data.payload.paymentUrl}?req=${data.payload.token}`
+    );
+    setDisplayModal(true);
+    const updatedCart = deleteCartItemPayload(cart);
+    dispatch(deleteCartItem(updatedCart));
+
+    setTimeout(() => {
+      setDisplayModal(false);
+      window.location.href = `${data.payload.paymentHost}${data.payload.paymentUrl}?req=${data.payload.token}`;
+    }, 5000);
   };
 
   const addCouponToCart = (discountCoupon) => {
@@ -106,9 +129,14 @@ export default function Checkout(props) {
           </Grid>
         </Grid>
         <Grid item xs={6} md={6} xl={6}>
-          <CartDetails cart={cart} addCouponToCart={addCouponToCart} />
+          <CartDetails
+            cart={cart}
+            addCouponToCart={addCouponToCart}
+            onPlaceOrder={onPlaceOrder}
+          />
         </Grid>
       </Grid>
+      {displayModal && <PlaceOrderModal show={true} />}
     </div>
   );
 }

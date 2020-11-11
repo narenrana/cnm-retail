@@ -1,5 +1,9 @@
 import httpClient from "./services/HttpClient";
-import { updateCartPrice, filterCartItem } from "./services/CartService";
+import {
+  updateCartPrice,
+  filterCartItem,
+  deleteCartItemPayload,
+} from "./services/CartService";
 import {
   storeAuth,
   getToken,
@@ -17,4 +21,5 @@ export {
   getAuthState,
   clearToken,
   filterCartItem,
+  deleteCartItemPayload,
 };

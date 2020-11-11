@@ -45,6 +45,7 @@ require (
 	github.com/performancecopilot/speed v3.0.0+incompatible
 	github.com/pkg/errors v0.8.1
 	github.com/prometheus/client_golang v1.3.0
+	github.com/prometheus/common v0.7.0
 	github.com/rs/cors v1.7.0 // indirect
 	github.com/samuel/go-zookeeper v0.0.0-20190923202752-2cc03de413da
 	github.com/shopspring/decimal v1.2.0

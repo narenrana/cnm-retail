@@ -38,12 +38,12 @@ func MakeHandler(bs services.Service, logger kitlog.Logger) http.Handler {
 
 
 
-	UpdateCartItemsHandler := kithttp.NewServer(
-		makeAddToCartEndpoint(bs),
-		decodeAddToCartRequest,
-		encodeResponse,
-		opts...,
-	)
+	//UpdateCartItemsHandler := kithttp.NewServer(
+	//	makeAddToCartEndpoint(bs),
+	//	decodeAddToCartRequest,
+	//	encodeResponse,
+	//	opts...,
+	//)
 
 	deleteCartsItemHandler := kithttp.NewServer(
 		makeDeleteCartItemsEndpoint(bs),
@@ -57,9 +57,8 @@ func MakeHandler(bs services.Service, logger kitlog.Logger) http.Handler {
 	r.Handle("/carts/v1/add", addToCartHandler).Methods("POST")
 	r.Handle("/carts/v1/list", getCartHandler).Methods("GET")
 
-	//r.Handle("/carts/v1/items", AddCartItemsHandler).Methods("POST")
-	r.Handle("/carts/v1/items", UpdateCartItemsHandler).Methods("PUT")
-	r.Handle("/carts/v1/items", deleteCartsItemHandler).Methods("POST")
+	r.Handle("/carts/v1/items", deleteCartsItemHandler).Methods("DELETE")
+
 
 	return r
 }

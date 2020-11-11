@@ -176,7 +176,7 @@ CREATE TABLE cart_items
 
 
 --DROP TABLE orders CASCADE;
-CREATE TYPE order_status_type AS ENUM ('COMPLETED', 'CANCELED','PENDING', 'DISPATCHED');
+CREATE TYPE order_status_type AS ENUM ('COMPLETED', 'CANCELED','PENDING_DELIVERY', 'DISPATCHED');
 CREATE TABLE orders
 (
     order_id            BIGSERIAL,
@@ -199,8 +199,8 @@ CREATE TABLE orders_items
     product_id          BIGINT ,
     product_name        VARCHAR(250) NOT NULL ,
     product_price       NUMERIC(10,2),
-    discount_id         INTEGER,
     quantity            INTEGER,
+    baseCurrency        VARCHAR(10) NOT NULL default  'USD',
     date_create         DATE NOT NULL  default  CURRENT_DATE,
     date_updated        DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT orders_items_pkey PRIMARY KEY (order_items_id),

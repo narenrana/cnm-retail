@@ -16,7 +16,7 @@ import useStyles from "../style";
 import { loadCoupon } from "../../redux";
 
 export default function CartDetails(props) {
-  const { cart, addCouponToCart } = props;
+  const { cart, addCouponToCart, onPlaceOrder } = props;
   const { discountCoupons } = useSelector((state) => state.checkoutStore);
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -41,6 +41,10 @@ export default function CartDetails(props) {
 
   const isInValidCoupon = () => {
     return couponValue && !discountCoupons.valid;
+  };
+
+  const onPlaceOrderClick = () => {
+    onPlaceOrder();
   };
 
   return (
@@ -134,7 +138,7 @@ export default function CartDetails(props) {
           className={classes.heading}
         ></Typography>
         <Typography variant="h6" component="h2" className={classes.heading}>
-          Total Paybel - ${cart.totalAmount || 0 - cart.totalDiscount || 0}
+          Total Payable - ${cart.totalAmount || 0 - cart.totalDiscount || 0}
         </Typography>
       </CardContent>
 
@@ -144,8 +148,9 @@ export default function CartDetails(props) {
           color="primary"
           className={classes.checkout}
           startIcon={<ShoppingBasket color="secondary" />}
+          onClick={onPlaceOrderClick}
         >
-          checkout
+          Place Order
         </Button>
       </CardActions>
     </Card>

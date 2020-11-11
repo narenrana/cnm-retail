@@ -66,7 +66,7 @@ const deleteCartItem = createAsyncThunk(
   async (request, thunkAPI) => {
     console.log({ request });
     const options = {
-      method: "POST",
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },

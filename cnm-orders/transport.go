@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"shopping-cart/cnm-core/utils"
 
 	"github.com/gorilla/mux"
 
@@ -20,7 +21,7 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 		kithttp.ServerErrorEncoder(encodeError),
 	}
 
-	addToCartHandler := kithttp.NewServer(
+	processOrderHandler := kithttp.NewServer(
 		makeOrdersAddEndpoint(bs),
 		decodeAddOrderRequest,
 		encodeResponse,
@@ -36,7 +37,7 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 
 	r := mux.NewRouter()
 
-	r.Handle("/orders/v1/add", addToCartHandler).Methods("POST")
+	r.Handle("/orders/v1/placeOrder", processOrderHandler).Methods("POST")
 	r.Handle("/orders/v1/list", getCartHandler).Methods("GET")
 
 	return r
@@ -48,11 +49,12 @@ func decodeAddOrderRequest(_ context.Context, r *http.Request) (interface{}, err
 	var request addOrdersRequest
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
-
+	userId,err:=utils.GetUserId(r)
+	request.UserId=userId
 	if err := dec.Decode(&request); err != nil {
 		return nil, err
 	}
-	return request, nil
+	return request, err
 }
 
 func decodeGetOrdersRequest(_ context.Context, r *http.Request) (interface{}, error) {

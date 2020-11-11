@@ -1,9 +1,6 @@
 package constants
 
 
-//CREATE TYPE discount_types AS ENUM ('FLAT', 'PERCENTILE');
-//CREATE TYPE offers_type AS ENUM ('COMBO_OFFER', 'INDIVIDUAL_ITEM_OFFER','CHRISTMAS_OFFER', 'NEW_YEAR_OFFER','BLACK_FRIDAY'); --All type of discount
-
 const (
         COMBO_OFFER  ="COMBO_OFFER"
         INDIVIDUAL_ITEM_OFFER = "INDIVIDUAL_ITEM_OFFER"

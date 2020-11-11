@@ -25,7 +25,7 @@ func (*repository) List() ([] *e.Orders, error){
 	}
 	db.Find(&found);
 	for _,v := range found {
-		var items [] *e.OrdersItems;
+		var items [] e.OrdersItems;
 		db.Model(&items).Where("cart_id = ?", v.CartId).Find(&items)
 		v.OrdersItems=  items
 	}
@@ -42,23 +42,23 @@ func (*repository) FindBy(u e.Orders) (e.Orders, error){
 	return  found, err;
 }
 
-func (*repository) Add(cart e.Orders) (e.Orders, error){
+func (*repository) Add(order e.Orders) (e.Orders, error){
 	db,err :=core.GetDB()
 
-	if db.Model(&cart).Where("cart_id = ?", cart.CartId).Updates(&cart).RowsAffected == 0 {
-		db.Create(&cart)
+	if db.Model(&order).Where("order_id = ?", order.CartId).Updates(&order).RowsAffected == 0 {
+		db.Create(&order)
 	}else {
-		for _,v := range cart.OrdersItems {
-			if db.Model(&v).Where("cart_id = ?", v.OrderId).Updates(&v).RowsAffected == 0 {
+		for _,v := range order.OrdersItems {
+			if db.Model(&v).Where("order_items_id = ?", v.OrderId).Updates(&v).RowsAffected == 0 {
 				db.Create(&v)
 			}
 		}
 	}
 	if err != nil {
-		return cart, err;
+		return order, err;
 	}
 
-	return  cart, err;
+	return order, err;
 }
 
 func (*repository) Delete(user e.Orders) (e.Orders, error){
@@ -70,7 +70,7 @@ func (*repository) Delete(user e.Orders) (e.Orders, error){
 	return  user, err;
 }
 
-func CartsRepositoryInstance() Repository {
+func OrderRepositoryInstance() Repository {
 	return &repository{}
 }
 

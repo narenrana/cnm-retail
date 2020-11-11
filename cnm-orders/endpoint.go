@@ -7,13 +7,19 @@ import (
 )
 
 type  addOrdersRequest struct {
-	Orders e.Orders;
+	CartId        int         `json:"cartId,omitempty"`
+	UserId        *int            `json:"userId,omitempty"`
 }
 
 type addOrdersResponse struct {
-	Orders            e.Orders   `json:"product,omitempty"`
+	Orders            e.Orders   `json:"orders,omitempty"`
 	Err               error  `json:"error,omitempty"`
+	PaymentUrl         string  `json:"paymentUrl,omitempty"`
+	PaymentHost        string  `json:"paymentHost,omitempty"`
+	Token            string  `json:"token,omitempty"`
 }
+
+
 
 type getOrderListResponse struct {
 	Orders           [] *e.Orders `json:"cart,omitempty"`

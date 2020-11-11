@@ -30,4 +30,20 @@ const filterCartItem = (cart, product) => {
   return modifiedCart;
 };
 
-export { updateCartPrice, filterCartItem };
+const deleteCartItemPayload = (cart, product) => {
+  const { cartId, userId } = cart;
+  const cartItemIds = [];
+  cart.cartItems.forEach((item) => {
+    cartItemIds.push(item.cartItemsId);
+  });
+
+  const modifiedCart = {
+    cartId,
+    userId,
+    cartItemIds,
+  };
+
+  return modifiedCart;
+};
+
+export { updateCartPrice, filterCartItem, deleteCartItemPayload };
