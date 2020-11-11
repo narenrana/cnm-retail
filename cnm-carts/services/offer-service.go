@@ -42,6 +42,7 @@ func (s *offersService) getOffers(items [] *ce.CartItems) ([] *oe.Offers,float64
 		fmt.Print(offer)
 		if offer.OffersType ==constants.COMBO_OFFER  {
 			comboOfferDiscount,discount, err:=s.comboOfferDiscount(items,offer)
+			offer.Discount=discount
 			totalDiscount=totalDiscount+discount;
 			offersFound = append(offersFound, comboOfferDiscount);
 			error=err
@@ -50,6 +51,7 @@ func (s *offersService) getOffers(items [] *ce.CartItems) ([] *oe.Offers,float64
 
 		if offer.OffersType ==constants.INDIVIDUAL_ITEM_OFFER {
 			comboOfferDiscount,discount, err:=s.individualOfferDiscount(items,offer)
+			offer.Discount=discount
 			totalDiscount = totalDiscount+discount;
 			error=err
 			offersFound = append(offersFound, comboOfferDiscount);

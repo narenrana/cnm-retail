@@ -54,10 +54,10 @@ func MakeHandler(bs services.Service, logger kitlog.Logger) http.Handler {
 
 	r := mux.NewRouter()
 
-	r.Handle("/carts/v1/add", addToCartHandler).Methods("POST")
-	r.Handle("/carts/v1/list", getCartHandler).Methods("GET")
+	r.Handle("/api/carts/v1/add", addToCartHandler).Methods("POST")
+	r.Handle("/api/carts/v1/list", getCartHandler).Methods("GET")
 
-	r.Handle("/carts/v1/items", deleteCartsItemHandler).Methods("DELETE")
+	r.Handle("/api/carts/v1/items", deleteCartsItemHandler).Methods("DELETE")
 
 
 	return r

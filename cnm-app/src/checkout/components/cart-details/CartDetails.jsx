@@ -65,12 +65,22 @@ export default function CartDetails(props) {
         </Typography>
         {cart.offersDiscount &&
           (cart.appliedOffers || []).map((offers) => (
-            <Typography variant="body2" color="textSecondary" component="p">
-              {get(offers, "description")}
-            </Typography>
+            <>
+              <Typography variant="body2" color="textSecondary" component="p">
+                {get(offers, "description")}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="primary"
+                component="p"
+                className={classes.discount}
+              >
+                Discount : ${offers.discount || 0}
+              </Typography>
+            </>
           ))}
 
-        {cart.offersDiscount && (
+        {/* {cart.offersDiscount && (
           <Typography
             variant="body2"
             color="primary"
@@ -79,7 +89,7 @@ export default function CartDetails(props) {
           >
             Offers Amount : ${cart.offersDiscount || 0}
           </Typography>
-        )}
+        )} */}
         <Typography variant="h6" component="h2" className={classes.heading}>
           Coupon Applied {cart.discountCoupon && ` - ${cart.discountCoupon}`}
         </Typography>
@@ -95,7 +105,7 @@ export default function CartDetails(props) {
             component="p"
             className={classes.discount}
           >
-            Coupon Discount : ${cart.couponDiscount}
+            Discount : ${cart.couponDiscount}
           </Typography>
         )}
 

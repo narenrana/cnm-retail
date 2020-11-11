@@ -36,8 +36,8 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 
 	r := mux.NewRouter()
 
-	r.Handle("/products/v1/add", addProductHandler).Methods("POST")
-	r.Handle("/products/v1/list", productListHandler).Methods("GET")
+	r.Handle("/api/products/v1/add", addProductHandler).Methods("POST")
+	r.Handle("/api/products/v1/list", productListHandler).Methods("GET")
 
 	return r
 }

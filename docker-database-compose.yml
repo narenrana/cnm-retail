@@ -4,7 +4,6 @@ services:
     container_name: postgres
     image: postgres
     environment:
-       DATABASE_HOST: 0.0.0.0
        POSTGRES_USER: postgres
        POSTGRES_PASSWORD: root@123
        POSTGRES_DB: postgres
@@ -40,15 +39,53 @@ services:
 
   flyway:
     image: flyway/flyway
-    command: -url=jdbc:postgresql://postgres:5432/postgres  -schemas=root -user=postgres -password=root@123 -connectRetries=60 migrate
+    command: -url=jdbc:postgresql://postgres:5432/postgres -user=postgres -password=root@123 -connectRetries=60 migrate
     volumes:
-      - .:/flyway/sql
+      - ./migration:/flyway/sql
+    networks:
+      - postgres
+    restart: on-failure
+    depends_on:
+      postgres:
+        condition: service_healthy
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+        - "8080:8080"
+    restart: "on-failure"
+    depends_on:
+      postgres:
+        condition: service_healthy
+  cnm_font_end:
+    build:
+      context: .
+      dockerfile: ./cnm-app/Dockerfile
+    volumes:
+      - '.:/cnm-app'
+    ports:
+      - "3000:3000"
+    restart: "on-failure"
     networks:
       - postgres
     depends_on:
       postgres:
         condition: service_healthy
-
+  cnm_payment:
+    build:
+      context: .
+      dockerfile: ./payment-app/Dockerfile
+    volumes:
+      - '.:/cnm-app'
+    ports:
+      - "3001:3000"
+    restart: "on-failure"
+    networks:
+      - postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
 networks:
   postgres:
     driver: bridge

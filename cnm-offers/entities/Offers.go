@@ -15,4 +15,5 @@ type Offers struct {
 	DateCreated        time.Time     `json:"dateCreated,omitempty"`
 	DateUpdated        time.Time    `json:"dateUpdated,omitempty"`
 	OffersRules        [] *OffersRules `gorm:"foreignKey:OffersId;references:OffersId" json:"offersRules,omitempty"`
+	offerTotalAmount   *float64          `gorm:"-" json:"discount,omitempty"`
 }

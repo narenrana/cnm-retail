@@ -57,7 +57,7 @@ CREATE TABLE offers
     discount            NUMERIC NOT NULL,
     discount_mode       discount_types NOT NULL,
     offers_type         offers_type NOT NULL  ,
-    active              boolean NOT NULL,
+    active              boolean NOT NULL default true,
     expire_date          DATE NOT NULL,
     date_created         DATE NOT NULL  default  CURRENT_DATE,
     date_updated        DATE NOT NULL  default  CURRENT_DATE,
@@ -84,7 +84,7 @@ CREATE TABLE product_offers
 (
     product_offers_id    BIGSERIAL,
     offers_id            BIGINT,
-    product_id           VARCHAR(250) NOT NULL,
+    product_id           BIGINT NOT NULL,
     date_create          DATE NOT NULL  default  CURRENT_DATE,
     date_updated         DATE NOT NULL  default  CURRENT_DATE,
     CONSTRAINT           product_offers_pkey            PRIMARY KEY (product_offers_id),
