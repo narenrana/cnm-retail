@@ -11,7 +11,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { get } from "lodash";
+import { get, isEmpty } from "lodash";
 import useStyles from "../style";
 import { loadCoupon } from "../../redux";
 
@@ -40,7 +40,7 @@ export default function CartDetails(props) {
     couponValue && !discountCoupons.valid && "Invalid Coupon";
 
   const isInValidCoupon = () => {
-    return couponValue && !discountCoupons.valid;
+    return !isEmpty(couponValue) && !discountCoupons.valid;
   };
 
   const onPlaceOrderClick = () => {
@@ -66,7 +66,7 @@ export default function CartDetails(props) {
         {cart.offersDiscount &&
           (cart.appliedOffers || []).map((offers) => (
             <>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body2" color="textSecondary" component="div">
                 {get(offers, "description")}
               </Typography>
               <Typography
@@ -80,16 +80,6 @@ export default function CartDetails(props) {
             </>
           ))}
 
-        {/* {cart.offersDiscount && (
-          <Typography
-            variant="body2"
-            color="primary"
-            component="p"
-            className={classes.discount}
-          >
-            Offers Amount : ${cart.offersDiscount || 0}
-          </Typography>
-        )} */}
         <Typography variant="h6" component="h2" className={classes.heading}>
           Coupon Applied {cart.discountCoupon && ` - ${cart.discountCoupon}`}
         </Typography>
@@ -109,7 +99,7 @@ export default function CartDetails(props) {
           </Typography>
         )}
 
-        <Typography variant="subtitle2" color="textSecondary" component="p">
+        <Typography variant="subtitle2" color="textSecondary" component="div">
           <TextField
             id="outlined-search"
             label="Enter Coupon"
@@ -138,7 +128,7 @@ export default function CartDetails(props) {
           variant="outlined"
           className={classes.margin}
           onClick={onCouponRemove}
-          disabled={discountCoupons.valid && cart.discountCoupon}
+          disabled={discountCoupons.valid && !isEmpty(cart.discountCoupon)}
         >
           Clear Coupon
         </Button>

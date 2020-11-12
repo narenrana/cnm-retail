@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     width: "100%",
     justifyContent: "center",
+    background: "#4caf50",
   },
   margin: {
     margin: theme.spacing(1),
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     maxWidth: 500,
     margin: "100px",
-    background: "rgb(76 175 80 / 5%)",
+    background: "#fff",
     padding: "100px",
   },
 }));

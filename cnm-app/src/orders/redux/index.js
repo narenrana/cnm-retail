@@ -4,7 +4,7 @@ import { httpClient } from "../../core";
 
 const initialOtpState = {
   isLoading: false,
-  coupons: [],
+  orders: [],
 };
 
 /**

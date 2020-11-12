@@ -56,7 +56,7 @@ services:
     volumes:
       - '.:/cnm-app'
     ports:
-      - "3000:3000"
+      - "3500:3000"
     restart: on-failure
     networks:
       - postgres
@@ -71,7 +71,7 @@ services:
     volumes:
       - '.:/cnm-app'
     ports:
-      - "3001:3000"
+      - "3501:3000"
     restart: on-failure
     networks:
       - postgres
@@ -84,7 +84,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8580:8080"
     restart: on-failure
     networks:
       - postgres

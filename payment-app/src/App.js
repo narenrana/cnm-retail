@@ -5,7 +5,7 @@ function App() {
   const onClick = () => {
     const urlParams = new URLSearchParams(window.location.search);
     const params = urlParams.get("req");
-    window.location.href = "http://localhost:3000/orders?req=" + params;
+    window.location.href = "http://localhost:3500/orders?req=" + params;
   };
 
   return (

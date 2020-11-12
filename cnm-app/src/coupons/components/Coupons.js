@@ -10,6 +10,7 @@ import clsx from "clsx";
 import Button from "@material-ui/core/Button";
 import { withRouter } from "react-router-dom";
 import { generateCoupons, getCoupons } from "../redux";
+import { get, isEmpty } from "lodash";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     width: "100%",
     justifyContent: "center",
+    background: "#4caf50",
   },
   margin: {
     margin: theme.spacing(1),
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     maxWidth: 500,
     margin: "100px",
-    background: "rgb(76 175 80 / 5%)",
+    background: "#fff",
     padding: "100px",
   },
 }));
@@ -39,8 +41,8 @@ export default withRouter(function GenerateCoupon(props) {
     (state) => state.couponsStore
   );
   const [values, setValues] = React.useState({
-    expireTimeInSeconds: 10,
-    quantity: 3,
+    expireTimeInSeconds: "",
+    quantity: "",
   });
 
   const handleChange = (prop) => (event) => {
@@ -48,7 +50,14 @@ export default withRouter(function GenerateCoupon(props) {
   };
 
   const onCouponGenerate = () => {
-    dispatch(generateCoupons({ values }));
+    const { expireTimeInSeconds, quantity } = values;
+    console.log({ values });
+    dispatch(
+      generateCoupons({
+        expireTimeInSeconds: parseInt(expireTimeInSeconds),
+        quantity: parseInt(quantity),
+      })
+    );
   };
 
   useEffect(() => {
@@ -73,7 +82,7 @@ export default withRouter(function GenerateCoupon(props) {
                 id="standard-adornment-expireTimeInSeconds"
                 type={"text"}
                 value={values.expireTimeInSeconds}
-                onChange={handleChange("Expire Time in Seconds")}
+                onChange={handleChange("expireTimeInSeconds")}
               />
             </FormControl>
 
@@ -87,8 +96,8 @@ export default withRouter(function GenerateCoupon(props) {
               <Input
                 id="standard-adornment-quantity"
                 type={"text"}
-                value={values.quantity || 5}
-                onChange={handleChange("")}
+                value={values.quantity}
+                onChange={handleChange("quantity")}
               />
             </FormControl>
 
@@ -109,8 +118,11 @@ export default withRouter(function GenerateCoupon(props) {
               className={clsx(classes.margin, classes.textField)}
               fullWidth
             >
-              {discountCoupons.map((coupon) => (
-                <Typography className={classes.countTypography}>
+              {discountCoupons.map((coupon, i) => (
+                <Typography
+                  className={classes.countTypography}
+                  key={`coupon-keys-${i}`}
+                >
                   {`${coupon.description}  - ${coupon.discountCoupon} - Expiry : ${coupon.expiryDate}`}
                 </Typography>
               ))}

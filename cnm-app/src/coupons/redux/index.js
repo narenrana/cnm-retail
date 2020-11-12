@@ -31,7 +31,7 @@ const generateCoupons = createAsyncThunk(
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ ...request.values }),
+      body: JSON.stringify({ ...request }),
     };
     let response = (await httpClient("/coupons/v1/generate", options)) || [];
     response = _.isEmpty(response) ? initialOtpState.defaultTabList : response;

@@ -39,7 +39,7 @@ func (s *service) add(request addOrdersRequest) (addOrdersResponse, error) {
 	//clear order
 	return  addOrdersResponse{
 		Orders: orderAdded,
-		PaymentHost:"http://localhost:3001",
+		PaymentHost:"http://localhost:3501",
 		PaymentUrl: "/payment",
 		Token:token,
 	}, err
