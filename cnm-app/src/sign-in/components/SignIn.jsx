@@ -40,7 +40,7 @@ export default withRouter(function Login(props) {
   const classes = useStyles();
   let history = useHistory();
   const dispatch = useDispatch();
-  const { auth } = useSelector((state) => state.commonStore);
+  const { auth, error } = useSelector((state) => state.commonStore);
   const [values, setValues] = React.useState({
     email: "",
     password: "",
@@ -63,6 +63,7 @@ export default withRouter(function Login(props) {
   const onSignIn = () => {
     const { email, password, rememberMe = true } = values;
     dispatch(login({ email, password, rememberMe }));
+    //error(pin):"Invalid Password"
     //dispatch(loadCoupon("ywuqywuq"));
   };
 
@@ -122,7 +123,11 @@ export default withRouter(function Login(props) {
                 }
               />
             </FormControl>
-
+            {error && (
+              <InputLabel htmlFor="standard-adornment-invalid-usr-pass">
+                Invalid user/password.
+              </InputLabel>
+            )}
             <FormControl
               className={clsx(classes.margin, classes.textField)}
               fullWidth

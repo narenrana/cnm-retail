@@ -26,8 +26,8 @@ export default function OrdersList() {
     }
   }, [dispatch, isLoading]);
 
-  const getOrderData = (order) => {
-    return JSON.parse(order.orderData) || { cartItems: [] };
+  const getOrderData = (order={}) => {
+    return order.orderData?JSON.parse(order.orderData ): { cartItems: [] };
   };
 
   return (
@@ -39,7 +39,7 @@ export default function OrdersList() {
         <Card className={classes.root} spacing={4}>
           <CardHeader title={`$${getOrderData(order).totalAmount || 0}`} />
           <Grid container spacing={4}>
-            {(getOrderData(order) || {}).cartItems.map((cartItem, index) => (
+            {(getOrderData(order) || {cartItems: []}).cartItems.map((cartItem, index) => (
               <Grid
                 item
                 xs={6}
