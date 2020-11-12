@@ -26,6 +26,21 @@ const login = createAsyncThunk("auth/login", async (request, thunkAPI) => {
   return response;
 });
 
+const signup = createAsyncThunk("auth/signup", async (request, thunkAPI) => {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(request),
+  };
+  let response = (await httpClient("/auth/v1/signup", options)) || [];
+
+  response = _.isEmpty(response) ? initialOtpState.auth : response;
+  storeAuth({ ...response, isLogin: true });
+  return response;
+});
+
 const logout = createAsyncThunk("auth/logout", async (request, thunkAPI) => {
   storeAuth({ isLogin: false });
   const options = {
@@ -87,6 +102,7 @@ const Reducer = createSlice({
     builder.addCase(logout.rejected, (state, action) => {
       state.isLoading = false;
     });
+
     builder.addCase(refreshToken.fulfilled, (state, { payload }) => {
       state.auth = { ...payload };
       state.isLoading = false;
@@ -95,11 +111,26 @@ const Reducer = createSlice({
     builder.addCase(refreshToken.rejected, (state, action) => {
       state.isLoading = false;
     });
+
+    builder.addCase(signup.fulfilled, (state, { payload }) => {
+      if (payload.error) {
+        state.error = payload.error;
+        state.auth.isLogin = false;
+        return;
+      } else {
+        state.auth = { ...payload, isLogin: true };
+        state.isLoading = false;
+      }
+    });
+
+    builder.addCase(signup.rejected, (state, action) => {
+      state.isLoading = false;
+    });
   },
 });
 
 /*Actions export*/
 const {} = Reducer.actions;
-export { login };
+export { login, signup };
 /*Reducer export*/
 export default Reducer.reducer;

@@ -8,11 +8,14 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
-#COPY ./cnm-app/package.json ./
-COPY ./cnm-app ./
+COPY ./cnm-app/package.json ./
+COPY ./cnm-app/public ./public
+COPY ./cnm-app/src ./src
+COPY ./cnm-app/server.js ./
 
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+RUN ls ./
+
+RUN npm install
 RUN npm run build
 
 RUN ls ./

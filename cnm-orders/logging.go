@@ -24,9 +24,9 @@ func (s *loggingService) add(request addOrdersRequest) (addOrdersResponse, error
 }
 
 
-func (s *loggingService) list() ( getOrderListResponse, error) {
+func (s *loggingService) list(request GetOrderRequest) ( getOrderListResponse, error) {
 	defer func(begin time.Time) {
 		s.logger.Log("method", "track", "tracking_id", "took", time.Since(begin))
 	}(time.Now())
-	return s.Service.get()
+	return s.Service.get(request)
 }

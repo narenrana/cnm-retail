@@ -1,10 +1,9 @@
 package main
 
 import (
-	"context"
+
 	"flag"
 	"fmt"
-	"github.com/go-kit/kit/examples/shipping/routing"
 	"github.com/go-kit/kit/log"
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
@@ -34,12 +33,9 @@ const (
 func main() {
 	var (
 		addr  = envString("PORT", defaultPort)
-		rsurl = envString("ROUTINGSERVICE_URL", defaultRoutingServiceURL)
 
 		httpAddr          = flag.String("http.addr", ":"+addr, "HTTP listen address")
-		routingServiceURL = flag.String("service.routing", rsurl, "routing service URL")
-
-		ctx = context.Background()
+	 
 	)
 
 	flag.Parse()
@@ -52,8 +48,6 @@ func main() {
 
 	fieldKeys := []string{"method"}
 
-	var rs routing.Service
-	rs = routing.NewProxyingMiddleware(ctx, *routingServiceURL)(rs)
 
 	var authService auth.Service
 	authService=auth.NewService()

@@ -9,27 +9,27 @@ import SideNavBar from "./sidebar/SideNavBar";
 import ProductList from "./products/components/product-home/ProductHome";
 import { Checkout } from "./checkout";
 import { SignIn } from "./sign-in";
+import { SignUp } from "./sign-up";
+import { Orders } from "./orders";
 import theme from "./theme";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-  useHistory,
 } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 
 const sections = [
   { title: "SignIn", url: "/login" },
+  { title: "SignUp", url: "/signup" },
   { title: "Home", url: "/home" },
   { title: "Orders", url: "/orders" },
   { title: "Paymemnts", url: "/paymemnts" },
 ];
 
 export default function App() {
-  let historyq = useHistory();
-  console.log({ historyq });
   const { auth = {} } = useSelector((state) => state.commonStore);
   return (
     <ThemeProvider theme={theme}>
@@ -42,8 +42,14 @@ export default function App() {
             <Route path="/login">
               <SignIn />
             </Route>
+            <Route path="/signup">
+              <SignUp />
+            </Route>
             <PrivateRoute path="/payment">
               <div>Payment</div>
+            </PrivateRoute>
+            <PrivateRoute path="/orders">
+              <Orders />
             </PrivateRoute>
             <PrivateRoute path="/checkout">
               <main>

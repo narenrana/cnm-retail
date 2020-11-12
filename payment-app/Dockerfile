@@ -9,15 +9,20 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
 COPY ./payment-app/package.json ./
- 
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+COPY ./payment-app/public ./public
+COPY ./payment-app/src ./src
+COPY ./payment-app/server.js ./
+
+RUN ls ./
+
+RUN npm install
+RUN npm run build
 
 RUN ls ./
 # add app
-COPY ./payment-app ./
+
 RUN ls
 RUN pwd
 
 # start app
-CMD ["npm", "start"]
+CMD ["node", "server.js"]

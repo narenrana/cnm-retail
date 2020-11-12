@@ -6,7 +6,7 @@ require (
 	github.com/VividCortex/gohistogram v1.0.0 // indirect
 	github.com/afex/hystrix-go v0.0.0-20180502004556-fa1af6a1f4f5 // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
-	github.com/go-kit/kit v0.9.0
+	github.com/go-kit/kit v0.10.0
 	github.com/go-logfmt/logfmt v0.5.0 // indirect
 	github.com/gorilla/mux v1.7.3
 	github.com/jackc/pgtype v1.5.0

@@ -35,7 +35,7 @@ INSERT INTO  PRODUCTS(product_id, product_name, product_price, base_currency, pr
 
 
 --Add discount coupons
-INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (1, '30% Discount on Oranges', 'DIS237890WR',30.00,'PERCENTILE','2020-01-01', true);
+INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (1, '30% Discount on Oranges', 'DIS237890WR',30.00,'PERCENTILE','2020-12-01', true);
 INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (2, 'Discount Coupons', 'DIS237891WR',5.00,'PERCENTILE','2021-01-01', true);
 INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (3, 'Discount Coupons', 'DIS237892WR',4.00,'PERCENTILE','2021-11-11', true);
 INSERT INTO  discount_coupons(discount_coupons_id, description, discount_coupon, discount,discount_mode, expiry_date, active) VALUES (4, 'Discount Coupons', 'DIS237893WR',3.00,'PERCENTILE','2021-12-30', true);

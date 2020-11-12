@@ -29,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   container: {
     display: "flex",
     maxWidth: 500,
+    margin: "100px",
+    background: "rgb(76 175 80 / 5%)",
+    padding: "100px",
   },
 }));
 
@@ -60,6 +63,10 @@ export default withRouter(function Login(props) {
     const { email, password, rememberMe = true } = values;
     dispatch(login({ email, password, rememberMe }));
     //dispatch(loadCoupon("ywuqywuq"));
+  };
+
+  const onSignUpClick = () => {
+    history.push("/signup");
   };
 
   useEffect(() => {
@@ -114,17 +121,31 @@ export default withRouter(function Login(props) {
                 }
               />
             </FormControl>
+
             <FormControl
               className={clsx(classes.margin, classes.textField)}
               fullWidth
             >
               <Button
-                variant="contained"
+                variant="outlined"
                 color="primary"
                 className={classes.checkout}
                 onClick={onSignIn}
               >
                 Sign In
+              </Button>
+            </FormControl>
+            <FormControl
+              className={clsx(classes.margin, classes.textField)}
+              fullWidth
+            >
+              <Button
+                variant="outlined"
+                color="primary"
+                className={classes.checkout}
+                onClick={onSignUpClick}
+              >
+                Sign Up
               </Button>
             </FormControl>
           </Grid>

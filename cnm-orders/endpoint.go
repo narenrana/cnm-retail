@@ -19,10 +19,13 @@ type addOrdersResponse struct {
 	Token            string  `json:"token,omitempty"`
 }
 
+type  GetOrderRequest struct {
+	UserId        *int            `json:"userId,omitempty"`
+}
 
 
 type getOrderListResponse struct {
-	Orders           [] *e.Orders `json:"cart,omitempty"`
+	Orders           [] *e.Orders `json:"orders,omitempty"`
 	Err            error  `json:"error,omitempty"`
 }
 
@@ -37,7 +40,8 @@ func makeOrdersAddEndpoint(s Service) endpoint.Endpoint {
 
 func makeGetOrdersEndpoint(s Service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		response, err := s.get()
+		req := request.(GetOrderRequest)
+		response, err := s.get(req)
 		return response, err
 	}
 }

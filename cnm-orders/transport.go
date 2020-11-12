@@ -28,7 +28,7 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 		opts...,
 	)
 
-	getCartHandler := kithttp.NewServer(
+	getOrderHandler := kithttp.NewServer(
 		makeGetOrdersEndpoint(bs),
 		decodeGetOrdersRequest,
 		encodeResponse,
@@ -38,7 +38,7 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 	r := mux.NewRouter()
 
 	r.Handle("/api/orders/v1/placeOrder", processOrderHandler).Methods("POST")
-	r.Handle("/api/orders/v1/list", getCartHandler).Methods("GET")
+	r.Handle("/api/orders/v1/list", getOrderHandler).Methods("GET")
 
 	return r
 }
@@ -58,9 +58,10 @@ func decodeAddOrderRequest(_ context.Context, r *http.Request) (interface{}, err
 }
 
 func decodeGetOrdersRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	//var request userRequest
-	//value := r.FormValue("token")
-	return nil, nil
+	var request GetOrderRequest
+	userId, err := utils.GetUserId(r)
+	request.UserId = userId
+	return request, err
 }
 
 

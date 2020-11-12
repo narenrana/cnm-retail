@@ -30,11 +30,11 @@ func (s *instrumentingService) add(request addOrdersRequest) (addOrdersResponse,
 	return s.Service.add(request)
 }
 
-func (s *instrumentingService) list() (getOrderListResponse, error) {
+func (s *instrumentingService) list(req GetOrderRequest) (getOrderListResponse, error) {
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	return s.Service.get()
+	return s.Service.get(req)
 }

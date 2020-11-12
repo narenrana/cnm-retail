@@ -1,25 +1,26 @@
-# pull official base image
-FROM node:13.12.0-alpine
+FROM golang:1.13
 
-# set working directory
+RUN mkdir -p /app
+
 WORKDIR /app
 
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+#ADD . /app
 
-# install app dependencies
-#COPY ./cnm-app/package.json ./
-COPY ./cnm-app ./
+COPY ./cnm-auth  ./cnm-auth
+COPY ./cnm-carts ./cnm-carts
+COPY ./cnm-core ./cnm-core
+COPY ./cnm-coupons ./cnm-coupons
+COPY ./cnm-offers ./cnm-offers
+COPY ./cnm-orders ./cnm-orders
+COPY ./cnm-payments ./cnm-payments
+COPY ./cnm-products ./cnm-products
+COPY ./cnm-users ./cnm-users
+COPY ./config ./config
+COPY ./migration ./migration
+COPY ./go.mod ./
+COPY ./main.go ./
 
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
-RUN npm run build
+RUN go install
+RUN go build ./main.go
 
-RUN ls ./
-# add app
-
-RUN ls
-RUN pwd
-
-# start app
-CMD ["node", "server.js"]
+CMD ["./main"]

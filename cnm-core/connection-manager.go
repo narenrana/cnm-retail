@@ -1,6 +1,7 @@
 package core
 
 import (
+	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -23,19 +24,8 @@ type Connection struct {
 var Conn= Connection{};
 
 func (s *Connection ) openConnection()  ( *gorm.DB, error ) {
-	newLogger := logger.New(
-		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
-		logger.Config{
-			SlowThreshold: time.Second,   // Slow SQL threshold
-			LogLevel:      logger.Info, // Log level
-			Colorful:      true,         // Disable color
-		},
-	)
-	db, err := gorm.Open(postgres.New(postgres.Config{
-		DSN: "host=0.0.0.0 user=postgres password=root@123 dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai",
-		PreferSimpleProtocol: true, // disables implicit prepared statement usage
-
-	}), &gorm.Config{Logger: newLogger,})
+	dataSource:="host=postgres user=postgres password=root@123 dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	db, err := s.InitDB(dataSource)
 
 	if err!=nil {
 		Conn.error=err;
@@ -52,6 +42,38 @@ func (s *Connection ) openConnection()  ( *gorm.DB, error ) {
 
 	// SetConnMaxLifetime sets the maximum amount of time a connection may be reused.
 	sqlDB.SetConnMaxLifetime(time.Hour)
+
+	return db, err
+}
+
+func (s *Connection ) InitDB(dataSource string) ( *gorm.DB, error ){
+	newLogger := logger.New(
+		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
+		logger.Config{
+			SlowThreshold: time.Second,   // Slow SQL threshold
+			LogLevel:      logger.Info, // Log level
+			Colorful:      true,         // Disable color
+		},
+	)
+	var err error
+	fmt.Println("Initializing database connection . . .")
+   var db *gorm.DB
+	for i := 0; i < 60; i++ {
+		db, err = gorm.Open(postgres.New(postgres.Config{
+			DSN: dataSource,
+			PreferSimpleProtocol: true, // disables implicit prepared statement usage
+
+		}), &gorm.Config{Logger: newLogger,})
+
+		if err != nil {
+			fmt.Printf("Unable to Open DB: %s... Retrying\n", err.Error())
+			time.Sleep(time.Second * 2)
+		}  else {
+			err = nil
+			break
+		}
+
+	}
 
 	return db, err
 }
