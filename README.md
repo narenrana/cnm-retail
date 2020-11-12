@@ -4,7 +4,7 @@
 
  This is a sample shopping cart assignment 
  
-###Server Side
+##Server Side
   - Golang 
   - Gokit - Microservice friendly toolkit  
   - Goram -  ORM 
@@ -15,20 +15,20 @@
   - Prome
   - Microservice friendly structure 
 
-###Client Side -
+##Client Side -
   - React
   - Redux
   - Material UI
 
 ###Project Setup
-####Using docker-compose
+###Using docker-compose
   1.  git clone https://github.com/narenrana/cnm-retail
   2.  cd cnm-retail
   3.  docker-compose build && docker-compose up
   4.  Open Url in browser -> http://localhost:3500
   5.  Sign Up to create new user and login
   
-####Local development setup
+###Local development setup
 **Run shopping cart app**
   1. cd cnm-app 
   2. yarn && yarn start
