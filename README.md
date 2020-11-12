@@ -2,11 +2,31 @@
  
 ## Description
 
-The implementation is based on the container shipping domain from the [Domain Driven Design](http://www.amazon.com/Domain-Driven-Design-Tackling-Complexity-Software/dp/0321125215) book by Eric Evans, which was [originally](http://dddsample.sourceforge.net/) implemented in Java but has since been ported to Go. This example is a somewhat stripped down version to demonstrate the use of Go kit. The [original Go application](https://github.com/marcusolsson/goddd) is maintained separately and accompanied by an [AngularJS application](https://github.com/marcusolsson/dddelivery-angularjs) as well as a mock [routing service](https://github.com/marcusolsson/pathfinder). 
+ This is a sample shopping cart assignment 
+ 
+###Technologies
+#####Server Side
+  - Go Lang 
+  - Gokit - Microservice friendly toolkit  
+  - Goram - ORM 
+  - Docker - App Containerization 
+  - Database - Postgres
+  - Database migration - Flyway 
+  - JWT base auth
+  - Microservice friendly structure 
+  
+  
+#####Client Side -
+  - React
+  - Redux
+  - Material UI
 
-### Organization
+#####How to start
+  - Ru   -> git clone https://github.com/narenrana/cnm-retail
+  - Run  ->  cnm-retail
+  - Run  -> docker-compose build && docker-compose up
+  - Open Url in browser -> http://localhost:3500
+  - Sign Up to create new user and login
+##  
 
  
-## Contributing
-
-As with all Go kit examples you are more than welcome to contribute. If you do however, please consider contributing back to the original project as well.
