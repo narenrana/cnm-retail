@@ -14,4 +14,6 @@ app.use(express.static("build"));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
+app.get('*', (req, res) => res.sendFile(path.resolve("", 'build', 'index.html')));
+
 var server = app.listen(3000);
