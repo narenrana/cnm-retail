@@ -25,6 +25,8 @@ import paymentStore from "./header/redux";
 import productsStore from "./products/redux";
 import sidebarStore from "./sidebar/redux";
 import signInStore from "./sign-in/redux";
+import ordersStore from "./orders/redux";
+import couponsStore from "./coupons/redux";
 //import signUpStore from "./sign-up/redux";
 
 const store = combineReducers({
@@ -36,7 +38,8 @@ const store = combineReducers({
   productsStore,
   sidebarStore,
   signInStore,
-  //signUpStore,
+  ordersStore,
+  couponsStore,
 });
 
 export default store;

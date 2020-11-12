@@ -1,7 +1,6 @@
 package coupons
 
 import (
-	 
 	core "shopping-cart/cnm-core"
 	e "shopping-cart/cnm-coupons/entities"
 )
@@ -29,7 +28,7 @@ func (*repository) List() ([] e.DiscountCoupons, error){
 	db.Find(&found);
 	for _,v := range found {
 		var item [] *e.DiscountCouponsRules;
-		db.Model(&item).Where("DiscountCoupons_id = ?", v.DiscountCouponsId).Find(&item)
+		db.Model(&item).Where("discount_coupons_id = ?", v.DiscountCouponsId).Find(&item)
 		v.DiscountCouponsRules=  item
 	}
 
@@ -43,6 +42,9 @@ func (*repository) FindBy(user e.DiscountCoupons) (e.DiscountCoupons, error){
 		return user, err;
 	}
 	db.Find(&found);
+	var item [] *e.DiscountCouponsRules;
+	db.Model(&item).Where("discount_coupons_id = ?", found.DiscountCouponsId).Find(&item)
+	found.DiscountCouponsRules=item;
 
 	return  found, err;
 }
@@ -68,15 +70,15 @@ func (*repository) FindByDiscountCoupon(coupon string) (e.DiscountCoupons, error
 func (*repository) Add(d e.DiscountCoupons) (e.DiscountCoupons, error){
 	db,err :=core.GetDB()
 
-	if db.Model(&d).Where("cart_id = ?", d.DiscountCouponsId).Updates(&d).RowsAffected == 0 {
-		db.Create(&d)
-	}else {
-		for _,v := range d.DiscountCouponsRules {
-			if db.Model(&v).Where("cart_id = ?", v.DiscountCouponsId).Updates(&v).RowsAffected == 0 {
-				db.Create(&v)
-			}
-		}
-	}
+	 db.Create(&d)
+
+	//for _, rule := range d.DiscountCouponsRules {
+	//
+	//	rule.DiscountCouponsId=d.DiscountCouponsId;
+	//	db.Model(&rule).Create(rule);
+	//
+	//}
+
 	if err != nil {
 		return d, err;
 	}

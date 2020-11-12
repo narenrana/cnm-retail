@@ -4,10 +4,10 @@ import { httpClient } from "../../core";
 
 const initialOtpState = {
   isLoading: false,
-  coupons: {},
+  discountCoupons: [],
 };
 
-const listCoupons = createAsyncThunk(
+const getCoupons = createAsyncThunk(
   "coupons/loadCoupons",
   async (request, thunkAPI) => {
     const options = {
@@ -16,8 +16,7 @@ const listCoupons = createAsyncThunk(
         "Content-Type": "application/json",
       },
     };
-    let response =
-      (await httpClient("/coupons/v1/list" + request, options)) || [];
+    let response = (await httpClient("/coupons/v1/list", options)) || [];
     response = _.isEmpty(response) ? initialOtpState.defaultTabList : response;
     return response;
   }
@@ -26,14 +25,15 @@ const listCoupons = createAsyncThunk(
 const generateCoupons = createAsyncThunk(
   "coupons/generate",
   async (request, thunkAPI) => {
+    console.log({ ...request.values });
     const options = {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
+      body: JSON.stringify({ ...request.values }),
     };
-    let response =
-      (await httpClient("/coupons/v1/generate" + request, options)) || [];
+    let response = (await httpClient("/coupons/v1/generate", options)) || [];
     response = _.isEmpty(response) ? initialOtpState.defaultTabList : response;
     return response;
   }
@@ -46,16 +46,16 @@ const Reducer = createSlice({
   initialState: initialOtpState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(listCoupons.fulfilled, (state, { payload }) => {
-      state.discountCoupons = { ...payload };
+    builder.addCase(getCoupons.fulfilled, (state, { payload = {} }) => {
+      state.discountCoupons = (payload || {}).discountCoupons || [];
       state.isLoading = false;
     });
 
-    builder.addCase(listCoupons.rejected, (state, action) => {
+    builder.addCase(getCoupons.rejected, (state, action) => {
       state.isLoading = false;
     });
     builder.addCase(generateCoupons.fulfilled, (state, { payload }) => {
-      state.discountCoupons = { ...payload };
+      state.discountCoupons = payload.discountCoupons;
       state.isLoading = false;
     });
 
@@ -67,6 +67,6 @@ const Reducer = createSlice({
 
 /*Actions export*/
 const {} = Reducer.actions;
-export {};
+export { generateCoupons, getCoupons };
 /*Reducer export*/
 export default Reducer.reducer;

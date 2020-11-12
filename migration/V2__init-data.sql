@@ -61,3 +61,5 @@ alter sequence offers_rules_offers_rules_id_seq restart with 1300;
 alter sequence products_product_id_seq restart with 1300;
 alter sequence discount_coupons_discount_coupons_id_seq restart with 1300;
 alter sequence offers_offers_id_seq restart with 1300;
+alter sequence discount_coupons_rules_discount_coupons_rules_id_seq restart with 1300;
+

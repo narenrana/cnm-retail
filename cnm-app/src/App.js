@@ -11,6 +11,7 @@ import { Checkout } from "./checkout";
 import { SignIn } from "./sign-in";
 import { SignUp } from "./sign-up";
 import { Orders } from "./orders";
+import { Coupons } from "./coupons";
 import theme from "./theme";
 import {
   BrowserRouter as Router,
@@ -22,11 +23,10 @@ import {
 import { useSelector } from "react-redux";
 
 const sections = [
-  { title: "SignIn", url: "/login" },
-  { title: "SignUp", url: "/signup" },
   { title: "Home", url: "/home" },
   { title: "Orders", url: "/orders" },
   { title: "Paymemnts", url: "/paymemnts" },
+  { title: "Generate Coupon", url: "/coupons" },
 ];
 
 export default function App() {
@@ -54,6 +54,11 @@ export default function App() {
             <PrivateRoute path="/checkout">
               <main>
                 <Checkout />
+              </main>
+            </PrivateRoute>
+            <PrivateRoute path="/coupons">
+              <main>
+                <Coupons />
               </main>
             </PrivateRoute>
             <PrivateRoute path="/">

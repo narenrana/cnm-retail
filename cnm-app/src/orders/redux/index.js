@@ -4,8 +4,7 @@ import { httpClient } from "../../core";
 
 const initialOtpState = {
   isLoading: false,
-  orders: [],
-  showSucessMessage: false,
+  coupons: [],
 };
 
 /**
@@ -54,7 +53,11 @@ const Reducer = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getOrders.fulfilled, (state, { payload = {} }) => {
-      state.oredrs = payload.oredrs;
+      let orders = [];
+      //orders = orders.concat(state.orders);
+      orders = orders.concat(payload.orders);
+      state.orders = orders;
+      state.showSucessMessage = true;
       state.isLoading = false;
     });
 

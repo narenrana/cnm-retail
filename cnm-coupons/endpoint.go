@@ -4,15 +4,19 @@ import (
 	"context"
 	"github.com/go-kit/kit/endpoint"
 	e "shopping-cart/cnm-coupons/entities"
+	"time"
 )
 
 type discountCouponsAddRequest struct {
-	DiscountCoupons e.DiscountCoupons ;
+
+	ExpireTimeInSeconds   int `json:"expireTimeInSeconds,omitempty"`
+	Quantity   int `json:"quantity,omitempty"`
 }
 
 type discountCouponsResponse struct {
-	DiscountCoupons e.DiscountCoupons `json:"discountCoupons,omitempty"`
+	DiscountCoupons [] e.DiscountCoupons `json:"discountCoupons,omitempty"`
 	Err             error             `json:"error,omitempty"`
+	TargetTime      time.Time    `json:"targetTime,omitempty"`
 }
 
 type discountCouponsListResponse struct {
@@ -29,6 +33,7 @@ type findCouponResponse struct {
 	Valid           bool              `json:"valid"`
 	Message         string            `json:"message"`
 	Err             error             `json:"error,omitempty"`
+	Time           time.Time       `json:"time,omitempty"`
 }
 
 

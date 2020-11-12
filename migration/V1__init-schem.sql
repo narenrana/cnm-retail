@@ -104,7 +104,7 @@ CREATE TABLE  discount_coupons
     discount            NUMERIC NOT NULL,
     discount_mode       discount_types NOT NULL,
     coupons_type        discount_coupons_type NOT NULL default  'ONE_TIME' ,
-    expiry_date         DATE NOT NULL,
+    expiry_date         timestamp  NOT NULL,
     date_created        DATE NOT NULL  default  CURRENT_DATE,
     date_updated        DATE NOT NULL  default  CURRENT_DATE,
     active              BOOLEAN NOT NULL DEFAULT  true,
