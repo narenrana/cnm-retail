@@ -37,7 +37,7 @@ Each app can be independent and can be deployed and scaled individually .
 
 ## Database diagram
 
-![db](./docs/graph.jpeg)
+![db](./docs/db.jpeg)
 
 Offers are configurable . Admin can specify promotional offers in the database and what rules it holds to apply on buyings.
 

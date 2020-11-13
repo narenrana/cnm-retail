@@ -188,6 +188,7 @@ CREATE TABLE orders
     order_data          json NOT NULL,
     date_create         DATE NOT NULL  default  CURRENT_DATE,
     date_updated        DATE NOT NULL  default  CURRENT_DATE,
+    CONSTRAINT orders_user_id_fk FOREIGN KEY(user_id) REFERENCES users(user_id),
     CONSTRAINT  orders_pkey PRIMARY KEY (order_id)
 );
 

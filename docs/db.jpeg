@@ -1,0 +1,2977 @@
+Creator	"DbVis"
+Whatever	"Stuff"
+graph
+[
+	label	""
+	directed	1
+	node
+	[
+		id	0
+		graphics
+		[
+			x	588.5
+			y	795.5536458333333
+			w	271.0
+			h	135.974609375
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"carts"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"cart_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	477.0
+			y	756.8768880208333
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	564.0
+			y	756.8768880208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"cart_name"
+			fontSize	10
+			fontName	"Dialog"
+			x	477.0
+			y	774.6542317708333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	564.0
+			y	774.6542317708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"user_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	477.0
+			y	792.4315755208333
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	564.0
+			y	792.4315755208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"discount_coupon"
+			fontSize	10
+			fontName	"Dialog"
+			x	477.0
+			y	810.2089192708333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(20)"
+			fontSize	10
+			fontName	"Dialog"
+			x	564.0
+			y	810.2089192708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_create"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	477.0
+			y	827.9862630208333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	564.0
+			y	827.9862630208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	477.0
+			y	845.7636067708333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	564.0
+			y	845.7636067708333
+		]
+	]
+	node
+	[
+		id	1
+		graphics
+		[
+			x	176.5
+			y	786.6649739583333
+			w	250.0
+			h	153.751953125
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"cart_items"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"cart_items_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	75.5
+			y	739.0995442708333
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	153.5
+			y	739.0995442708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"cart_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	75.5
+			y	756.8768880208333
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	153.5
+			y	756.8768880208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	75.5
+			y	774.6542317708333
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	153.5
+			y	774.6542317708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"quantity"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	75.5
+			y	792.4315755208333
+		]
+		LabelGraphics
+		[
+			text	"INTEGER"
+			fontSize	10
+			fontName	"Dialog"
+			x	153.5
+			y	792.4315755208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"currency"
+			fontSize	10
+			fontName	"Dialog"
+			x	75.5
+			y	810.2089192708333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(3)"
+			fontSize	10
+			fontName	"Dialog"
+			x	153.5
+			y	810.2089192708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_create"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	75.5
+			y	827.9862630208333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	153.5
+			y	827.9862630208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	75.5
+			y	845.7636067708333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	153.5
+			y	845.7636067708333
+		]
+	]
+	node
+	[
+		id	2
+		graphics
+		[
+			x	588.5
+			y	601.5642578125
+			w	250.0
+			h	153.751953125
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"products"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	487.5
+			y	553.998828125
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	569.5
+			y	553.998828125
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_name"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	487.5
+			y	571.776171875
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	569.5
+			y	571.776171875
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_price"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	487.5
+			y	589.553515625
+		]
+		LabelGraphics
+		[
+			text	"NUMERIC(10,2)"
+			fontSize	10
+			fontName	"Dialog"
+			x	569.5
+			y	589.553515625
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"base_currency"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	487.5
+			y	607.330859375
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(3)"
+			fontSize	10
+			fontName	"Dialog"
+			x	569.5
+			y	607.330859375
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_title"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	487.5
+			y	625.108203125
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	569.5
+			y	625.108203125
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_desc"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	487.5
+			y	642.885546875
+		]
+		LabelGraphics
+		[
+			text	"TEXT"
+			fontSize	10
+			fontName	"Dialog"
+			x	569.5
+			y	642.885546875
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"image_url"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	487.5
+			y	660.662890625
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	569.5
+			y	660.662890625
+		]
+	]
+	node
+	[
+		id	3
+		graphics
+		[
+			x	977.5
+			y	519.1591145833333
+			w	327.0
+			h	207.083984375
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"discount_coupons"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"discount_coupons_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	444.92766927083335
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	444.92766927083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"description"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	462.70501302083335
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	462.70501302083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"discount_coupon"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	480.48235677083335
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(20)"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	480.48235677083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"discount"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	498.25970052083335
+		]
+		LabelGraphics
+		[
+			text	"NUMERIC"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	498.25970052083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"discount_mode"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	516.0370442708333
+		]
+		LabelGraphics
+		[
+			text	"discount_types"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	516.0370442708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"coupons_type"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	533.8143880208333
+		]
+		LabelGraphics
+		[
+			text	"discount_coupons_type"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	533.8143880208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"expiry_date"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	551.5917317708333
+		]
+		LabelGraphics
+		[
+			text	"TIMESTAMP(6) WITHOUT TIME ZONE"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	551.5917317708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_created"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	569.3690755208333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	569.3690755208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	587.1464192708333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	587.1464192708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"active"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	838.0
+			y	604.9237630208333
+		]
+		LabelGraphics
+		[
+			text	"BOOLEAN"
+			fontSize	10
+			fontName	"Dialog"
+			x	953.0
+			y	604.9237630208333
+		]
+	]
+	node
+	[
+		id	4
+		graphics
+		[
+			x	977.5
+			y	1031.5263020833333
+			w	246.0
+			h	189.306640625
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"users"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"user_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	878.5
+			y	966.1835286458333
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	956.5
+			y	966.1835286458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"first_name"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	878.5
+			y	983.9608723958333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	956.5
+			y	983.9608723958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"middle_name"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	878.5
+			y	1001.7382161458333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	956.5
+			y	1001.7382161458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"last_name"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	878.5
+			y	1019.5155598958333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	956.5
+			y	1019.5155598958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"user_email"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	878.5
+			y	1037.2929036458333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	956.5
+			y	1037.2929036458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"password"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	878.5
+			y	1055.0702473958333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	956.5
+			y	1055.0702473958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"phone_number"
+			fontSize	10
+			fontName	"Dialog"
+			x	878.5
+			y	1072.8475911458333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(15)"
+			fontSize	10
+			fontName	"Dialog"
+			x	956.5
+			y	1072.8475911458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_create"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	878.5
+			y	1090.6249348958333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	956.5
+			y	1090.6249348958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	878.5
+			y	1108.4022786458333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	956.5
+			y	1108.4022786458333
+		]
+	]
+	node
+	[
+		id	5
+		graphics
+		[
+			x	588.5
+			y	85.7646484375
+			w	331.0
+			h	171.529296875
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"discount_coupons_rules"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"discount_coupons_rules_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	447.0
+			y	29.310546875
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	594.0
+			y	29.310546875
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"discount_coupons_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	447.0
+			y	47.087890625
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	594.0
+			y	47.087890625
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"key"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	447.0
+			y	64.865234375
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	594.0
+			y	64.865234375
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"value"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	447.0
+			y	82.642578125
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	594.0
+			y	82.642578125
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"operator"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	447.0
+			y	100.419921875
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(10)"
+			fontSize	10
+			fontName	"Dialog"
+			x	594.0
+			y	100.419921875
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"description"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	447.0
+			y	118.197265625
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	594.0
+			y	118.197265625
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_created"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	447.0
+			y	135.974609375
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	594.0
+			y	135.974609375
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	447.0
+			y	153.751953125
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	594.0
+			y	153.751953125
+		]
+	]
+	node
+	[
+		id	6
+		graphics
+		[
+			x	176.5
+			y	448.04973958333335
+			w	353.0
+			h	135.974609375
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"products_coupons_mapping"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"products_coupons_mapping_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	24.0
+			y	409.37298177083335
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	193.0
+			y	409.37298177083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"description"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	24.0
+			y	427.15032552083335
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	193.0
+			y	427.15032552083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	24.0
+			y	444.92766927083335
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	193.0
+			y	444.92766927083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_create"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	24.0
+			y	462.70501302083335
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	193.0
+			y	462.70501302083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	24.0
+			y	480.48235677083335
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	193.0
+			y	480.48235677083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"active"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	24.0
+			y	498.25970052083335
+		]
+		LabelGraphics
+		[
+			text	"BOOLEAN"
+			fontSize	10
+			fontName	"Dialog"
+			x	193.0
+			y	498.25970052083335
+		]
+	]
+	node
+	[
+		id	7
+		graphics
+		[
+			x	176.5
+			y	586.2470052083333
+			w	198.0
+			h	100.419921875
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"inventory"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"inventory_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	101.5
+			y	565.3475911458333
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	172.5
+			y	565.3475911458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	101.5
+			y	583.1249348958333
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	172.5
+			y	583.1249348958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"price"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	101.5
+			y	600.9022786458333
+		]
+		LabelGraphics
+		[
+			text	"NUMERIC(10,2)"
+			fontSize	10
+			fontName	"Dialog"
+			x	172.5
+			y	600.9022786458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"quantity"
+			fontSize	10
+			fontName	"Dialog"
+			x	101.5
+			y	618.6796223958333
+		]
+		LabelGraphics
+		[
+			text	"INTEGER"
+			fontSize	10
+			fontName	"Dialog"
+			x	172.5
+			y	618.6796223958333
+		]
+	]
+	node
+	[
+		id	8
+		graphics
+		[
+			x	588.5
+			y	286.1826171875
+			w	253.0
+			h	189.306640625
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"offers"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"offers_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	486.0
+			y	220.83984375
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	571.0
+			y	220.83984375
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"description"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	486.0
+			y	238.6171875
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	571.0
+			y	238.6171875
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"discount"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	486.0
+			y	256.39453125
+		]
+		LabelGraphics
+		[
+			text	"NUMERIC"
+			fontSize	10
+			fontName	"Dialog"
+			x	571.0
+			y	256.39453125
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"discount_mode"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	486.0
+			y	274.171875
+		]
+		LabelGraphics
+		[
+			text	"discount_types"
+			fontSize	10
+			fontName	"Dialog"
+			x	571.0
+			y	274.171875
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"offers_type"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	486.0
+			y	291.94921875
+		]
+		LabelGraphics
+		[
+			text	"offers_type"
+			fontSize	10
+			fontName	"Dialog"
+			x	571.0
+			y	291.94921875
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"active"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	486.0
+			y	309.7265625
+		]
+		LabelGraphics
+		[
+			text	"BOOLEAN"
+			fontSize	10
+			fontName	"Dialog"
+			x	571.0
+			y	309.7265625
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"expire_date"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	486.0
+			y	327.50390625
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	571.0
+			y	327.50390625
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_created"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	486.0
+			y	345.28125
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	571.0
+			y	345.28125
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	486.0
+			y	363.05859375
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	571.0
+			y	363.05859375
+		]
+	]
+	node
+	[
+		id	9
+		graphics
+		[
+			x	176.5
+			y	132.28411458333335
+			w	268.0
+			h	171.529296875
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"offers_rules"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"offers_rules_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	75.83001302083335
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	75.83001302083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"offers_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	66.5
+			y	93.60735677083335
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	93.60735677083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"key"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	111.38470052083335
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	111.38470052083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"value"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	129.16204427083335
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	129.16204427083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"operator"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	146.93938802083335
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(10)"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	146.93938802083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"description"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	164.71673177083335
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	164.71673177083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_created"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	182.49407552083335
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	182.49407552083335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	200.27141927083335
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	200.27141927083335
+		]
+	]
+	node
+	[
+		id	10
+		graphics
+		[
+			x	176.5
+			y	297.14739583333335
+			w	201.0
+			h	118.197265625
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"product_offers"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_offers_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	100.0
+			y	267.35930989583335
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	198.0
+			y	267.35930989583335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"offers_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	100.0
+			y	285.13665364583335
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	198.0
+			y	285.13665364583335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	100.0
+			y	302.91399739583335
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	198.0
+			y	302.91399739583335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_create"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	100.0
+			y	320.69134114583335
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	198.0
+			y	320.69134114583335
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	100.0
+			y	338.46868489583335
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	198.0
+			y	338.46868489583335
+		]
+	]
+	node
+	[
+		id	11
+		graphics
+		[
+			x	588.5
+			y	995.9716145833333
+			w	221.0
+			h	189.306640625
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"orders"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"order_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	502.0
+			y	930.6288411458333
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	580.0
+			y	930.6288411458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"cart_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	502.0
+			y	948.4061848958333
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	580.0
+			y	948.4061848958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"user_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	502.0
+			y	966.1835286458333
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	580.0
+			y	966.1835286458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"amount"
+			fontSize	10
+			fontName	"Dialog"
+			x	502.0
+			y	983.9608723958333
+		]
+		LabelGraphics
+		[
+			text	"NUMERIC(10,2)"
+			fontSize	10
+			fontName	"Dialog"
+			x	580.0
+			y	983.9608723958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"status"
+			fontSize	10
+			fontName	"Dialog"
+			x	502.0
+			y	1001.7382161458333
+		]
+		LabelGraphics
+		[
+			text	"order_status_type"
+			fontSize	10
+			fontName	"Dialog"
+			x	580.0
+			y	1001.7382161458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"active"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	502.0
+			y	1019.5155598958333
+		]
+		LabelGraphics
+		[
+			text	"BOOLEAN"
+			fontSize	10
+			fontName	"Dialog"
+			x	580.0
+			y	1019.5155598958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"order_data"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	502.0
+			y	1037.2929036458333
+		]
+		LabelGraphics
+		[
+			text	"JSON"
+			fontSize	10
+			fontName	"Dialog"
+			x	580.0
+			y	1037.2929036458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_create"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	502.0
+			y	1055.0702473958333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	580.0
+			y	1055.0702473958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	502.0
+			y	1072.8475911458333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	580.0
+			y	1072.8475911458333
+		]
+	]
+	node
+	[
+		id	12
+		graphics
+		[
+			x	176.5
+			y	978.1942708333333
+			w	268.0
+			h	189.306640625
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"orders_items"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"order_items_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	912.8514973958333
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	912.8514973958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"order_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	66.5
+			y	930.6288411458333
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	930.6288411458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_id"
+			fontSize	10
+			fontName	"Dialog"
+			x	66.5
+			y	948.4061848958333
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	948.4061848958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_name"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	966.1835286458333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	966.1835286458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"product_price"
+			fontSize	10
+			fontName	"Dialog"
+			x	66.5
+			y	983.9608723958333
+		]
+		LabelGraphics
+		[
+			text	"NUMERIC(10,2)"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	983.9608723958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"quantity"
+			fontSize	10
+			fontName	"Dialog"
+			x	66.5
+			y	1001.7382161458333
+		]
+		LabelGraphics
+		[
+			text	"INTEGER"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	1001.7382161458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"basecurrency"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	1019.5155598958333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(10)"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	1019.5155598958333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_create"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	1037.2929036458333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	1037.2929036458333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	66.5
+			y	1055.0702473958333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	150.5
+			y	1055.0702473958333
+		]
+	]
+	node
+	[
+		id	13
+		graphics
+		[
+			x	588.5
+			y	1231.9442708333333
+			w	300.0
+			h	242.638671875
+			customconfiguration	"TableNodeWithSelectionColor"
+			fill	"#FFFFCC"
+			outline	"#808080"
+		]
+		LabelGraphics
+		[
+			text	"shipping_address"
+			fontSize	13
+			fontStyle	"bold"
+			fontName	"Dialog"
+			anchor	"t"
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"shipping_address_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1139.9354817708333
+		]
+		LabelGraphics
+		[
+			text	"BIGSERIAL"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1139.9354817708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"user_id"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1157.7128255208333
+		]
+		LabelGraphics
+		[
+			text	"BIGINT"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1157.7128255208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"user_name"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1175.4901692708333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1175.4901692708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"user_email"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1193.2675130208333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1193.2675130208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"phone_number"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1211.0448567708333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(15)"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1211.0448567708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"pin_code"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1228.8222005208333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(15)"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1228.8222005208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"address1"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1246.5995442708333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1246.5995442708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"address2"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1264.3768880208333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1264.3768880208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"street"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1282.1542317708333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1282.1542317708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"landmark"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1299.9315755208333
+		]
+		LabelGraphics
+		[
+			text	"CHARACTER VARYING(250)"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1299.9315755208333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_create"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1317.7089192708333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1317.7089192708333
+		]
+		LabelGraphics
+		[
+		]
+		LabelGraphics
+		[
+			text	"date_updated"
+			fontSize	10
+			fontStyle	"bold"
+			fontName	"Dialog"
+			x	462.5
+			y	1335.4862630208333
+		]
+		LabelGraphics
+		[
+			text	"DATE"
+			fontSize	10
+			fontName	"Dialog"
+			x	578.5
+			y	1335.4862630208333
+		]
+	]
+	edge
+	[
+		source	1
+		target	0
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	-0.29787477850914
+			xTarget	-1.0
+			yTarget	-0.4675591289997101
+		]
+	]
+	edge
+	[
+		source	1
+		target	2
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	176.5
+					y	786.6649739583333
+				]
+				point
+				[
+					x	383.0
+					y	781.5429036458333
+				]
+				point
+				[
+					x	383.0
+					y	560.8875
+				]
+				point
+				[
+					x	588.5
+					y	601.5642578125
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	-0.06662771105766296
+			xTarget	-1.0
+			yTarget	-0.5291218161582947
+		]
+	]
+	edge
+	[
+		source	0
+		target	3
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	588.5
+					y	795.5536458333333
+				]
+				point
+				[
+					x	779.0
+					y	817.0975911458333
+				]
+				point
+				[
+					x	779.0
+					y	487.37102864583335
+				]
+				point
+				[
+					x	977.5
+					y	519.1591145833333
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	0.3168818950653076
+			xTarget	-1.0
+			yTarget	-0.30700671672821045
+		]
+	]
+	edge
+	[
+		source	0
+		target	4
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	588.5
+					y	795.5536458333333
+				]
+				point
+				[
+					x	789.0
+					y	799.3202473958333
+				]
+				point
+				[
+					x	789.0
+					y	973.0722005208333
+				]
+				point
+				[
+					x	977.5
+					y	1031.5263020833333
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	0.05540154129266739
+			xTarget	-1.0
+			yTarget	-0.6175599694252014
+		]
+	]
+	edge
+	[
+		source	5
+		target	3
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	588.5
+					y	85.7646484375
+				]
+				point
+				[
+					x	789.0
+					y	53.9765625
+				]
+				point
+				[
+					x	789.0
+					y	451.81634114583335
+				]
+				point
+				[
+					x	977.5
+					y	519.1591145833333
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	-0.3706432282924652
+			xTarget	-1.0
+			yTarget	-0.6503909230232239
+		]
+	]
+	edge
+	[
+		source	6
+		target	3
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	176.5
+					y	448.04973958333335
+				]
+				point
+				[
+					x	373.0
+					y	451.81634114583335
+				]
+				point
+				[
+					x	373.0
+					y	422.690234375
+				]
+				point
+				[
+					x	779.0
+					y	422.690234375
+				]
+				point
+				[
+					x	779.0
+					y	451.81634114583335
+				]
+				point
+				[
+					x	977.5
+					y	519.1591145833333
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	0.05540154129266739
+			xTarget	-1.0
+			yTarget	-0.6503909230232239
+		]
+	]
+	edge
+	[
+		source	7
+		target	2
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	176.5
+					y	586.2470052083333
+				]
+				point
+				[
+					x	373.0
+					y	590.0136067708333
+				]
+				point
+				[
+					x	373.0
+					y	560.8875
+				]
+				point
+				[
+					x	588.5
+					y	601.5642578125
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	0.07501702010631561
+			xTarget	-1.0
+			yTarget	-0.5291218161582947
+		]
+	]
+	edge
+	[
+		source	9
+		target	8
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	176.5
+					y	132.28411458333335
+				]
+				point
+				[
+					x	383.0
+					y	100.49602864583335
+				]
+				point
+				[
+					x	383.0
+					y	227.728515625
+				]
+				point
+				[
+					x	588.5
+					y	286.1826171875
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	-0.3706432282924652
+			xTarget	-1.0
+			yTarget	-0.6175599694252014
+		]
+	]
+	edge
+	[
+		source	10
+		target	8
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	176.5
+					y	297.14739583333335
+				]
+				point
+				[
+					x	373.0
+					y	292.02532552083335
+				]
+				point
+				[
+					x	373.0
+					y	227.728515625
+				]
+				point
+				[
+					x	588.5
+					y	286.1826171875
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	-0.08666986227035522
+			xTarget	-1.0
+			yTarget	-0.6175599694252014
+		]
+	]
+	edge
+	[
+		source	11
+		target	4
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	-0.2419293224811554
+			xTarget	-1.0
+			yTarget	-0.6175599694252014
+		]
+	]
+	edge
+	[
+		source	12
+		target	11
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	-0.4297446608543396
+			xTarget	-1.0
+			yTarget	-0.6175599694252014
+		]
+	]
+	edge
+	[
+		source	10
+		target	2
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	176.5
+					y	297.14739583333335
+				]
+				point
+				[
+					x	403.0
+					y	309.80266927083335
+				]
+				point
+				[
+					x	403.0
+					y	560.8875
+				]
+				point
+				[
+					x	588.5
+					y	601.5642578125
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	0.2141381800174713
+			xTarget	-1.0
+			yTarget	-0.5291218161582947
+		]
+	]
+	edge
+	[
+		source	6
+		target	2
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	176.5
+					y	448.04973958333335
+				]
+				point
+				[
+					x	393.0
+					y	451.81634114583335
+				]
+				point
+				[
+					x	393.0
+					y	560.8875
+				]
+				point
+				[
+					x	588.5
+					y	601.5642578125
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	0.05540154129266739
+			xTarget	-1.0
+			yTarget	-0.5291218161582947
+		]
+	]
+	edge
+	[
+		source	13
+		target	4
+		graphics
+		[
+			fill	"#808080"
+			targetArrow	"standard"
+			Line
+			[
+				point
+				[
+					x	588.5
+					y	1231.9442708333333
+				]
+				point
+				[
+					x	779.0
+					y	1164.6014973958333
+				]
+				point
+				[
+					x	779.0
+					y	973.0722005208333
+				]
+				point
+				[
+					x	977.5
+					y	1031.5263020833333
+				]
+			]
+		]
+		edgeAnchor
+		[
+			xSource	1.0
+			ySource	-0.5550869107246399
+			xTarget	-1.0
+			yTarget	-0.6175599694252014
+		]
+	]
+]
