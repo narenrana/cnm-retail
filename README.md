@@ -82,5 +82,5 @@ Coupon page
 Fake Payment page
 ![pay](./docs/fake-pay.png)
 
-Place order
+Placed order
 ![order](./docs/orders2.png)
