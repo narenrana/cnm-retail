@@ -26,8 +26,8 @@ export default function OrdersList() {
     }
   }, [dispatch, isLoading]);
 
-  const getOrderData = (order={}) => {
-    return order.orderData?JSON.parse(order.orderData ): { cartItems: [] };
+  const getOrderData = (order = {}) => {
+    return order.orderData ? JSON.parse(order.orderData) : { cartItems: [] };
   };
 
   return (
@@ -37,28 +37,35 @@ export default function OrdersList() {
       </Typography>
       {orders.map((order) => (
         <Card className={classes.root} spacing={4}>
-          <CardHeader title={`$${getOrderData(order).totalAmount || 0}`} />
+          <CardHeader
+            title={`$${
+              (getOrderData(order).totalAmount || 0) -
+              (getOrderData(order).totalDiscount || 0)
+            }`}
+          />
           <Grid container spacing={4}>
-            {(getOrderData(order) || {cartItems: []}).cartItems.map((cartItem, index) => (
-              <Grid
-                item
-                xs={6}
-                md={3}
-                xl={3}
-                key={"suggestion-key-" + index}
-                spacing={4}
-              >
-                <OrderItem
-                  product={cartItem.products}
-                  cartQuantity={cartItem.quantity}
-                  isExpanded={false}
-                  cart={cartItem}
-                  onAddToCart={() => {}}
-                  onIncreaseQuantity={() => {}}
-                  onReduceQuantity={() => {}}
-                />
-              </Grid>
-            ))}
+            {(getOrderData(order) || { cartItems: [] }).cartItems.map(
+              (cartItem, index) => (
+                <Grid
+                  item
+                  xs={6}
+                  md={3}
+                  xl={3}
+                  key={"suggestion-key-" + index}
+                  spacing={4}
+                >
+                  <OrderItem
+                    product={cartItem.products}
+                    cartQuantity={cartItem.quantity}
+                    isExpanded={false}
+                    cart={cartItem}
+                    onAddToCart={() => {}}
+                    onIncreaseQuantity={() => {}}
+                    onReduceQuantity={() => {}}
+                  />
+                </Grid>
+              )
+            )}
           </Grid>
         </Card>
       ))}

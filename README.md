@@ -83,4 +83,4 @@ Fake Payment page
 ![pay](./docs/fake-pay.png)
 
 Place order
-![order](./docs/order.png)
+![order](./docs/orders2.png)
