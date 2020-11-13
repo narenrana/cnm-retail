@@ -24,7 +24,10 @@
   },
   "devDependencies": {
     "http-proxy-middleware": "^1.0.6",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-http-proxy": "^1.6.2",
+    "os": "^0.1.1",
+    "cluster": "^0.7.7"
   },
   "browserslist": {
     "production": [

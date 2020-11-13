@@ -44,9 +44,9 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 
 	r := mux.NewRouter()
 
-	r.Handle("/api/coupons/v1/generate", addCouponHandler).Methods("POST")// Must be  for admin role Only
-	r.Handle("/api/coupons/v1/list", couponListHandler).Methods("GET")// Must be  for admin role Only
-	r.Handle("/api/coupons/v1/find", couponFindHandler).Methods("GET")
+	r.Handle("/coupons/v1/generate", addCouponHandler).Methods("POST")// Must be  for admin role Only
+	r.Handle("/coupons/v1/list", couponListHandler).Methods("GET")// Must be  for admin role Only
+	r.Handle("/coupons/v1/find", couponFindHandler).Methods("GET")
 
 
 	return r

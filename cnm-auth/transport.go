@@ -57,11 +57,11 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 
 	r := mux.NewRouter()
 
-	r.Handle("/api/auth/v1/login", authLoginHandler).Methods("POST")
-	r.Handle("/api/auth/v1/logout", authLogoutHandler).Methods("GET")
-	r.Handle("/api/auth/v1/signup", authSignUpHandler).Methods("POST")
-	r.Handle("/api/auth/v1/recoverPassword", authRecoverPasswordHandler).Methods("POST")
-	r.Handle("/api/auth/v1/refreshToken", authRefreshTokenHandler).Methods("POST")
+	r.Handle("/auth/v1/login", authLoginHandler).Methods("POST")
+	r.Handle("/auth/v1/logout", authLogoutHandler).Methods("GET")
+	r.Handle("/auth/v1/signup", authSignUpHandler).Methods("POST")
+	r.Handle("/auth/v1/recoverPassword", authRecoverPasswordHandler).Methods("POST")
+	r.Handle("/auth/v1/refreshToken", authRefreshTokenHandler).Methods("POST")
 
 	return r
 }

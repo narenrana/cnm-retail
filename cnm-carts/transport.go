@@ -15,7 +15,7 @@ import (
 	kithttp "github.com/go-kit/kit/transport/http"
 )
 
-// MakeHandler returns a handler for the booking service.
+
 func MakeHandler(bs services.Service, logger kitlog.Logger) http.Handler {
 	opts := []kithttp.ServerOption{
 		kithttp.ServerErrorHandler(transport.NewLogErrorHandler(logger)),
@@ -36,15 +36,6 @@ func MakeHandler(bs services.Service, logger kitlog.Logger) http.Handler {
 		opts...,
 	)
 
-
-
-	//UpdateCartItemsHandler := kithttp.NewServer(
-	//	makeAddToCartEndpoint(bs),
-	//	decodeAddToCartRequest,
-	//	encodeResponse,
-	//	opts...,
-	//)
-
 	deleteCartsItemHandler := kithttp.NewServer(
 		makeDeleteCartItemsEndpoint(bs),
 		decodeCartDeleteItemRequest,
@@ -54,10 +45,9 @@ func MakeHandler(bs services.Service, logger kitlog.Logger) http.Handler {
 
 	r := mux.NewRouter()
 
-	r.Handle("/api/carts/v1/add", addToCartHandler).Methods("POST")
-	r.Handle("/api/carts/v1/list", getCartHandler).Methods("GET")
-
-	r.Handle("/api/carts/v1/items", deleteCartsItemHandler).Methods("DELETE")
+	r.Handle("/carts/v1/add", addToCartHandler).Methods("POST")
+	r.Handle("/carts/v1/list", getCartHandler).Methods("GET")
+	r.Handle("/carts/v1/items", deleteCartsItemHandler).Methods("DELETE")
 
 
 	return r

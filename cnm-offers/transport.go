@@ -13,7 +13,7 @@ import (
 	kithttp "github.com/go-kit/kit/transport/http"
 )
 
-// MakeHandler returns a handler for the booking service.
+
 func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 	opts := []kithttp.ServerOption{
 		kithttp.ServerErrorHandler(transport.NewLogErrorHandler(logger)),
@@ -36,8 +36,8 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 
 	r := mux.NewRouter()
 
-	r.Handle("/api/offers/v1/add", addToCartHandler).Methods("POST")
-	r.Handle("/api/offers/v1/list", getCartHandler).Methods("GET")
+	r.Handle("/offers/v1/add", addToCartHandler).Methods("POST")
+	r.Handle("/offers/v1/list", getCartHandler).Methods("GET")
 
 	return r
 }
