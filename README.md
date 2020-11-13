@@ -41,7 +41,7 @@ Each app can be independent and can be deployed and scaled individually .
 
 Offers are configurable . Admin can specify promotional offers in the database and what rules it holds to apply on buyings.
 
-Coupons are also configurables .Asmin can define coupon promotions and coupon rules in coupon rules tables.
+Coupons are also configurables .Admin can define coupon promotions and coupon rules in coupon rules tables.
 
 ### UI APP
 
