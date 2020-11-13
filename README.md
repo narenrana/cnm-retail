@@ -29,7 +29,7 @@ docker-compose build && docker-compose  up
 
 Open `http://localhost:3500`
 
-##Project Architecture
+## Project Architecture
 
 Each app can be independent and can be deployed and scaled individually .
 
