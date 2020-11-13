@@ -17,6 +17,7 @@ import {
   getCart,
   getProducts,
   deleteCartItem,
+  clearCart,
 } from "../../../products/redux";
 import { placeOrder } from "../../../orders/redux";
 
@@ -77,13 +78,10 @@ export default function Checkout(props) {
   const onPlaceOrder = async () => {
     const data = await dispatch(placeOrder({ cartId: cart.cartId }));
 
-    console.log(
-      `${data.payload.paymentHost}${data.payload.paymentUrl}?req=${data.payload.token}`
-    );
     setDisplayModal(true);
-    const updatedCart = deleteCartItemPayload(cart);
+    const updatedCart = await deleteCartItemPayload(cart);
     dispatch(deleteCartItem(updatedCart));
-
+    dispatch(clearCart());
     setTimeout(() => {
       setDisplayModal(false);
       window.location.href = `${data.payload.paymentHost}${data.payload.paymentUrl}?req=${data.payload.token}`;

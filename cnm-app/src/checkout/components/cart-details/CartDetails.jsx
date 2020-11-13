@@ -31,7 +31,6 @@ export default function CartDetails(props) {
   };
 
   const onCouponEnter = (e) => {
-    console.log({ e: e.target.value });
     setCouponValue(e.target.value);
     dispatch(loadCoupon(e.target.value));
   };
@@ -138,7 +137,7 @@ export default function CartDetails(props) {
           className={classes.heading}
         ></Typography>
         <Typography variant="h6" component="h2" className={classes.heading}>
-          Total Payable - ${cart.totalAmount || 0 - cart.totalDiscount || 0}
+          Total Payable - ${(cart.totalAmount || 0) - (cart.totalDiscount || 0)}
         </Typography>
       </CardContent>
 

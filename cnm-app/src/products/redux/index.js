@@ -91,6 +91,14 @@ const Reducer = createSlice({
       cartItems.push({ ...payload });
       state.cart.cartItems = cartItems;
     },
+    clearCart: (state, { payload }) => {
+      state.cart = {
+        cartName: "",
+        userId: "",
+        cartItems: [],
+        discountCoupon: null,
+      };
+    },
     updateCartItem: (state, { payload }) => {
       const cartItems = state.cart.cartItems.map((product) => {
         if (payload.productId === product.productId) {
@@ -140,7 +148,12 @@ const Reducer = createSlice({
 });
 
 /*Actions export*/
-const { addCartItem, updateCartItem, removeCartItem } = Reducer.actions;
+const {
+  addCartItem,
+  updateCartItem,
+  removeCartItem,
+  clearCart,
+} = Reducer.actions;
 export {
   getProducts,
   updateCart,
@@ -149,6 +162,7 @@ export {
   removeCartItem,
   getCart,
   deleteCartItem,
+  clearCart,
 };
 /*Reducer export*/
 export default Reducer.reducer;

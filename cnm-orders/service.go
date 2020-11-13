@@ -66,12 +66,12 @@ func (s *service) CartToOrder(cart ce.CartResponse) (entities.Orders) {
 		})
 	}
 	 order:= entities.Orders{
-		  UserId :  cart.UserId,
-		  CartId :  cart.CartId,
-		  Amount :  cart.TotalAmount,
-		  Status :  constants.PENDING_DELIVERY,
+		  UserId :     cart.UserId,
+		  CartId :     cart.CartId,
+		  Amount :     cart.TotalAmount-cart.TotalDiscount,
+		  Status :     constants.PENDING_DELIVERY,
 		  OrdersItems: oderItems,
-		  OrderData: string(b),
+		  OrderData:   string(b),
 	 }
 
 	return order
