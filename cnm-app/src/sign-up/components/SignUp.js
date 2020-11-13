@@ -156,8 +156,8 @@ export default withRouter(function Login(props) {
               <Input
                 id="standard-adornment-mobileNumber"
                 type={"text"}
-                value={values.mobileNumber}
-                onChange={handleChange("mobileNumber")}
+                value={values.phoneNumber}
+                onChange={handleChange("phoneNumber")}
               />
             </FormControl>
             <FormControl

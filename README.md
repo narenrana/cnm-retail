@@ -55,24 +55,24 @@ Sign Up Page
 
 Product Home Page
 
-![products](./docs/products.png)
+![products](./docs/products2.png)
 
 Add items in cart
-![products](./docs/products-cart.png)
+![products](./docs/products-cart2.png)
 
 Checkout page
 
-![checkout](./docs/checkout.png)
+![checkout](./docs/checkout2-0.png)
 
 4 Pears and 2 banana scenario- 30 % discount on items
-![checkout](./docs/checkout-1.png)
+![checkout](./docs/checkout2-1.png)
 
 7 or more apple added in cart- 10% discount on apples
-![checkout](./docs/checkout-2.png)
+![checkout](./docs/checkout2-2.png)
 
 Apply a coupon DIS237890WR to get 30 % discount on oranges
 
-![checkout](./docs/checkout-3.png)
+![checkout](./docs/checkout2-3.png)
 
 For Demonstration purpose user can generate coupon valid for 10 or more seconds from
 Coupon page
