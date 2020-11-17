@@ -1,0 +1,37 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: cnm-orders
+#  namespace: cnm-orders
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cnm-orders
+  template:
+    metadata:
+      labels:
+        app: cnm-orders
+    spec:
+      containers:
+        - name: cnm-orders
+          image: narenrana02/cnm-retail_cnm_server
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8580
+      restartPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: cnm-orders
+#  namespace: cnm-orders
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8580
+      targetPort: 8580
+#      protocol: TCP
+#      nodePort: 31000
+  selector:
+    app: cnm-orders

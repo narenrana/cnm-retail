@@ -18,14 +18,14 @@ if (cluster.isMaster) {
 } else {
   // Workers can share any TCP connection
   // In this case it is an HTTP server
-  app.use(
-    "/api",
-    proxy("http://localhost:8080", {
-      proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
-        return proxyReqOpts;
-      },
-    })
-  );
+  // app.use(
+  //   "/api",
+  //   proxy("http://localhost:8080", {
+  //     proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
+  //       return proxyReqOpts;
+  //     },
+  //   })
+  // );
 
   app.use(express.static("build"));
   app.get("/", (req, res) => {

@@ -3,7 +3,6 @@ package entities
 import "time"
 
 type DiscountCoupons struct {
-
 	DiscountCouponsId     int          `gorm:"primaryKey" json:"discountCouponsId,omitempty"`
 	Description           string       `json:"description,omitempty"`
 	DiscountCoupon        string       `json:"discountCoupon,omitempty"`

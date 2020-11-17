@@ -1,0 +1,40 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: payment-app
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: payment-app
+#  namespace: payment-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: payment-app
+  template:
+    metadata:
+      labels:
+        app: payment-app
+    spec:
+      containers:
+        - name: payment-app
+          image: narenrana02/cnm-retail_cnm_payment
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: payment-app
+#  namespace: payment-app
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    app: payment-app

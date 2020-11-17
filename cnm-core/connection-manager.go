@@ -25,7 +25,7 @@ var Conn= Connection{};
 
 func (s *Connection ) openConnection()  ( *gorm.DB, error ) {
 	//TODO get this from docker environment variables
-	dataSource:="host=postgres user=postgres password=root@123 dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
+	dataSource:="host=192.168.1.111 user=postgres password=root@123 dbname=postgres port=5432 sslmode=disable TimeZone=Asia/Shanghai"
 	db, err := s.InitDB(dataSource)
 
 	if err!=nil {

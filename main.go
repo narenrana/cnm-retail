@@ -26,7 +26,7 @@ import (
 )
 
 const (
-	defaultPort              = "8080"
+	defaultPort              = "8580"
 	defaultRoutingServiceURL = "http://localhost:7878"
 )
 
