@@ -5,6 +5,8 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"shopping-cart/cnm-auth/models"
+	"shopping-cart/cnm-auth/services"
 
 	"github.com/gorilla/mux"
 
@@ -14,7 +16,7 @@ import (
 )
 
 // MakeHandler returns a handler for the booking service.
-func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
+func MakeHandler(bs services.Service, logger kitlog.Logger) http.Handler {
 	opts := []kithttp.ServerOption{
 		kithttp.ServerErrorHandler(transport.NewLogErrorHandler(logger)),
 		kithttp.ServerErrorEncoder(encodeError),
@@ -69,7 +71,7 @@ func MakeHandler(bs Service, logger kitlog.Logger) http.Handler {
 var errBadRoute = errors.New("bad route")
 
 func decodeAuthLoginRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request authLoginRequest
+	var request models.AuthLoginRequest
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
 	if err := dec.Decode(&request); err != nil {
@@ -81,13 +83,13 @@ func decodeAuthLoginRequest(_ context.Context, r *http.Request) (interface{}, er
 func decodeAuthLogoutRequest(_ context.Context, r *http.Request) (interface{}, error) {
 
 	value := r.FormValue("token")
-	return authLogoutRequest{
+	return models.AuthLogoutRequest{
 		Token:       value,
 	}, nil
 }
 
 func decodeAuthSignUpRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request authSignUpRequest
+	var request models.AuthSignUpRequest
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
 	if err := dec.Decode(&request); err != nil {
@@ -97,7 +99,7 @@ func decodeAuthSignUpRequest(_ context.Context, r *http.Request) (interface{}, e
 }
 
 func decodeAuthRecoverPasswordRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request authRecoverPasswordRequest
+	var request models.AuthRecoverPasswordRequest
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
 	if err := dec.Decode(&request); err != nil {
@@ -109,7 +111,7 @@ func decodeAuthRecoverPasswordRequest(_ context.Context, r *http.Request) (inter
 
 
 func decodeAuthRefreshTokenRequest(_ context.Context, r *http.Request) (interface{}, error) {
-	var request authRecoverPasswordRequest
+	var request models.AuthRecoverPasswordRequest
 	dec := json.NewDecoder(r.Body)
 	dec.DisallowUnknownFields()
 	if err := dec.Decode(&request); err != nil {
@@ -135,7 +137,7 @@ type errorer interface {
 func encodeError(_ context.Context, err error, w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	switch err {
-	case ErrInvalidArgument:
+	case services.ErrInvalidArgument:
 		w.WriteHeader(http.StatusBadRequest)
 	default:
 		w.WriteHeader(http.StatusInternalServerError)

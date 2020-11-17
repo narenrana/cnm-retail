@@ -1,6 +1,8 @@
 package auth
 
 import (
+	"shopping-cart/cnm-auth/models"
+	"shopping-cart/cnm-auth/services"
 	"time"
 
 	"github.com/go-kit/kit/metrics"
@@ -9,11 +11,11 @@ import (
 type instrumentingService struct {
 	requestCount   metrics.Counter
 	requestLatency metrics.Histogram
-	Service
+	services.Service
 }
 
 // NewInstrumentingService returns an instance of an instrumenting Service.
-func NewInstrumentingService(counter metrics.Counter, latency metrics.Histogram, s Service) Service {
+func NewInstrumentingService(counter metrics.Counter, latency metrics.Histogram, s services.Service) services.Service {
 	return &instrumentingService{
 		requestCount:   counter,
 		requestLatency: latency,
@@ -21,50 +23,50 @@ func NewInstrumentingService(counter metrics.Counter, latency metrics.Histogram,
 	}
 }
 
-func (s *instrumentingService) login(request authLoginRequest) (authLoginResponse, error){
+func (s *instrumentingService) login(request models.AuthLoginRequest) (models.AuthLoginResponse, error){
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	return s.Service.login(request)
+	return s.Service.Login(request)
 }
-func (s *instrumentingService) logout(token string) (authLogoutResponse, error) {
+func (s *instrumentingService) logout(token string) (models.AuthLogoutResponse, error) {
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	return s.Service.logout(token)
-}
-
-
-
-func (s *instrumentingService) recoverPassword(request authRecoverPasswordRequest) (authRecoverPasswordResponse, error) {
-	defer func(begin time.Time) {
-		s.requestCount.With("method", "track").Add(1)
-		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
-	}(time.Now())
-
-	return s.Service.recoverPassword(request)
+	return s.Service.Logout(token)
 }
 
 
 
-func (s *instrumentingService)  refreshToken(request authRefreshTokenRequest) (authRefreshTokenResponse, error){
+func (s *instrumentingService) recoverPassword(request models.AuthRecoverPasswordRequest) (models.AuthRecoverPasswordResponse, error) {
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	return s.Service.refreshToken(request)
+	return s.Service.RecoverPassword(request)
 }
 
-func (s *instrumentingService)  signUp(request  authSignUpRequest) (authSignUpResponse, error) {
+
+
+func (s *instrumentingService)  refreshToken(request models.AuthRefreshTokenRequest) (models.AuthRefreshTokenResponse, error){
 	defer func(begin time.Time) {
 		s.requestCount.With("method", "track").Add(1)
 		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	return s.Service.signUp(request)
+	return s.Service.RefreshToken(request)
+}
+
+func (s *instrumentingService)  signUp(request models.AuthSignUpRequest) (models.AuthSignUpResponse, error) {
+	defer func(begin time.Time) {
+		s.requestCount.With("method", "track").Add(1)
+		s.requestLatency.With("method", "track").Observe(time.Since(begin).Seconds())
+	}(time.Now())
+
+	return s.Service.SignUp(request)
 }

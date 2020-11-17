@@ -12,6 +12,7 @@ import (
 	"os"
 	"os/signal"
 	auth "shopping-cart/cnm-auth"
+	services2 "shopping-cart/cnm-auth/services"
 	carts "shopping-cart/cnm-carts"
 	"shopping-cart/cnm-carts/services"
 	core "shopping-cart/cnm-core"
@@ -49,8 +50,8 @@ func main() {
 	fieldKeys := []string{"method"}
 
 
-	var authService auth.Service
-	authService=auth.NewService()
+	var authService services2.Service
+	authService= services2.NewService()
 	authService = auth.NewLoggingService(log.With(logger, "component", "auth"), authService)
 	authService = auth.NewInstrumentingService(
 		kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
