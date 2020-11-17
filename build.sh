@@ -14,18 +14,18 @@ docker push narenrana02/cnm-retail_cnm_payment
 docker push narenrana02/cnm-retail_cnm_server
 
 #kubectl apply -f  ./deployment-cnm-server.yaml
-kubectl apply -f  ./deployment-cnm-auth.yaml
-kubectl apply -f  ./deployment-cnm-carts.yaml
-kubectl apply -f  ./deployment-cnm-coupons.yaml
-kubectl apply -f  ./deployment-cnm-offers.yaml
-kubectl apply -f  ./deployment-cnm-orders.yaml
-kubectl apply -f  ./deployment-cnm-payments.yaml
-kubectl apply -f  ./deployment-cnm-products.yaml
-kubectl apply -f  ./deployment-cnm-users.yaml
+kubectl apply -f  ./cnm-auth/deployment.yaml
+kubectl apply -f  ./cnm-carts/deployment.yaml
+kubectl apply -f  ./cnm-coupons/deployment.yaml
+kubectl apply -f  ./cnm-offers/deployment.yaml
+kubectl apply -f  ./cnm-orders/deployment.yaml
+kubectl apply -f  ./cnm-payments/deployment.yaml
+kubectl apply -f  ./cnm-products/deployment.yaml
+kubectl apply -f  ./cnm-users/deployment.yaml
 #Main Ui App
-kubectl apply -f  ./deployment-main-app.yaml
+kubectl apply -f  ./cnm-app/deployment.yaml
 #Main payment App
-kubectl apply -f  ./deployment-payment-app.yaml
+kubectl apply -f  ./payment-app/deployment.yaml
 #Router
 kubectl apply -f  ./deployment-ingress.yaml
 
