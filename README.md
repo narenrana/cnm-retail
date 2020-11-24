@@ -30,14 +30,13 @@ Open http://localhost:3500
 
 ## How To run as microservices
 
-Please make sure you have minikube setup for local deployment. Please kubeadmn for prod deployment.
+Please make sure you have minikube and kubectl are setup for locally. Please use kubeadmn for prod deployment.
 Please map below host entry in /etc/hosts file
 ```
 127.0.0.1 payment.retail.com
 127.0.0.1 cnm.retail.com
 ```
-Find your IP address using below comming and update harcodded host IP ( please use kubernated config map and secrate services to load all environment variable 
-time being these are hard coded. I am gona update this once i will get time. Please raise issue in case someone looking this on urgent basis, I will be happy to assist)
+Find your IP address using below comming and update harcodded host IP ( please use kubernetes configmap(https://kubernetes.io/docs/concepts/configuration/configmap/) and secrets(https://kubernetes.io/docs/concepts/configuration/secret/) services to load all environment variable time being these are hard coded. I am gona update this once i will get time. Please raise issue in case someone looking this on urgent basis, I will be happy to assist)
 
 ```
 ifconfig |grep inet
