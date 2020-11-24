@@ -30,7 +30,7 @@ Open http://localhost:3500
 
 ## How to run as microservices
 
-Please make sure you have minikube and kubectl are setup for locally. Please use kubeadmn for prod deployment.
+Please make sure you have minikube and kubectl are setup locally. Please use kubeadmn for prod deployment.
 Please map below host entry in /etc/hosts file
 ```
 127.0.0.1 payment.retail.com
