@@ -28,7 +28,7 @@ docker-compose build && docker-compose  up
 ```
 Open http://localhost:3500
 
-## How To run as microservices
+## How to run as microservices
 
 Please make sure you have minikube and kubectl are setup for locally. Please use kubeadmn for prod deployment.
 Please map below host entry in /etc/hosts file
