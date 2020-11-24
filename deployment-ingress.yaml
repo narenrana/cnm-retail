@@ -1,0 +1,98 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cnm-ingress
+  namespace: app
+  annotations:
+    #nginx.ingress.kubernetes.io/rewrite-target: /$1
+    kubernetes.io/ingress.class: nginx
+spec:
+  defaultBackend:
+    service:
+      name: main-app
+      port:
+        number: 3000
+  rules:
+    - host: cnm.retail.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: main-app
+                port:
+                  number: 3000
+          - path: /auth
+            pathType: Prefix
+            backend:
+              service:
+                name: cnm-auth
+                port:
+                  number: 8580
+          - path: /carts
+            pathType: Prefix
+            backend:
+              service:
+                name: cnm-carts
+                port:
+                  number: 8580
+          - path: /coupons
+            pathType: Prefix
+            backend:
+              service:
+                name: cnm-coupons
+                port:
+                  number: 8580
+          - path: /offers
+            pathType: Prefix
+            backend:
+              service:
+                name: cnm-offers
+                port:
+                  number: 8580
+          - path: /orders
+            pathType: Prefix
+            backend:
+              service:
+                name: cnm-orders
+                port:
+                  number: 8580
+          - path: /payments
+            pathType: Prefix
+            backend:
+              service:
+                name: cnm-payments
+                port:
+                  number: 8580
+          - path: /products
+            pathType: Prefix
+            backend:
+              service:
+                name: cnm-products
+                port:
+                  number: 8580
+          - path: /users
+            pathType: Prefix
+            backend:
+              service:
+                name: cnm-users
+                port:
+                  number: 8580
+#          - path: /payment
+#            pathType: Prefix
+#            backend:
+#              service:
+#                name: payment-app
+#                port:
+#                  number: 3000
+    - host: payment.retail.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: payment-app
+                port:
+                  number: 3000

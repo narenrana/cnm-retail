@@ -2,19 +2,20 @@ package auth
 
 import (
 	"reflect"
+	"shopping-cart/cnm-auth/services"
 	"testing"
 )
 
 func TestNewService(t *testing.T) {
 	tests := []struct {
 		name string
-		want Service
+		want services.Service
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := NewService(); !reflect.DeepEqual(got, tt.want) {
+			if got := services.NewService(); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("NewService() = %v, want %v", got, tt.want)
 			}
 		})
@@ -23,19 +24,19 @@ func TestNewService(t *testing.T) {
 
 func Test_service_login(t *testing.T) {
 	type args struct {
-		request authLoginRequest
+		request AuthLoginRequest
 	}
 	tests := []struct {
 		name    string
 		args    args
-		want    authLoginResponse
+		want    AuthLoginResponse
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := &service{}
+			s := &services.service{}
 			got, err := s.login(tt.args.request)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("login() error = %v, wantErr %v", err, tt.wantErr)
@@ -55,14 +56,14 @@ func Test_service_logout(t *testing.T) {
 	tests := []struct {
 		name    string
 		args    args
-		want    authLogoutResponse
+		want    AuthLogoutResponse
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := &service{}
+			s := &services.service{}
 			got, err := s.logout(tt.args.token)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("logout() error = %v, wantErr %v", err, tt.wantErr)
@@ -77,19 +78,19 @@ func Test_service_logout(t *testing.T) {
 
 func Test_service_recoverPassword(t *testing.T) {
 	type args struct {
-		request authRecoverPasswordRequest
+		request AuthRecoverPasswordRequest
 	}
 	tests := []struct {
 		name    string
 		args    args
-		want    authRecoverPasswordResponse
+		want    AuthRecoverPasswordResponse
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := &service{}
+			s := &services.service{}
 			got, err := s.recoverPassword(tt.args.request)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("recoverPassword() error = %v, wantErr %v", err, tt.wantErr)
@@ -104,19 +105,19 @@ func Test_service_recoverPassword(t *testing.T) {
 
 func Test_service_refreshToken(t *testing.T) {
 	type args struct {
-		request authRefreshTokenRequest
+		request AuthRefreshTokenRequest
 	}
 	tests := []struct {
 		name    string
 		args    args
-		want    authRefreshTokenResponse
+		want    AuthRefreshTokenResponse
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := &service{}
+			s := &services.service{}
 			got, err := s.refreshToken(tt.args.request)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("refreshToken() error = %v, wantErr %v", err, tt.wantErr)
@@ -131,19 +132,19 @@ func Test_service_refreshToken(t *testing.T) {
 
 func Test_service_signUp(t *testing.T) {
 	type args struct {
-		request authSignUpRequest
+		request AuthSignUpRequest
 	}
 	tests := []struct {
 		name    string
 		args    args
-		want    authSignUpResponse
+		want    AuthSignUpResponse
 		wantErr bool
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			s := &service{}
+			s := &services.service{}
 			got, err := s.signUp(tt.args.request)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("signUp() error = %v, wantErr %v", err, tt.wantErr)

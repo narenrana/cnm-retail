@@ -3,8 +3,6 @@ package entities
 import "time"
 
 type Offers struct {
-	//TODO adopt some id generator - Time being, i am using only timestamp while creating record
-	//json:"offer_id,omitempty",
 	OffersId           int             `gorm:"primaryKey" json:"offersId,omitempty"`
 	Description        string          `json:"description,description"`
 	Discount           float64          `json:"discount,omitempty"`

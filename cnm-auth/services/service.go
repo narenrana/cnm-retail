@@ -1,7 +1,9 @@
-package auth
+package services
 
 import (
 	"errors"
+	"shopping-cart/cnm-auth/models"
+
 	"shopping-cart/cnm-auth/entities"
 	"shopping-cart/cnm-auth/repository"
 	"shopping-cart/cnm-core/utils"
@@ -16,11 +18,11 @@ var ErrInvalidSignature = errors.New("Invalid Token")
 
 // Service is the interface that provides booking methods.
 type Service interface {
-	login(request authLoginRequest) (authLoginResponse, error)
-	logout(token string) (authLogoutResponse, error)
-	recoverPassword(request authRecoverPasswordRequest) (authRecoverPasswordResponse, error)
-	refreshToken(request authRefreshTokenRequest)(authRefreshTokenResponse, error)
-    signUp(request authSignUpRequest ) (authSignUpResponse, error)
+	Login(request models.AuthLoginRequest) (models.AuthLoginResponse, error)
+	Logout(token string) (models.AuthLogoutResponse, error)
+	RecoverPassword(request models.AuthRecoverPasswordRequest) (models.AuthRecoverPasswordResponse, error)
+	RefreshToken(request models.AuthRefreshTokenRequest)(models.AuthRefreshTokenResponse, error)
+    SignUp(request models.AuthSignUpRequest) (models.AuthSignUpResponse, error)
 }
 
 type service struct {
@@ -28,39 +30,39 @@ type service struct {
 
 
 
-func (s *service) login(request authLoginRequest) (authLoginResponse, error){
+func (s *service) Login(request models.AuthLoginRequest) (models.AuthLoginResponse, error){
 
 	instance:= repository.NewUsersRepository()
 	usr, err:=instance.FindById(request.Email);
 	if err != nil {
-		return authLoginResponse{Err: err}, err
+		return models.AuthLoginResponse{Err: err}, err
 	}
 
 	isValid:=utils.CheckPasswordHash(request.Password,usr.Password)
 
 	if !isValid {
-		return authLoginResponse{}, ErrInvalidPassword
+		return models.AuthLoginResponse{}, ErrInvalidPassword
 	}
 
 	token, error:=utils.CreateToken(usr.UserEmail, usr.UserId);
 
 	if error != nil {
-		return authLoginResponse{Err: err}, err
+		return models.AuthLoginResponse{Err: err}, err
 	}
 
-	return authLoginResponse{
+	return models.AuthLoginResponse{
 		Token: token,
 		Email: usr.UserEmail,
 	}, err
 }
 
-func (s *service) logout(token string) (authLogoutResponse, error)   {
-	response := authLogoutResponse{Email: "6712671267162"}
+func (s *service) Logout(token string) (models.AuthLogoutResponse, error)   {
+	response := models.AuthLogoutResponse{Email: "6712671267162"}
 	return response, nil
 }
 
-func (s *service) recoverPassword(request authRecoverPasswordRequest) (authRecoverPasswordResponse, error){
-	response := authRecoverPasswordResponse{ }
+func (s *service) RecoverPassword(request models.AuthRecoverPasswordRequest) (models.AuthRecoverPasswordResponse, error){
+	response := models.AuthRecoverPasswordResponse{ }
 	/**
 	  Write login to send email to reset password
 	 */
@@ -69,20 +71,21 @@ func (s *service) recoverPassword(request authRecoverPasswordRequest) (authRecov
 
 
 
-func (s *service) refreshToken(request authRefreshTokenRequest)(authRefreshTokenResponse, error){
+func (s *service) RefreshToken(request models.AuthRefreshTokenRequest)(models.AuthRefreshTokenResponse, error){
 
 	isValid,token,err:=utils.RefreshToken(request.Token);
 
-	if err !=nil { return authRefreshTokenResponse{}, err  }
+	if err !=nil { return models.AuthRefreshTokenResponse{}, err  }
 
-	if(!isValid) { return authRefreshTokenResponse{}, ErrInvalidSignature }
+	if(!isValid) { return models.AuthRefreshTokenResponse{}, ErrInvalidSignature
+	}
 
-	return authRefreshTokenResponse{
+	return models.AuthRefreshTokenResponse{
 		Token: token,
 	}, nil
 }
 
-func (s *service)  signUp(request authSignUpRequest ) (authSignUpResponse, error){
+func (s *service)  SignUp(request models.AuthSignUpRequest) (models.AuthSignUpResponse, error){
 	instance:=repository.NewUsersRepository()
 	var users entities.Users
 
@@ -95,21 +98,21 @@ func (s *service)  signUp(request authSignUpRequest ) (authSignUpResponse, error
 	hashKey, err :=utils.HashPassword(request.Password)
 	users.Password=hashKey;
 	if err != nil {
-		return authSignUpResponse{},err
+		return models.AuthSignUpResponse{},err
 	}
 	 usr, err:=instance.AddOrUpdate(users);
 
 	if err!=nil   {
-		return authSignUpResponse{}, err
+		return models.AuthSignUpResponse{}, err
 	}
 
 	token, error:=utils.CreateToken(usr.UserEmail,usr.UserId);
 
 	if err!=nil   {
-		return authSignUpResponse{}, error
+		return models.AuthSignUpResponse{}, error
 	}
 
-	return authSignUpResponse{
+	return models.AuthSignUpResponse{
 		Email: usr.UserEmail,
 		Token: token,
 	}, err

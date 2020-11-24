@@ -11,7 +11,7 @@ async function httpClient(URL, options) {
     };
     options.headers = { ...commonOptions.headers, ...options.headers };
   }
-  return await fetch("http://localhost:8580/api" + URL, options)
+  return await fetch( URL, options)
     .then(async (res) => {
       console.log(res.status);
       if (res.status === 401) {

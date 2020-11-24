@@ -68,21 +68,11 @@ func (*repository) FindByDiscountCoupon(coupon string) (e.DiscountCoupons, error
 }
 
 func (*repository) Add(d e.DiscountCoupons) (e.DiscountCoupons, error){
-	db,err :=core.GetDB()
-
+	 db,err :=core.GetDB()
 	 db.Create(&d)
-
-	//for _, rule := range d.DiscountCouponsRules {
-	//
-	//	rule.DiscountCouponsId=d.DiscountCouponsId;
-	//	db.Model(&rule).Create(rule);
-	//
-	//}
-
-	if err != nil {
+	 if err != nil {
 		return d, err;
 	}
-
 	return  d, err;
 }
 

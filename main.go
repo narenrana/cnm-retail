@@ -12,6 +12,7 @@ import (
 	"os"
 	"os/signal"
 	auth "shopping-cart/cnm-auth"
+	services2 "shopping-cart/cnm-auth/services"
 	carts "shopping-cart/cnm-carts"
 	"shopping-cart/cnm-carts/services"
 	core "shopping-cart/cnm-core"
@@ -26,7 +27,7 @@ import (
 )
 
 const (
-	defaultPort              = "8080"
+	defaultPort              = "8580"
 	defaultRoutingServiceURL = "http://localhost:7878"
 )
 
@@ -49,8 +50,8 @@ func main() {
 	fieldKeys := []string{"method"}
 
 
-	var authService auth.Service
-	authService=auth.NewService()
+	var authService services2.Service
+	authService= services2.NewService()
 	authService = auth.NewLoggingService(log.With(logger, "component", "auth"), authService)
 	authService = auth.NewInstrumentingService(
 		kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
@@ -210,14 +211,14 @@ func main() {
 	core.NewDatabaseManager();
 
 
-	mux.Handle("/api/auth/v1/", auth.MakeHandler(authService, httpLogger))
-	mux.Handle("/api/users/v1/", users.MakeHandler(userService, httpLogger))
-	mux.Handle("/api/products/v1/", products.MakeHandler(productService, httpLogger))
-	mux.Handle("/api/carts/v1/", carts.MakeHandler(cartsService, httpLogger))
-	mux.Handle("/api/offers/v1/", offers.MakeHandler(offersService, httpLogger))
-	mux.Handle("/api/coupons/v1/", coupons.MakeHandler(couponsService, httpLogger))
-	mux.Handle("/api/orders/v1/", orders.MakeHandler(ordersService, httpLogger))
-	mux.Handle("/api/payments/v1/", payments.MakeHandler(paymentsService, httpLogger))
+	mux.Handle("/auth/v1/", auth.MakeHandler(authService, httpLogger))
+	mux.Handle("/users/v1/", users.MakeHandler(userService, httpLogger))
+	mux.Handle("/products/v1/", products.MakeHandler(productService, httpLogger))
+	mux.Handle("/carts/v1/", carts.MakeHandler(cartsService, httpLogger))
+	mux.Handle("/offers/v1/", offers.MakeHandler(offersService, httpLogger))
+	mux.Handle("/coupons/v1/", coupons.MakeHandler(couponsService, httpLogger))
+	mux.Handle("/orders/v1/", orders.MakeHandler(ordersService, httpLogger))
+	mux.Handle("/payments/v1/", payments.MakeHandler(paymentsService, httpLogger))
 
 
 
@@ -249,8 +250,8 @@ func accessControl(h http.Handler) http.Handler {
 		if r.Method == "OPTIONS" {
 			return
 		}
-
-		if r.URL.RequestURI()=="/api/auth/v1/login" || r.URL.RequestURI()=="/api/auth/v1/signup" {
+         fmt.Println(r.URL.RequestURI())
+		if r.URL.RequestURI()=="/auth/v1/login" || r.URL.RequestURI()=="/auth/v1/signup" {
 			h.ServeHTTP(w, r)
 			return
 		}
