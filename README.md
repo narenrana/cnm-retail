@@ -26,8 +26,34 @@ git clone https://github.com/narenrana/cnm-retail.git
 cd cnm-retail
 docker-compose build && docker-compose  up
 ```
+Open http://localhost:3500
 
-Open `http://localhost:3500`
+## How To run as microservices
+
+Please make sure you have minikube setup for local deployment. Please kubeadmn for prod deployment.
+Please map below host entry in /etc/hosts file
+```
+127.0.0.1 payment.retail.com
+127.0.0.1 cnm.retail.com
+```
+Find your IP address using below comming and update harcodded host IP ( please use kubernated config map and secrate services to load all environment variable 
+time being these are hard coded. I am gona update this once i will get time. Please raise issue in case someone looking this on urgent basis, I will be happy to assist)
+
+```
+ifconfig |grep inet
+```
+Copy IP Address mentined alongside your broadcast address.
+Replace IP addr from  ```docker-compose-db.yml``` and ```connection-manager.go```
+
+Run database and flyway migartion 
+```
+docker-compose -f docker-compose-db.yml up
+```
+Deploy pods in minikube 
+```
+sudo sh build.sh
+```
+Open `http://cnm.retail.com`
 
 ## Project Architecture
 
