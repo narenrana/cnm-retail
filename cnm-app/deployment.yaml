@@ -1,13 +1,8 @@
-kind: Namespace
-apiVersion: v1
-metadata:
-  name: main-app
----
 kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: main-app
-#  namespace: main-app
+  namespace: app
 spec:
   replicas: 4
   selector:
@@ -30,6 +25,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: main-app
+  namespace: app
 #  namespace: main-app
 spec:
   type: LoadBalancer

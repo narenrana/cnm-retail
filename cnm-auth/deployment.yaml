@@ -2,7 +2,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: cnm-auth
-#  namespace: cnm-auth
+  namespace: app
 spec:
   replicas: 2
   selector:
@@ -25,7 +25,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: cnm-auth
-#  namespace: cnm-auth
+  namespace: app
 spec:
   type: LoadBalancer
   ports:
